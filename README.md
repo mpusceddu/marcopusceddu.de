@@ -8,11 +8,19 @@ Persönliche Website von **Marco Pusceddu**: Familienmensch, Unternehmer und Kom
 
 ## Live-Version
 
-[marcopusceddu.de öffnen](https://marcopusceddu.de/)
+[**marcopusceddu.de öffnen**](https://marcopusceddu.de/)
 
 ## Inhalt
 
 Die Website stellt meinen beruflichen Hintergrund und mein kommunalpolitisches Engagement in **Urbar** und der **Verbandsgemeinde Vallendar** vor. Sie bietet außerdem direkte Kontaktmöglichkeiten sowie rechtlich erforderliche Informationen.
+
+## Öffentliches Digitalprojekt
+
+### [Dorfflohmarkt Urbar 2026](https://github.com/mpusceddu/dorfflohmarkt-urbar)
+
+Interaktive, mobil nutzbare Karte für die teilnehmenden Stände des Dorfflohmarkts. Das Projekt verbindet konkrete Bürgerinformation mit einer schlanken technischen Umsetzung auf Basis von JavaScript, Leaflet, OpenStreetMap und GitHub Pages.
+
+[**Interaktive Karte öffnen**](https://mpusceddu.github.io/dorfflohmarkt-urbar/)
 
 ## Technische Umsetzung
 
@@ -62,6 +70,6 @@ Die Seite ist bewusst schlank gehalten: kurze Ladewege, klare Inhalte und keine 
 ## Kontakt
 
 - Website: [marcopusceddu.de](https://marcopusceddu.de/)
+- GitHub: [github.com/mpusceddu](https://github.com/mpusceddu)
 - E-Mail: [marco.pusceddu@cdu-urbar.de](mailto:marco.pusceddu@cdu-urbar.de)
-- GitHub: [mpusceddu](https://github.com/mpusceddu)
 - Instagram: [@mapusceddu](https://www.instagram.com/mapusceddu/)
