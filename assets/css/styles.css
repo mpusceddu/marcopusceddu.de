@@ -174,7 +174,7 @@ footer div { display: flex; gap: 24px; }
   .news-grid { grid-template-columns: minmax(0,1fr); }
   .news-card { padding: 26px 22px; }
   .news-meta { margin-bottom: 28px; }
-  .article-header h1 { font-size: clamp(2.75rem,12.5vw,4.2rem); overflow-wrap: normal; word-break: normal; }
+  .article-header h1 { font-size: clamp(2.75rem,12.5vw,4.2rem); overflow-wrap: anywhere; hyphens: auto; }
   .article-page { padding-left: 22px; padding-right: 22px; }
   footer { flex-direction: column; gap: 12px; }
 }
