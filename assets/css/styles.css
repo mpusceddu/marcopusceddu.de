@@ -111,6 +111,8 @@ blockquote cite { font-style: normal; color: var(--green-light); font-weight: 80
 .article-aside strong { display: block; margin-bottom: 10px; font-family: var(--font-display); font-size: 1.35rem; }
 .article-aside p { margin: 0; color: var(--muted); font-size: .82rem; }
 .article-aside a { display: inline-block; margin-top: 16px; color: var(--green-light); font-weight: 800; font-size: .78rem; overflow-wrap: anywhere; }
+.article-source { margin-top: 58px; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: .86rem !important; }
+.article-source a { color: var(--green-light); text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 3px; }
 .article-disclaimer { margin-top: 70px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; }
 
 .contact { text-align: center; max-width: 1050px; margin: 0 auto; }
