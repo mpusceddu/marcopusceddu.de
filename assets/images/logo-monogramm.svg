@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 92" role="img" aria-labelledby="title desc">
+  <title id="title">Marco Pusceddu Monogramm</title>
+  <desc id="desc">Klassisches MP-Monogramm mit ausgeschriebenem Namen</desc>
+  <rect x="2" y="2" width="78" height="78" rx="3" fill="#173f34"/>
+  <text x="14" y="60" fill="#fffdf8" font-family="Georgia, 'Times New Roman', serif" font-size="49" font-weight="700" letter-spacing="-8">MP</text>
+  <path d="M14 69h52" stroke="#caa563" stroke-width="2"/>
+  <text x="102" y="45" fill="#102b24" font-family="Georgia, 'Times New Roman', serif" font-size="27" font-weight="700">Marco Pusceddu</text>
+  <text x="103" y="66" fill="#65736e" font-family="Arial, sans-serif" font-size="9" font-weight="700" letter-spacing="2.1">VALLENDAR · URBAR</text>
+</svg>
