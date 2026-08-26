@@ -12,7 +12,7 @@ Persönliche Website von **Marco Pusceddu**: Familienmensch, Unternehmer und Kom
 
 ## Inhalt
 
-Die Website stellt meinen beruflichen Hintergrund und mein kommunalpolitisches Engagement in **Urbar** und der **Verbandsgemeinde Vallendar** vor. Sie bietet außerdem eine direkte Kontaktmöglichkeit sowie rechtlich erforderliche Informationen.
+Die Website stellt meinen beruflichen Hintergrund und mein kommunalpolitisches Engagement in **Urbar** und der **Verbandsgemeinde Vallendar** vor. Sie bietet außerdem direkte Kontaktmöglichkeiten sowie rechtlich erforderliche Informationen.
 
 ## Technische Umsetzung
 
@@ -63,4 +63,5 @@ Die Seite ist bewusst schlank gehalten: kurze Ladewege, klare Inhalte und keine 
 
 - Website: [marcopusceddu.de](https://marcopusceddu.de/)
 - E-Mail: [marco.pusceddu@cdu-urbar.de](mailto:marco.pusceddu@cdu-urbar.de)
+- GitHub: [mpusceddu](https://github.com/mpusceddu)
 - Instagram: [@mapusceddu](https://www.instagram.com/mapusceddu/)
