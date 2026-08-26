@@ -82,7 +82,7 @@ blockquote cite { font-style: normal; color: var(--green-light); font-weight: 80
 .news-card-featured { background: var(--green); color: white; border-color: var(--green); }
 .news-meta { display: flex; flex-wrap: wrap; gap: 9px 18px; margin: 0 0 42px; color: var(--muted); font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .13em; }
 .news-card-featured .news-meta { color: #dbbf87; }
-.news-card h2, .news-card h3 { font-size: clamp(2rem,3.4vw,3.35rem); letter-spacing: -.025em; }
+.news-card h2, .news-card h3 { font-size: clamp(2rem,3.4vw,3.35rem); letter-spacing: -.025em; overflow-wrap: anywhere; hyphens: auto; }
 .news-card h2 a, .news-card h3 a { color: inherit; }
 .news-card > p:not(.news-meta) { color: var(--muted); }
 .news-card-featured > p:not(.news-meta) { color: rgba(255,255,255,.76); }
