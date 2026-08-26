@@ -21,7 +21,8 @@ a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; border-ra
 .skip-link:focus { transform: translateY(0); }
 
 .site-header { height: 88px; padding: 0 clamp(24px, 6vw, 96px); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); background: rgba(255,253,248,.94); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 20; }
-.wordmark { font-family: var(--font-display); font-weight: 700; font-size: 1.65rem; letter-spacing: -.02em; }
+.wordmark { display: flex; align-items: center; min-width: 0; }
+.wordmark img { width: clamp(190px,24vw,245px); height: 62px; object-fit: contain; object-position: left center; }
 nav { display: flex; align-items: center; gap: 32px; font-size: .88rem; font-weight: 700; }
 nav a:hover { color: var(--green-light); }
 .nav-contact { padding: 10px 18px; border: 1px solid var(--green); border-radius: 999px; }
@@ -74,10 +75,8 @@ blockquote cite { font-style: normal; color: var(--green-light); font-weight: 80
 .contact h2 { font-size: clamp(3rem,6vw,6rem); letter-spacing: -.04em; }
 .contact > p:not(.eyebrow) { color: var(--muted); max-width: 650px; margin: 28px auto; }
 .mail-link { display: inline-block; overflow-wrap: anywhere; color: var(--green-light); font-family: var(--font-display); font-size: clamp(1.45rem,3.4vw,3.1rem); border-bottom: 1px solid var(--gold); }
-.social-links { margin: 28px auto 0; display: flex; width: fit-content; max-width: 100%; align-items: center; justify-content: center; gap: 18px 26px; flex-wrap: wrap; }
-.social-link { display: flex; align-items: center; gap: 9px; font-size: .83rem; font-weight: 800; }
-.social-link:hover { color: var(--green-light); }
-.social-mark { display: grid; place-items: center; min-width: 28px; height: 24px; padding: 0 5px; background: var(--green); color: white; border-radius: 6px; font-family: var(--font-sans); font-size: .68rem; letter-spacing: .02em; }
+.instagram-link { margin: 28px auto 0; display: flex; width: fit-content; align-items: center; gap: 9px; font-size: .83rem; font-weight: 800; }
+.instagram-mark { display: grid; place-items: center; width: 24px; height: 24px; background: var(--green); color: white; border-radius: 6px; font-family: var(--font-sans); }
 
 footer { border-top: 1px solid var(--line); padding: 30px clamp(24px,6vw,96px); display: flex; justify-content: space-between; color: var(--muted); font-size: .75rem; }
 footer div { display: flex; gap: 24px; }
@@ -104,7 +103,7 @@ footer div { display: flex; gap: 24px; }
 @media (max-width: 560px) {
   html { scroll-padding-top: 72px; }
   .site-header { height: 72px; }
-  .wordmark { font-size: 1.35rem; }
+  .wordmark img { width: 176px; height: 50px; }
   .nav-contact { padding: 8px 13px; }
   .hero { min-height: auto; }
   .hero-portrait { min-height: 58vh; }
