@@ -1,0 +1,61 @@
+name: Abgerundete Projektgrafik erzeugen
+
+on:
+  push:
+    paths:
+      - ".github/workflows/generate-rounded-project-image.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Pillow installieren
+        run: python -m pip install --disable-pip-version-check pillow
+
+      - name: Projektgrafik mit runden Ecken erzeugen
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageDraw
+
+          source = Path("assets/images/og.jpg")
+          target = Path("assets/images/github-website-card-rounded.png")
+
+          image = Image.open(source).convert("RGBA")
+          mask = Image.new("L", image.size, 0)
+          draw = ImageDraw.Draw(mask)
+          draw.rounded_rectangle(
+              (0, 0, image.width - 1, image.height - 1),
+              radius=42,
+              fill=255,
+          )
+          image.putalpha(mask)
+          image.save(target, format="PNG", optimize=True)
+          PY
+
+      - name: Ergebnis speichern
+        run: |
+          if git diff --quiet -- assets/images/github-website-card-rounded.png && \
+             git ls-files --error-unmatch assets/images/github-website-card-rounded.png >/dev/null 2>&1; then
+            echo "Keine Änderung erforderlich."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/images/github-website-card-rounded.png
+          git commit -m "Projektgrafik mit runden Ecken erzeugen [skip ci]"
+          git push
