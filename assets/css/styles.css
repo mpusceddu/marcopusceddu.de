@@ -66,7 +66,7 @@ h1 span { display: block; color: var(--green-light); }
 
 .section { padding: clamp(80px,10vw,150px) clamp(24px,8vw,130px); }
 .about { display: grid; grid-template-columns: 70px minmax(0,1fr); gap: clamp(30px,5vw,86px); }
-.section-heading, .about-inner, .about-story, .engagement-grid, .personal > *, .contact { min-width: 0; }
+.section-heading, .about-inner, .about-story, .engagement-grid, .personal > *, .latest-heading, .latest-more, .contact-inner, .contact-body { min-width: 0; }
 .section-heading h2 { hyphens: auto; overflow-wrap: break-word; }
 .section-number { font-size: .75rem; font-weight: 800; color: var(--gold); padding-top: 9px; }
 .section-heading h2 { font-size: clamp(2.55rem,4.8vw,4.8rem); font-weight: 580; letter-spacing: -.02em; }
@@ -85,7 +85,7 @@ h1 span { display: block; color: var(--green-light); }
 .engagement { background: var(--green); color: white; display: grid; grid-template-columns: 70px minmax(0,.9fr) minmax(0,1.1fr); gap: clamp(30px,5vw,86px); }
 .eyebrow.light, .section-number.light { color: #dbbf87; }
 .engagement-grid { display: grid; gap: 24px; padding-top: 56px; }
-.engagement-grid article { min-width: 0; padding: 30px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.04); }
+.engagement-grid article { min-width: 0; padding: 30px; border-top: 3px solid var(--gold); background: rgba(255,255,255,.055); }
 .card-place { margin: 0; color: #dbbf87; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .14em; }
 .engagement-grid h3 { font-size: 2rem; margin: 12px 0; hyphens: auto; overflow-wrap: break-word; }
 .engagement-grid article > p:last-child { color: rgba(255,255,255,.76); margin-bottom: 0; }
@@ -97,12 +97,12 @@ blockquote { margin: 0; }
 blockquote p { font-family: var(--font-display); font-size: clamp(2.55rem,4.8vw,5rem); line-height: 1.13; letter-spacing: -.025em; margin: 0 0 30px; }
 blockquote cite { font-style: normal; color: var(--green-light); font-weight: 800; font-size: .8rem; text-transform: uppercase; letter-spacing: .14em; }
 
-.latest { display: grid; grid-template-columns: minmax(0,.82fr) minmax(0,1.18fr); gap: clamp(48px,8vw,130px); align-items: start; }
+.latest { display: grid; grid-template-columns: 70px minmax(0,.82fr) minmax(0,1.18fr); gap: clamp(30px,5vw,86px); align-items: start; }
 .latest > .news-card { margin-top: 42px; }
 .latest-heading h2, .editorial-hero h1 { font-size: clamp(3rem,5.7vw,5.7rem); letter-spacing: -.025em; }
 .latest-heading > p:not(.eyebrow) { max-width: 520px; color: var(--muted); }
 .text-link { display: inline-flex; gap: 10px; align-items: center; margin-top: 22px; padding-bottom: 3px; border-bottom: 1px solid var(--gold); color: var(--green-light); font-size: .82rem; font-weight: 800; }
-.latest-more { grid-column: 1 / -1; margin-top: clamp(34px,5vw,72px); padding-top: clamp(34px,5vw,56px); border-top: 1px solid var(--line); }
+.latest-more { grid-column: 2 / -1; margin-top: clamp(34px,5vw,72px); padding-top: clamp(34px,5vw,56px); border-top: 1px solid var(--line); }
 .latest-more-heading { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-bottom: 32px; }
 .latest-more-heading .eyebrow, .latest-more-heading .text-link { margin: 0; }
 .latest-preview-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(24px,3vw,42px); }
@@ -153,11 +153,12 @@ blockquote cite { font-style: normal; color: var(--green-light); font-weight: 80
 .article-source a { color: var(--green-light); text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 3px; }
 .article-disclaimer { margin-top: 70px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; }
 
-.contact { text-align: center; max-width: 1050px; margin: 0 auto; }
-.contact h2 { font-size: clamp(3rem,6vw,6rem); letter-spacing: -.04em; }
-.contact > p:not(.eyebrow) { color: var(--muted); max-width: 650px; margin: 28px auto; }
-.contact-options { margin: 48px auto 0; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; max-width: 920px; text-align: left; }
-.contact-option { min-width: 0; display: grid; grid-template-columns: 50px minmax(0,1fr) auto; align-items: center; gap: 18px; padding: 24px; border: 1px solid var(--line); background: var(--paper); transition: border-color .2s, background .2s, transform .2s; }
+.contact { display: grid; grid-template-columns: 70px minmax(0,1fr); gap: clamp(30px,5vw,86px); background: var(--cream); }
+.contact-inner { display: grid; grid-template-columns: minmax(0,.82fr) minmax(0,1.18fr); gap: clamp(48px,8vw,130px); align-items: start; }
+.contact-heading h2 { max-width: 650px; font-size: clamp(3rem,5.4vw,5.5rem); font-weight: 580; letter-spacing: -.025em; }
+.contact-body > p { max-width: 650px; margin: 5px 0 0; color: #3f514b; font-family: var(--font-display); font-size: clamp(1.35rem,2vw,1.75rem); line-height: 1.45; }
+.contact-options { margin-top: 42px; display: grid; grid-template-columns: minmax(0,1fr); gap: 14px; }
+.contact-option { min-width: 0; display: grid; grid-template-columns: 50px minmax(0,1fr) auto; align-items: center; gap: 18px; padding: 24px; border: 0; border-top: 3px solid var(--gold); background: var(--paper); transition: background .2s, transform .2s; }
 .contact-option:hover { border-color: var(--green-light); background: var(--cream); transform: translateY(-2px); }
 .contact-icon { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%; background: var(--green); color: white; }
 .contact-icon svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
@@ -182,6 +183,13 @@ footer div { display: flex; gap: 24px; }
   .about-inner { grid-template-columns: minmax(0,1fr); row-gap: 42px; }
   .about-story { max-width: 760px; }
   .about-values { grid-column: 1; }
+  .engagement, .latest, .contact { grid-template-columns: 40px minmax(0,1fr); }
+  .engagement .section-heading, .engagement-grid, .latest-heading, .latest > .news-card, .contact-inner { grid-column: 2; }
+  .engagement-grid { padding-top: 0; }
+  .latest > .news-card { margin-top: 0; }
+  .latest-more { grid-column: 2; }
+  .contact-inner { grid-template-columns: minmax(0,1fr); row-gap: 42px; }
+  .contact-body { max-width: 760px; }
 }
 
 @media (max-width: 900px) {
@@ -189,7 +197,7 @@ footer div { display: flex; gap: 24px; }
   .hero { grid-template-columns: minmax(0,1fr); }
   .hero-copy { order: 2; padding-top: 64px; padding-bottom: 80px; }
   .hero-portrait { min-height: 72vh; max-height: 820px; }
-  .about, .engagement { grid-template-columns: 40px minmax(0,1fr); }
+  .about, .engagement, .latest, .contact { grid-template-columns: 40px minmax(0,1fr); }
   .about-inner, .engagement-grid { grid-column: 2; padding-top: 0; }
   .about-values { grid-template-columns: minmax(0,1fr); gap: 12px; }
   .about-values article { display: grid; grid-template-columns: 70px minmax(0,.85fr) minmax(0,1.15fr); gap: 12px; align-items: start; }
@@ -198,8 +206,6 @@ footer div { display: flex; gap: 24px; }
   .about-values article > p:last-child { margin: 0; }
   .personal { grid-template-columns: minmax(0,1fr); }
   .personal-photo { height: 82vh; max-height: 740px; }
-  .latest { grid-template-columns: minmax(0,1fr); align-items: start; }
-  .latest > .news-card { margin-top: 0; }
   .latest-preview-grid { grid-template-columns: minmax(0,1fr); }
   .article-layout { grid-template-columns: minmax(0,1fr); }
   .article-aside { max-width: 520px; }
@@ -215,9 +221,9 @@ footer div { display: flex; gap: 24px; }
   .hero-copy { padding-left: 22px; padding-right: 22px; }
   h1 { font-size: clamp(3.2rem,15vw,4.5rem); }
   .section { padding-left: 22px; padding-right: 22px; }
-  .about, .engagement { grid-template-columns: minmax(0,1fr); }
+  .about, .engagement, .latest, .contact { grid-template-columns: minmax(0,1fr); }
   .section-number { display: none; }
-  .about-inner, .engagement-grid { grid-column: 1; }
+  .about-inner, .engagement .section-heading, .engagement-grid, .latest-heading, .latest > .news-card, .latest-more, .contact-inner { grid-column: 1; }
   .about-values { grid-template-columns: minmax(0,1fr); }
   .about-values article { display: block; }
   .about-value-label { margin: 0 0 20px; }
