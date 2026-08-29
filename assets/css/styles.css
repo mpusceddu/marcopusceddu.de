@@ -123,6 +123,9 @@ blockquote cite { font-style: normal; color: var(--green-light); font-weight: 80
 .article-body h2 { margin: 56px 0 20px; font-size: clamp(2rem,3.7vw,3rem); font-weight: 600; line-height: 1.12; }
 .article-body ul { padding-left: 1.2em; color: #44544f; }
 .article-body li + li { margin-top: 10px; }
+.article-figure { margin: 44px 0 40px; }
+.article-figure img { width: 100%; height: auto; border: 1px solid var(--line); background: var(--cream); }
+.article-figure figcaption { margin-top: 12px; color: var(--muted); font-size: .78rem; line-height: 1.5; }
 .article-aside { padding: 28px; border-top: 3px solid var(--gold); background: var(--cream); }
 .article-aside strong { display: block; margin-bottom: 10px; font-family: var(--font-display); font-size: 1.35rem; }
 .article-aside p { margin: 0; color: var(--muted); font-size: .82rem; }
