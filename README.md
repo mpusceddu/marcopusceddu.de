@@ -12,7 +12,7 @@ Persönliche Website von **Marco Pusceddu**: Familienmensch, Unternehmer und Kom
 
 ## Inhalt
 
-Die Website stellt meinen beruflichen Hintergrund und mein kommunalpolitisches Engagement in **Urbar** und der **Verbandsgemeinde Vallendar** vor. Sie bietet außerdem direkte Kontaktmöglichkeiten sowie rechtlich erforderliche Informationen.
+Die Website stellt meinen beruflichen Hintergrund und mein kommunalpolitisches Engagement in **Urbar** und der **Verbandsgemeinde Vallendar** vor. Unter **Aktuelles** erscheinen Berichte, Einblicke und persönliche Positionen. Die Seite bietet außerdem direkte Kontaktmöglichkeiten sowie Impressum und Datenschutzerklärung.
 
 ## Öffentliches Digitalprojekt
 
@@ -27,6 +27,8 @@ Interaktive, mobil nutzbare Karte für die teilnehmenden Stände des Dorfflohmar
 - statische Website ohne komplexes Framework
 - semantisches HTML5
 - eigenes responsives CSS
+- lokale Schriftdateien mit beiliegenden Lizenztexten
+- mobile Navigation mit sichtbaren, bei Bedarf umbrechenden Links ohne JavaScript
 - optimierte Darstellung für Smartphones und Desktop-Rechner
 - Skip-Link und beschriftete Navigation für bessere Zugänglichkeit
 - Open-Graph- und Social-Media-Metadaten
@@ -41,8 +43,12 @@ Interaktive, mobil nutzbare Karte für die teilnehmenden Stände des Dorfflohmar
 ├── impressum.html      # Impressum
 ├── datenschutz.html    # Datenschutzerklärung
 ├── 404.html            # Fehlerseite
+├── aktuelles/
+│   ├── index.html      # Beitragsarchiv
+│   └── *.html          # Einzelne Beiträge
 ├── assets/
 │   ├── css/            # Gestaltung
+│   ├── fonts/          # Lokale Schriften und Lizenzen
 │   └── images/         # Bildmaterial
 ├── CNAME               # eigene Domain für GitHub Pages
 ├── robots.txt
@@ -66,6 +72,16 @@ http://localhost:8000
 ## Grundsatz
 
 Die Seite ist bewusst schlank gehalten: kurze Ladewege, klare Inhalte und keine unnötige technische Komplexität.
+
+## Änderungen prüfen
+
+- Die vorhandenen Artikeladressen und Quellen beibehalten. Rechtliche Texte gesondert prüfen.
+- Bei CSS-Änderungen den Versionsparameter an allen 16 HTML-Seiten gemeinsam aktualisieren; aktuell `styles.css?v=19`.
+- Startseite, Beitragsarchiv, einen langen Artikel und den Bildartikel auf Smartphone, Tablet und Desktop prüfen. Zusätzlich schmale Ansichten, die Umbrüche bei 900 und 1100 Pixeln sowie Textvergrößerung berücksichtigen.
+- Navigation, Tastaturfokus, Sprungmarken, Bilder und interne Links kontrollieren. Der mobile Kopfbereich scrollt mit der Seite, damit mehrzeilige Navigation keine Inhalte verdeckt.
+- Die Fehlerseite lokal unter `/404.html` prüfen. Der einfache lokale Python-Server ersetzt nicht den GitHub-Pages-Test einer tatsächlich fehlenden Unterseite.
+- Nach der Veröffentlichung auch eine verschachtelte, nicht vorhandene Adresse auf der echten Domain aufrufen: Gestaltung und Link zur Startseite müssen funktionieren.
+- Den erfolgreichen Pages-Lauf und anschließend den veröffentlichten Stand auf der eigenen Domain kontrollieren. Offene Browserprüfungen ausdrücklich als offen festhalten.
 
 ## Kontakt
 

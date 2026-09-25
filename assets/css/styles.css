@@ -193,7 +193,13 @@ footer div { display: flex; gap: 24px; }
 }
 
 @media (max-width: 900px) {
-  nav a:not(.nav-contact) { display: none; }
+  html { scroll-padding-top: 16px; }
+  /* Keep every link available; a wrapping mobile header must not cover the content. */
+  .site-header { height: auto; padding-top: 12px; padding-bottom: 12px; flex-direction: column; align-items: stretch; gap: 8px; position: static; }
+  .wordmark { align-self: flex-start; }
+  .wordmark img { width: 220px; height: 58px; }
+  .site-header nav { flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; }
+  .site-header nav a { display: inline-flex; align-items: center; min-height: 44px; padding-top: 8px; padding-bottom: 8px; }
   .hero { grid-template-columns: minmax(0,1fr); }
   .hero-copy { order: 2; padding-top: 64px; padding-bottom: 80px; }
   .hero-portrait { min-height: 72vh; max-height: 820px; }
@@ -212,8 +218,7 @@ footer div { display: flex; gap: 24px; }
 }
 
 @media (max-width: 560px) {
-  html { scroll-padding-top: 78px; }
-  .site-header { height: 78px; }
+  .site-header nav { gap: 4px 8px; }
   .wordmark img { width: 198px; height: 58px; }
   .nav-contact { padding: 8px 13px; }
   .hero { min-height: auto; }
