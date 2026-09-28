@@ -1,10 +1,10 @@
 # marcopusceddu.de
 
-[![Website](https://img.shields.io/badge/Website-marcopusceddu.de-173f34?style=flat-square)](https://marcopusceddu.de/)
+[![Website](https://img.shields.io/badge/Website-marcopusceddu.de-071f33?style=flat-square)](https://marcopusceddu.de/)
 
 Persönliche Website von **Marco Pusceddu**: Familienmensch, Unternehmer und Kommunalpolitiker aus Urbar.
 
-[![Vorschau der Website](assets/images/og.jpg)](https://marcopusceddu.de/)
+[![Vorschau der Website](assets/images/og-20260928.jpg)](https://marcopusceddu.de/)
 
 ## Live-Version
 
@@ -76,7 +76,7 @@ Die Seite ist bewusst schlank gehalten: kurze Ladewege, klare Inhalte und keine 
 ## Änderungen prüfen
 
 - Die vorhandenen Artikeladressen und Quellen beibehalten. Rechtliche Texte gesondert prüfen.
-- Bei CSS-Änderungen den Versionsparameter an allen HTML-Seiten gemeinsam aktualisieren; derzeit 17 Seiten, im Gestaltungsentwurf `styles.css?v=21-preview`.
+- Bei CSS-Änderungen den Versionsparameter an allen HTML-Seiten gemeinsam aktualisieren; derzeit 17 Seiten, aktuell `styles.css?v=22`.
 - Startseite, Beitragsarchiv, einen langen Artikel und den Bildartikel auf Smartphone, Tablet und Desktop prüfen. Zusätzlich schmale Ansichten, die Umbrüche bei 900 und 1100 Pixeln sowie Textvergrößerung berücksichtigen.
 - Navigation, Tastaturfokus, Sprungmarken, Bilder und interne Links kontrollieren. Der mobile Kopfbereich scrollt mit der Seite, damit mehrzeilige Navigation keine Inhalte verdeckt.
 - Die Fehlerseite lokal unter `/404.html` prüfen. Der einfache lokale Python-Server ersetzt nicht den GitHub-Pages-Test einer tatsächlich fehlenden Unterseite.
