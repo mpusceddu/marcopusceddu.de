@@ -90,7 +90,10 @@ h1 span { display: block; color: var(--teal-dark); }
 .engagement-grid article { min-width: 0; padding: 30px; border-top: 3px solid var(--teal); background: rgba(255,255,255,.055); }
 .card-place { margin: 0; color: #75e1dc; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .14em; }
 .engagement-grid h3 { font-size: 2rem; margin: 12px 0; hyphens: auto; overflow-wrap: break-word; }
-.engagement-grid article > p:last-child { color: rgba(255,255,255,.76); margin-bottom: 0; }
+.engagement-grid article > p:not(.card-place) { color: rgba(255,255,255,.76); margin-bottom: 0; }
+.engagement-link { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; margin-top: 24px; color: #75e1dc; font-size: .9rem; font-weight: 700; text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+.engagement-link:hover { color: white; }
+.engagement-link span { flex-shrink: 0; }
 
 .personal { display: grid; grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr); gap: clamp(40px,8vw,130px); align-items: center; background: var(--cream); }
 .personal-photo { margin: 0; height: min(720px,72vw); overflow: hidden; }
@@ -142,6 +145,7 @@ blockquote cite { font-style: normal; color: var(--teal-dark); font-weight: 800;
 .article-body { max-width: 720px; }
 .article-body > p:first-child { color: var(--ink); font-family: var(--font-display); font-size: clamp(1.5rem,2.35vw,1.95rem); line-height: 1.48; }
 .article-body p { color: #43545f; font-size: 1.125rem; line-height: 1.75; }
+.inline-link { color: var(--teal-dark); text-decoration: underline; text-underline-offset: 3px; }
 .article-body h2 { margin: 56px 0 20px; font-size: clamp(2rem,3.7vw,3rem); font-weight: 600; line-height: 1.12; }
 .article-body ul { padding-left: 1.2em; color: #43545f; }
 .article-body li + li { margin-top: 10px; }
@@ -183,6 +187,7 @@ footer div { display: flex; gap: 24px; }
 .legal-updated { color: var(--muted); font-size: .82rem; }
 
 @media (max-width: 1100px) {
+  .latest-preview-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .about-inner { grid-template-columns: minmax(0,1fr); row-gap: 42px; }
   .about-story { max-width: 760px; }
   .about-values { grid-column: 1; }
@@ -215,12 +220,12 @@ footer div { display: flex; gap: 24px; }
   .about-values article > p:last-child { margin: 0; }
   .personal { grid-template-columns: minmax(0,1fr); }
   .personal-photo { height: 82vh; max-height: 740px; }
-  .latest-preview-grid { grid-template-columns: minmax(0,1fr); }
   .article-layout { grid-template-columns: minmax(0,1fr); }
   .article-aside { max-width: 520px; }
 }
 
 @media (max-width: 560px) {
+  .latest-preview-grid { grid-template-columns: minmax(0,1fr); }
   .site-header nav { gap: 4px 8px; }
   .wordmark img { width: 264px; height: 58px; }
   .nav-contact { padding: 8px 13px; }
