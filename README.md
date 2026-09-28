@@ -57,7 +57,7 @@ Interaktive, mobil nutzbare Karte für die teilnehmenden Stände des Dorfflohmar
 
 ## Lokal ansehen
 
-Das Projekt benötigt keinen Build-Prozess. Im Projektordner genügt beispielsweise:
+Die Website bleibt statisch und kann direkt angesehen werden. Der optionale Pflegeschritt für Artikelübersichten benötigt nur Python 3 ab Version 3.9, keine zusätzlichen Pakete. Im Projektordner genügt für die Vorschau:
 
 ```bash
 python3 -m http.server 8000
@@ -85,8 +85,12 @@ Die Seite ist bewusst schlank gehalten: kurze Ladewege, klare Inhalte und keine 
 
 ## Beiträge auf der Startseite pflegen
 
-- Den neuesten Beitrag im hervorgehobenen Bereich zeigen.
-- Unter „Weitere Beiträge“ die sechs nächsten vorhandenen Beiträge in absteigender Reihenfolge des Datums zeigen. Titel, Datum und Kurztext aus dem Beitragsarchiv übernehmen; den hervorgehobenen Beitrag nicht doppelt aufführen.
+- Artikel ausschließlich in ihrer bestehenden Datei unter `aktuelles/*.html` pflegen. Entwürfe außerhalb der veröffentlichten Website aufbewahren: GitHub Pages liefert jede HTML-Datei im Repository aus, auch wenn sie nicht verlinkt ist.
+- Nach einer freigegebenen Änderung `python3 scripts/build_articles.py` ausführen. Das Skript erzeugt die markierten Bereiche in Startseite und Archiv sowie die Artikeladressen der Sitemap. Die erzeugten Dateien gemeinsam mit dem Artikel committen. GitHub Pages veröffentlicht weiterhin die eingecheckten statischen Dateien; es gibt keinen Hintergrundprozess mit Schreibzugriff.
+- Quelle sind der sichtbare Artikelkopf (Titel, Datum, Rubrik), `og:description` als Kurztext, Canonical-Adresse und Artikelmetadaten. Optional überschreibt `<meta name="article:summary" content="Kurzer Überblick">` den Kurztext für die Übersichten. Das Skript ändert keine Artikeltexte oder rechtlichen Seiten.
+- Den neuesten Beitrag zeigt das Skript hervorgehoben. Unter „Weitere Beiträge“ erscheinen die sechs nächsten vorhandenen Beiträge in absteigender Reihenfolge des Veröffentlichungsdatums, ohne Dopplung. Aktualisierungen ändern diese Reihenfolge nicht. Bei gleichem Datum entscheidet der Dateiname.
+- Bestehende Adressen und Veröffentlichungsdaten beibehalten. Eine wesentliche Aktualisierung mit `article:modified_time` und sichtbarem Änderungsdatum kennzeichnen. Historische Sitemap-Änderungsdaten bleiben erhalten; das Datum eines erneuten Builds wird nicht als inhaltliche Änderung ausgegeben.
+- Vor dem Veröffentlichen `python3 scripts/build_articles.py --check` und `python3 -m unittest discover -s tests` ausführen. Fehlende Metadaten, falsche Canonical-Adressen, abweichende Titel/Datumswerte und zukünftige Veröffentlichungsdaten brechen die Erzeugung ab, bevor Ausgabedateien geändert werden.
 - Das Raster zeigt über 1100 Pixeln drei, zwischen 561 und 1100 Pixeln zwei und bis 560 Pixel eine Spalte. Mit sechs Einträgen bleiben die letzten Reihen vollständig.
 
 ## Verweise zur CDU-Seite
