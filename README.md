@@ -32,6 +32,7 @@ Interaktive, mobil nutzbare Karte für die teilnehmenden Stände des Dorfflohmar
 - optimierte Darstellung für Smartphones und Desktop-Rechner
 - Skip-Link und beschriftete Navigation für bessere Zugänglichkeit
 - Open-Graph- und Social-Media-Metadaten
+- MP-Favicon als SVG, PNG und ICO sowie eigenes Apple-Touch-Icon
 - eigene Fehlerseite
 - Veröffentlichung über GitHub Pages mit eigener Domain
 
@@ -94,6 +95,12 @@ Das kanonische runde Porträt für persönliche Kacheln und Profil-Icons liegt u
 - Bestehende Adressen und Veröffentlichungsdaten beibehalten. Eine wesentliche Aktualisierung mit `article:modified_time` und sichtbarem Änderungsdatum kennzeichnen. Historische Sitemap-Änderungsdaten bleiben erhalten; das Datum eines erneuten Builds wird nicht als inhaltliche Änderung ausgegeben.
 - Vor dem Veröffentlichen `python3 scripts/build_articles.py --check` und `python3 -m unittest discover -s tests` ausführen. Fehlende Metadaten, falsche Canonical-Adressen, abweichende Titel/Datumswerte und zukünftige Veröffentlichungsdaten brechen die Erzeugung ab, bevor Ausgabedateien geändert werden.
 - Das Raster zeigt über 1100 Pixeln drei, zwischen 561 und 1100 Pixeln zwei und bis 560 Pixel eine Spalte. Mit sechs Einträgen bleiben die letzten Reihen vollständig.
+
+## Favicon und Lesezeichen
+
+Das Favicon verwendet eine für kleine Größen angepasste Fassung des vorhandenen MP-Zeichens: cremeweißes M und helltürkises P auf Dunkelblau. `favicon.svg` ist die skalierbare Hauptfassung, `favicon-96x96.png` die Rasterfassung und `favicon.ico` enthält 16, 32 und 48 Pixel. `apple-touch-icon.png` hat 180 × 180 Pixel und einen deckenden Hintergrund; die Rundung übernimmt das Gerät.
+
+Alle 18 HTML-Seiten binden diese Dateien mit Pfaden ab der Domainwurzel ein. Das gilt auch für verschachtelte Artikel und die Fehlerseite. Bei Änderungen alle Fassungen gemeinsam ersetzen, in kleinen Größen vor hellem und dunklem Hintergrund prüfen und die Einbindung in neuen Artikeln übernehmen. Die Favicon-Adressen stabil halten, damit Suchmaschinen sie zuverlässig abrufen können.
 
 ## Persönlicher Urbar-Bereich
 
