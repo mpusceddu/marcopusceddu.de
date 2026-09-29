@@ -98,9 +98,9 @@ Das kanonische runde Porträt für persönliche Kacheln und Profil-Icons liegt u
 
 ## Favicon und Lesezeichen
 
-Das Favicon verwendet eine für kleine Größen angepasste Fassung des vorhandenen MP-Zeichens: cremeweißes M und helltürkises P auf Dunkelblau. `favicon.svg` ist die skalierbare Hauptfassung, `favicon-96x96.png` die Rasterfassung und `favicon.ico` enthält 16, 32 und 48 Pixel. `apple-touch-icon.png` hat 180 × 180 Pixel und einen deckenden Hintergrund; die Rundung übernimmt das Gerät.
+Das Favicon verwendet eine für kleine Größen angepasste Fassung des vorhandenen MP-Zeichens: cremeweißes M und helltürkises P auf Dunkelblau. `favicon.svg` ist die skalierbare Hauptfassung mit expliziten Abmessungen. `favicon-32x32.png` und `favicon-96x96.png` sind die Rasterfassungen, `favicon.ico` enthält 16, 32 und 48 Pixel. `apple-touch-icon.png` hat 180 × 180 Pixel und einen deckenden Hintergrund; die Rundung übernimmt das Gerät. `safari-pinned-tab.svg` stellt für angeheftete Safari-Tabs das MP-Zeichen als schwarze Vektormaske auf transparentem Grund bereit; Safari übernimmt die Einfärbung.
 
-Alle 18 HTML-Seiten binden diese Dateien mit Pfaden ab der Domainwurzel ein. Das gilt auch für verschachtelte Artikel und die Fehlerseite. Bei Änderungen alle Fassungen gemeinsam ersetzen, in kleinen Größen vor hellem und dunklem Hintergrund prüfen und die Einbindung in neuen Artikeln übernehmen. Die Favicon-Adressen stabil halten, damit Suchmaschinen sie zuverlässig abrufen können.
+Alle 18 HTML-Seiten binden diese Dateien mit Pfaden ab der Domainwurzel ein. Das gilt auch für verschachtelte Artikel und die Fehlerseite. Bei Änderungen alle Fassungen gemeinsam ersetzen, in kleinen Größen vor hellem und dunklem Hintergrund prüfen und die Einbindung in neuen Artikeln übernehmen. Die Favicon-Adressen stabil halten, damit Suchmaschinen sie zuverlässig abrufen können. Aktuell gilt einmalig `?v=2`, damit Browser die anfänglichen, fehlenden oder veralteten Symbole erneut abrufen. Diesen Wert nicht bei gewöhnlichen Artikeländerungen erhöhen.
 
 ## Persönlicher Urbar-Bereich
 
