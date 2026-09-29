@@ -176,7 +176,7 @@ blockquote cite { font-style: normal; color: var(--teal-dark); font-weight: 800;
 .contact-arrow { color: var(--teal-dark); font-size: 1.3rem; line-height: 1; }
 
 footer { border-top: 1px solid var(--line); padding: 30px clamp(24px,6vw,96px); display: flex; justify-content: space-between; color: var(--muted); font-size: .75rem; }
-footer div { display: flex; gap: 24px; }
+footer div { display: flex; flex-wrap: wrap; gap: 12px 24px; }
 .legal-page { min-height: calc(100vh - 165px); max-width: 900px; margin: 0 auto; padding: clamp(64px,10vw,130px) 24px; }
 .legal-page h1 { font-size: clamp(3rem,8vw,6rem); }
 .legal-page section { margin-top: 54px; }
