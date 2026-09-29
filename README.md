@@ -73,6 +73,8 @@ http://localhost:8000
 
 Die Seite ist bewusst schlank gehalten: kurze Ladewege, klare Inhalte und keine unnötige technische Komplexität.
 
+Das kanonische runde Porträt für persönliche Kacheln und Profil-Icons liegt unter `assets/images/avatar-marco-rund.jpg`. Für solche Einsätze dieses Bild verwenden und keine abweichenden Porträtausschnitte anlegen. Funktionale Symbole wie E-Mail oder soziale Netzwerke bleiben davon unberührt, sofern kein persönlicher Absender dargestellt wird.
+
 ## Änderungen prüfen
 
 - Die vorhandenen Artikeladressen und Quellen beibehalten. Rechtliche Texte gesondert prüfen.
