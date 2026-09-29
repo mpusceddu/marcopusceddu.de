@@ -116,7 +116,8 @@ def read_article(path):
     summary = metadata.get("article:summary") or metadata.get("og:description", "")
     if not all([title, category, summary, metadata.get("article:author"), metadata.get("og:image")]):
         raise ValueError(f"{path.name}: Titel, Rubrik, Kurztext, Autor oder Vorschaubild fehlen")
-    return dict(filename=path.name, title=title, heading=heading_html(heading), category=category,
+    places = {place.strip().casefold() for place in metadata.get("article:places", "").split(",") if place.strip()}
+    return dict(filename=path.name, title=title, heading=heading_html(heading), category=category, places=places,
                 summary=summary, published=published, modified=modified, url=url)
 
 
@@ -155,6 +156,11 @@ def outputs(root):
     archive = archive_path.read_text(encoding="utf-8")
     cards = "\n".join(card(a, 2, "news-card news-card-featured" if i == 0 else "news-card") for i, a in enumerate(articles))
     archive = replace_region(archive, "archive", cards, "        ")
+    urbar_path = root / "urbar/index.html"
+    urbar = urbar_path.read_text(encoding="utf-8")
+    local_articles = [a for a in articles if "urbar" in a["places"]]
+    local_cards = "\n".join(card(a, 3, "latest-preview-card", "../aktuelles/") for a in local_articles)
+    urbar = replace_region(urbar, "urbar", local_cards, "        ")
 
     sitemap_path = root / "sitemap.xml"
     ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
@@ -176,7 +182,7 @@ def outputs(root):
             xml.append("    <lastmod>" + modified + "</lastmod>")
         xml.append("  </url>")
     xml.append("</urlset>")
-    return {home_path: home, archive_path: archive, sitemap_path: "\n".join(xml) + "\n"}, len(articles)
+    return {home_path: home, archive_path: archive, urbar_path: urbar, sitemap_path: "\n".join(xml) + "\n"}, len(articles)
 
 
 def build(root, check=False):

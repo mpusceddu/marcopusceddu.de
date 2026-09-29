@@ -16,7 +16,7 @@ class ArticleBuildTest(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name) / "site"
-        shutil.copytree(SITE, self.root, ignore=shutil.ignore_patterns("__pycache__"))
+        shutil.copytree(SITE, self.root, ignore=shutil.ignore_patterns("__pycache__", ".git"))
 
     def snapshot(self):
         return {p.relative_to(self.root): p.read_bytes() for p in self.root.rglob("*") if p.is_file()}
@@ -34,8 +34,31 @@ class ArticleBuildTest(unittest.TestCase):
         self.assertFalse(changed)
         after = self.snapshot()
         for path in before:
-            if path not in map(Path, ["index.html", "aktuelles/index.html", "sitemap.xml"]):
+            if path not in map(Path, ["index.html", "aktuelles/index.html", "urbar/index.html", "sitemap.xml"]):
                 self.assertEqual(before[path], after[path], str(path))
+
+    def test_urbar_lists_only_tagged_articles_and_removes_stale_entries(self):
+        build(self.root)
+        page = self.root / "urbar/index.html"
+        document = Document(page.read_text()).root
+        self.assertEqual(len(document.find("article", "latest-preview-card")), 3)
+        self.assertNotIn('href="../aktuelles/haushalt-2026.html"', page.read_text())
+        original = self.root / "aktuelles/organisationshoheit-gute-ideen.html"
+        new = self.root / "aktuelles/aaa-urbar-test.html"
+        source = original.read_text().replace(original.name, new.name)
+        source = source.replace('<head>', '<head>\n<meta name="article:places" content=" Urbar, Vallendar ">')
+        new.write_text(source)
+        before = self.snapshot()
+        with self.assertRaisesRegex(ValueError, "Veraltete Artikelübersichten"):
+            build(self.root, check=True)
+        self.assertEqual(before, self.snapshot())
+        build(self.root)
+        self.assertIn('href="../aktuelles/aaa-urbar-test.html"', page.read_text())
+        self.assertLess(page.read_text().index(new.name), page.read_text().index('bauturbo-suedliche-ortsmitte.html'))
+        new.unlink()
+        build(self.root)
+        self.assertNotIn(new.name, page.read_text())
+        self.assertIn('https://marcopusceddu.de/urbar/', (self.root / 'sitemap.xml').read_text())
 
     def test_new_article_updates_all_lists_without_manual_entries(self):
         original = self.root / "aktuelles/organisationshoheit-gute-ideen.html"

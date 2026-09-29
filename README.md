@@ -78,7 +78,7 @@ Das kanonische runde Porträt für persönliche Kacheln und Profil-Icons liegt u
 ## Änderungen prüfen
 
 - Die vorhandenen Artikeladressen und Quellen beibehalten. Rechtliche Texte gesondert prüfen.
-- Bei CSS-Änderungen den Versionsparameter an allen HTML-Seiten gemeinsam aktualisieren; derzeit 17 Seiten, aktuell `styles.css?v=22`.
+- Bei CSS-Änderungen den Versionsparameter an allen HTML-Seiten gemeinsam aktualisieren; derzeit 18 Seiten, aktuell `styles.css?v=23`.
 - Startseite, Beitragsarchiv, einen langen Artikel und den Bildartikel auf Smartphone, Tablet und Desktop prüfen. Zusätzlich schmale Ansichten, die Umbrüche bei 900 und 1100 Pixeln sowie Textvergrößerung berücksichtigen.
 - Navigation, Tastaturfokus, Sprungmarken, Bilder und interne Links kontrollieren. Der mobile Kopfbereich scrollt mit der Seite, damit mehrzeilige Navigation keine Inhalte verdeckt.
 - Die Fehlerseite lokal unter `/404.html` prüfen. Der einfache lokale Python-Server ersetzt nicht den GitHub-Pages-Test einer tatsächlich fehlenden Unterseite.
@@ -94,6 +94,14 @@ Das kanonische runde Porträt für persönliche Kacheln und Profil-Icons liegt u
 - Bestehende Adressen und Veröffentlichungsdaten beibehalten. Eine wesentliche Aktualisierung mit `article:modified_time` und sichtbarem Änderungsdatum kennzeichnen. Historische Sitemap-Änderungsdaten bleiben erhalten; das Datum eines erneuten Builds wird nicht als inhaltliche Änderung ausgegeben.
 - Vor dem Veröffentlichen `python3 scripts/build_articles.py --check` und `python3 -m unittest discover -s tests` ausführen. Fehlende Metadaten, falsche Canonical-Adressen, abweichende Titel/Datumswerte und zukünftige Veröffentlichungsdaten brechen die Erzeugung ab, bevor Ausgabedateien geändert werden.
 - Das Raster zeigt über 1100 Pixeln drei, zwischen 561 und 1100 Pixeln zwei und bis 560 Pixel eine Spalte. Mit sechs Einträgen bleiben die letzten Reihen vollständig.
+
+## Persönlicher Urbar-Bereich
+
+`urbar/index.html` bündelt persönliche Beiträge, digitale Projekte und die Arbeit im Ortsgemeinderat. Der Bereich ist von der Startseite und der Hauptnavigation erreichbar. Das Layout ergänzt die vorhandene Gestaltung über `assets/css/urbar.css`; rechtliche Texte bleiben unverändert. Der gemeinsame Footer kann auf schmalen Geräten umbrechen.
+
+Ein veröffentlichter Artikel erscheint automatisch auch dort, wenn sein Kopf `<meta name="article:places" content="urbar">` enthält. Mehrere Orte können durch Kommas getrennt werden. Die Zuordnung erfolgt bewusst durch die Redaktion, nicht über eine Stichwortsuche im Text. Anschließend denselben Pflegeschritt `python3 scripts/build_articles.py` ausführen und alle erzeugten Änderungen gemeinsam committen. Auf der Urbar-Seite erscheinen alle zugeordneten Beiträge, neueste zuerst; die Artikel selbst bleiben unter ihrer bisherigen Adresse.
+
+Projektangaben vor Änderungen auf den verlinkten Projektseiten prüfen. Aktueller Stand am 29.09.2026: Dorfflohmarkt mit Ausblick auf 2027 ohne veröffentlichten Termin; Vereinsring als öffentliche Vorschau. Die Domain `unser-urbar-für-alle.de` ist als zusätzliche Adresse vorgesehen, die auf `https://marcopusceddu.de/urbar/` weiterleitet. Canonical-Adresse bleibt die persönliche Hauptdomain.
 
 ## Verweise zur CDU-Seite
 
