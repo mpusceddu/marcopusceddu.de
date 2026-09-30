@@ -7,20 +7,28 @@
       <stop offset="0.62" stop-color="#08384b"/>
       <stop offset="1" stop-color="#007579"/>
     </linearGradient>
+    <clipPath id="banner-clip">
+      <rect width="1400" height="520" rx="34"/>
+    </clipPath>
     <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
       <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#00121f" flood-opacity="0.28"/>
     </filter>
   </defs>
 
+  <g clip-path="url(#banner-clip)">
   <rect width="1400" height="520" rx="34" fill="url(#background)"/>
   <circle cx="1275" cy="35" r="245" fill="#ffffff" fill-opacity="0.045"/>
   <circle cx="1210" cy="500" r="310" fill="#75e1dc" fill-opacity="0.055"/>
   <path d="M0 430C240 360 390 474 620 411S1030 315 1400 392V520H0Z" fill="#00a6a6" fill-opacity="0.10"/>
+  </g>
 
   <g transform="translate(78 68)">
-    <text x="0" y="0" dominant-baseline="hanging" fill="#75e1dc" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="23" font-weight="760" letter-spacing="4.5">UNTERNEHMER · KOMMUNALPOLITIK · DIGITALE PROJEKTE</text>
+    <text x="0" y="0" dominant-baseline="hanging" fill="#75e1dc" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="21" font-weight="760" letter-spacing="3">UNTERNEHMER · KOMMUNALPOLITIK · DIGITALE PROJEKTE</text>
     <text x="0" y="108" fill="#ffffff" font-family="Georgia, 'Times New Roman', serif" font-size="86" font-weight="700">Marco Pusceddu</text>
-    <text x="0" y="190" fill="#dcebed" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="29">Websites, Beiträge und Werkzeuge für Wirtschaft, Kommune und Ehrenamt.</text>
+    <text x="0" y="188" fill="#dcebed" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="29">
+      <tspan x="0">Websites, Beiträge und Werkzeuge</tspan>
+      <tspan x="0" dy="40">für Wirtschaft, Kommune und Ehrenamt.</tspan>
+    </text>
 
     <g transform="translate(0 268)" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="20" font-weight="700">
       <g>
@@ -44,13 +52,13 @@
     <text x="0" y="382" fill="#a9cdd1" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="20">github.com/mpusceddu</text>
   </g>
 
-  <g transform="translate(1050 105)" filter="url(#shadow)">
-    <rect width="260" height="310" rx="40" fill="#f6f4ef"/>
-    <g transform="translate(31 63) scale(1.78)">
+  <g transform="translate(1080 112)" filter="url(#shadow)">
+    <rect width="240" height="296" rx="36" fill="#f6f4ef"/>
+    <g transform="translate(26.5 57) scale(1.7)">
       <path d="M5 65V15h8l17 27 17-27h8v50h-9V32L30 57 14 32v33Z" fill="#071f33"/>
       <path d="M65 65V15h19c13 0 21 7 21 19s-8 20-21 20H74v11Zm9-20h9c8 0 13-4 13-11s-5-10-13-10h-9Z" fill="#007579"/>
     </g>
-    <line x1="42" y1="228" x2="218" y2="228" stroke="#dfe4e4" stroke-width="2"/>
-    <text x="130" y="263" text-anchor="middle" fill="#071f33" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="17" font-weight="800" letter-spacing="2">KLAR · DIGITAL · VOR ORT</text>
+    <line x1="28" y1="217" x2="212" y2="217" stroke="#dfe4e4" stroke-width="2"/>
+    <text x="120" y="250" text-anchor="middle" fill="#071f33" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="800" letter-spacing="1">KLAR · DIGITAL · VOR ORT</text>
   </g>
 </svg>
