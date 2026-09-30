@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="520" viewBox="0 0 1400 520" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="520" viewBox="0 0 1400 520" role="img" aria-labelledby="title desc" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
   <title id="title">Marco Pusceddu</title>
   <desc id="desc">Unternehmer, Kommunalpolitiker und Initiator digitaler Projekte aus Urbar.</desc>
   <defs>
@@ -23,14 +23,14 @@
   </g>
 
   <g transform="translate(78 68)">
-    <text x="0" y="0" dominant-baseline="hanging" fill="#75e1dc" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="21" font-weight="760" letter-spacing="3">UNTERNEHMER · KOMMUNALPOLITIK · DIGITALE PROJEKTE</text>
-    <text x="0" y="108" fill="#ffffff" font-family="Georgia, 'Times New Roman', serif" font-size="86" font-weight="700">Marco Pusceddu</text>
-    <text x="0" y="188" fill="#dcebed" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="29">
+    <text x="0" y="0" dominant-baseline="hanging" fill="#75e1dc" font-size="21" font-weight="700" letter-spacing="3">UNTERNEHMER · KOMMUNALPOLITIK · DIGITALE PROJEKTE</text>
+    <text x="0" y="108" fill="#ffffff" font-size="82" font-weight="700">Marco Pusceddu</text>
+    <text x="0" y="188" fill="#dcebed" font-size="29">
       <tspan x="0">Websites, Beiträge und Werkzeuge</tspan>
       <tspan x="0" dy="40">für Wirtschaft, Kommune und Ehrenamt.</tspan>
     </text>
 
-    <g transform="translate(0 268)" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="20" font-weight="700">
+    <g transform="translate(0 268)" font-size="20" font-weight="700">
       <g>
         <rect width="125" height="50" rx="25" fill="#ffffff" fill-opacity="0.10" stroke="#ffffff" stroke-opacity="0.24"/>
         <text x="62.5" y="33" text-anchor="middle" fill="#ffffff">Urbar</text>
@@ -49,7 +49,7 @@
       </g>
     </g>
 
-    <text x="0" y="382" fill="#a9cdd1" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="20">github.com/mpusceddu</text>
+    <text x="0" y="382" fill="#a9cdd1" font-size="20">github.com/mpusceddu</text>
   </g>
 
   <g transform="translate(1080 112)" filter="url(#shadow)">
@@ -59,6 +59,6 @@
       <path d="M65 65V15h19c13 0 21 7 21 19s-8 20-21 20H74v11Zm9-20h9c8 0 13-4 13-11s-5-10-13-10h-9Z" fill="#007579"/>
     </g>
     <line x1="28" y1="217" x2="212" y2="217" stroke="#dfe4e4" stroke-width="2"/>
-    <text x="120" y="250" text-anchor="middle" fill="#071f33" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="800" letter-spacing="1">KLAR · DIGITAL · VOR ORT</text>
+    <text x="120" y="250" text-anchor="middle" fill="#071f33" font-size="12" font-weight="700" letter-spacing="1">KLAR · DIGITAL · VOR ORT</text>
   </g>
 </svg>
