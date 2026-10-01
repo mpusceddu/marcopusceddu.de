@@ -15,6 +15,7 @@ BASE = "https://marcopusceddu.de/"
 TOPICS = {
     "politik-finanzen": "Politik & Finanzen",
     "bauen-umwelt": "Bauen & Umwelt",
+    "erneuerbare-energien": "Erneuerbare Energien",
     "digitalisierung": "Digitalisierung",
     "ehrenamt": "Ehrenamt",
     "persoenlich": "Persönlich",
@@ -127,7 +128,10 @@ def read_article(path):
     topics = {topic.strip() for topic in metadata.get("article:topics", "").split(",") if topic.strip()}
     if not topics or topics - TOPICS.keys():
         raise ValueError(f"{path.name}: article:topics muss mindestens ein gültiges Thema enthalten; erlaubt: {', '.join(TOPICS)}")
-    return dict(filename=path.name, title=title, heading=heading_html(heading), category=category, places=places, topics=topics,
+    listing = metadata.get("article:listing", "current")
+    if listing not in {"current", "background"}:
+        raise ValueError(f"{path.name}: article:listing muss current oder background sein")
+    return dict(listing=listing, filename=path.name, title=title, heading=heading_html(heading), category=category, places=places, topics=topics,
                 summary=summary, published=published, modified=modified, url=url)
 
 
@@ -170,7 +174,8 @@ def outputs(root):
     articles = [read_article(p) for p in sorted((root / "aktuelles").glob("*.html")) if p.name != "index.html"]
     if not articles:
         raise ValueError("Keine veröffentlichten Artikel gefunden")
-    articles.sort(key=lambda a: (-a["published"].toordinal(), a["filename"]))
+    # Editorial placement is independent of the real publication date.
+    articles.sort(key=lambda a: (a["listing"] == "background", -a["published"].toordinal(), a["filename"]))
     home_path, archive_path = root / "index.html", root / "aktuelles/index.html"
     home = home_path.read_text(encoding="utf-8")
     home = replace_region(home, "featured", card(articles[0], 3, "news-card news-card-featured", "aktuelles/"), "      ")
