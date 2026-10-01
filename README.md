@@ -76,10 +76,14 @@ Die Seite ist bewusst schlank gehalten: kurze Ladewege, klare Inhalte und keine 
 
 Das kanonische runde Porträt für persönliche Kacheln und Profil-Icons liegt unter `assets/images/avatar-marco-rund.jpg`. Für solche Einsätze dieses Bild verwenden und keine abweichenden Porträtausschnitte anlegen. Funktionale Symbole wie E-Mail oder soziale Netzwerke bleiben davon unberührt, sofern kein persönlicher Absender dargestellt wird.
 
+## Schrift und Startseitenporträt
+
+Die Website verwendet die lokal gespeicherte Source Sans 3 für Fließtext und Überschriften. Moderate Schriftgewichte und offene Zeilenabstände halten die Darstellung ruhig. Das Startseitenporträt `assets/images/marco-pusceddu-arme-verschraenkt.jpg` zeigt Marco im dunkelblauen Poloshirt. Auf schmalen Ansichten bleibt das Bild im Hochformat, damit Gesicht und verschränkte Arme sichtbar sind. Das runde Profilbild und vorhandene Social-Media-Vorschaubilder bleiben eigenständige Motive.
+
 ## Änderungen prüfen
 
 - Die vorhandenen Artikeladressen und Quellen beibehalten. Rechtliche Texte gesondert prüfen.
-- Bei CSS-Änderungen den Versionsparameter an allen HTML-Seiten gemeinsam aktualisieren; derzeit 18 Seiten, aktuell `styles.css?v=23`.
+- Bei CSS-Änderungen den Versionsparameter an allen HTML-Seiten gemeinsam aktualisieren; derzeit 18 Seiten, aktuell `styles.css?v=24`.
 - Startseite, Beitragsarchiv, einen langen Artikel und den Bildartikel auf Smartphone, Tablet und Desktop prüfen. Zusätzlich schmale Ansichten, die Umbrüche bei 900 und 1100 Pixeln sowie Textvergrößerung berücksichtigen.
 - Navigation, Tastaturfokus, Sprungmarken, Bilder und interne Links kontrollieren. Der mobile Kopfbereich scrollt mit der Seite, damit mehrzeilige Navigation keine Inhalte verdeckt.
 - Die Fehlerseite lokal unter `/404.html` prüfen. Der einfache lokale Python-Server ersetzt nicht den GitHub-Pages-Test einer tatsächlich fehlenden Unterseite.

@@ -9,15 +9,16 @@
 .urbar-photo img { width: 100%; height: auto; max-height: 600px; aspect-ratio: 3 / 4; object-fit: cover; object-position: center; }
 .urbar-photo figcaption { margin-top: 12px; color: var(--muted); font-size: .8rem; }
 .urbar-jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px clamp(24px,4vw,64px); padding: 20px 24px; border-block: 1px solid var(--line); background: var(--cream); }
-.urbar-jump a { min-height: 44px; display: inline-flex; align-items: center; gap: 12px; color: var(--teal-dark); }
+.urbar-jump a { min-width: 0; min-height: 44px; display: inline-flex; align-items: center; gap: 12px; color: var(--teal-dark); overflow-wrap: anywhere; }
 .urbar-section { padding: clamp(64px,7vw,104px) max(24px,calc((100vw - 1248px) / 2)); }
 .urbar-section-heading { max-width: 800px; margin-bottom: 40px; }
-.urbar-section-heading h2 { font-size: clamp(2.4rem,4vw,4rem); font-weight: 580; letter-spacing: -.025em; overflow-wrap: break-word; }
+.urbar-section-heading h2 { font-size: clamp(2.4rem,4vw,4rem); font-weight: 500; letter-spacing: -.025em; overflow-wrap: break-word; }
 .urbar-section-heading > p:not(.eyebrow) { max-width: 720px; color: var(--muted); }
 .urbar-articles .news-meta { letter-spacing: .08em; }
 .urbar-projects { background: var(--cream); }
 .urbar-project-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
 .urbar-project-card { min-width: 0; padding: clamp(24px,3vw,40px); background: white; border-top: 3px solid var(--teal); display: flex; flex-direction: column; align-items: flex-start; }
+.urbar-project-card > * { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
 .urbar-project-card h3 { font-size: clamp(2rem,3vw,2.7rem); }
 .urbar-project-card > p:not(.eyebrow) { color: var(--muted); }
 .urbar-project-card .text-link { margin-top: auto; padding-top: 20px; }
