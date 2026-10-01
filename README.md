@@ -78,7 +78,7 @@ Das kanonische runde Porträt für persönliche Kacheln und Profil-Icons liegt u
 
 ## Schrift und Startseitenporträt
 
-Die Website verwendet die lokal gespeicherte Source Sans 3 für Fließtext und Überschriften. Moderate Schriftgewichte und offene Zeilenabstände halten die Darstellung ruhig. Das Startseitenporträt `assets/images/marco-pusceddu-arme-verschraenkt.jpg` zeigt Marco im dunkelblauen Poloshirt. Auf schmalen Ansichten bleibt das Bild im Hochformat, damit Gesicht und verschränkte Arme sichtbar sind. Das runde Profilbild und vorhandene Social-Media-Vorschaubilder bleiben eigenständige Motive.
+Die Website verwendet die lokal gespeicherte Source Sans 3 für Fließtext und Überschriften. Moderate Schriftgewichte und offene Zeilenabstände halten die Darstellung ruhig. Das Startseitenporträt `assets/images/marco-pusceddu-portrait-ki-v2.jpg` zeigt Marco im dunkelblauen Poloshirt. Das KI-bearbeitete Porträt wurde von Marco am 01.10.2026 als Bildfassung bestätigt; Hintergrund und Pose sind generativ bearbeitet. Die Bilddatei hat 1122 × 1402 Pixel und wird im Alternativtext als KI-bearbeitet bezeichnet. Auf schmalen Ansichten bleibt das Bild im Hochformat, damit Gesicht und verschränkte Arme sichtbar sind. Das runde Profilbild und vorhandene Social-Media-Vorschaubilder bleiben eigenständige Motive.
 
 ## Änderungen prüfen
 
