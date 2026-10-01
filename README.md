@@ -50,6 +50,7 @@ Interaktive, mobil nutzbare Karte für die teilnehmenden Stände des Dorfflohmar
 ├── assets/
 │   ├── css/            # Gestaltung
 │   ├── fonts/          # Lokale Schriften und Lizenzen
+│   ├── js/             # Optionaler Themenfilter im Archiv
 │   └── images/         # Bildmaterial
 ├── CNAME               # eigene Domain für GitHub Pages
 ├── robots.txt
@@ -99,6 +100,16 @@ Die Website verwendet die lokal gespeicherte Source Sans 3 für Fließtext und �
 - Bestehende Adressen und Veröffentlichungsdaten beibehalten. Eine wesentliche Aktualisierung mit `article:modified_time` und sichtbarem Änderungsdatum kennzeichnen. Historische Sitemap-Änderungsdaten bleiben erhalten; das Datum eines erneuten Builds wird nicht als inhaltliche Änderung ausgegeben.
 - Vor dem Veröffentlichen `python3 scripts/build_articles.py --check` und `python3 -m unittest discover -s tests` ausführen. Fehlende Metadaten, falsche Canonical-Adressen, abweichende Titel/Datumswerte und zukünftige Veröffentlichungsdaten brechen die Erzeugung ab, bevor Ausgabedateien geändert werden.
 - Das Raster zeigt über 1100 Pixeln drei, zwischen 561 und 1100 Pixeln zwei und bis 560 Pixel eine Spalte. Mit sechs Einträgen bleiben die letzten Reihen vollständig.
+
+## Themenfilter unter Aktuelles
+
+Das Archiv bietet „Alle“, „Politik & Finanzen“, „Bauen & Umwelt“, „Digitalisierung“, „Ehrenamt“ und „Persönlich“. Ein Artikel kann zu mehreren Themen gehören; Orte und sichtbare Rubriken bleiben davon unabhängig. Die Zuordnung erfolgt im Artikelkopf über beispielsweise `<meta name="article:topics" content="politik-finanzen, digitalisierung">`.
+
+Erlaubte Kennungen sind `politik-finanzen`, `bauen-umwelt`, `digitalisierung`, `ehrenamt` und `persoenlich`. Jeder Artikel benötigt mindestens eine gültige Kennung. Der bestehende Artikelgenerator prüft sie und erzeugt Filter, Beitragszahlen und Kartenzuordnungen gemeinsam. Themen ohne Artikel werden nicht angezeigt. Neue Themen in `TOPICS` in `scripts/build_articles.py` ergänzen, erst wenn passende veröffentlichte Beiträge vorliegen.
+
+Das kleine lokale Skript `assets/js/article-filter.js` blendet passende Karten direkt ein. Die Auswahl lässt sich als Link weitergeben, etwa `/aktuelles/#thema=digitalisierung`, und bleibt beim Zurückgehen erhalten. Ein unbekanntes Thema zeigt alle Beiträge. Ohne JavaScript oder bei einem nicht geladenen Skript bleiben alle Artikel sichtbar und die Bedienelemente verborgen. Keine Cookies, kein Speicherzugriff, keine externen Abhängigkeiten.
+
+Die Gestaltung liegt ausschließlich in `assets/css/article-filter.css`. Bei Änderungen an Filter-CSS oder -JavaScript den jeweiligen Versionsparameter in `aktuelles/index.html` erhöhen. Tastaturbedienung, Fokus, Beitragszahl, Zurück/Weiter, direkte Themenlinks und die Ansicht ohne JavaScript auf schmalen und breiten Bildschirmen mitprüfen.
 
 ## Favicon und Lesezeichen
 

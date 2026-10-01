@@ -102,6 +102,34 @@ class ArticleBuildTest(unittest.TestCase):
         self.assertIn("willkommen.html</loc>\n    <lastmod>2026-09-28</lastmod>", sitemap)
         self.assertIn("haushalt-2026.html</loc>\n    <lastmod>2026-08-26</lastmod>", sitemap)
 
+    def test_topics_cover_archive_and_empty_topic_disappears(self):
+        build(self.root)
+        page = self.root / "aktuelles/index.html"
+        archive = Document(page.read_text()).root
+        cards = archive.find("article", "news-card")
+        self.assertTrue(all(card.attrs.get("data-topics") for card in cards))
+        by_file = {card.find("a")[0].attrs["href"]: card for card in cards}
+        self.assertEqual(set(by_file["organisationshoheit-gute-ideen.html"].attrs["data-topics"].split()),
+                         {"politik-finanzen", "digitalisierung"})
+        self.assertIn('data-topic="ehrenamt"', page.read_text())
+        (self.root / "aktuelles/jahresuebung-feuerwehr-vallendar-2026.html").unlink()
+        build(self.root)
+        self.assertNotIn('data-topic="ehrenamt"', page.read_text())
+        archive = Document(page.read_text()).root
+        all_button = next(b for b in archive.find("button") if b.attrs.get("data-topic") == "alle")
+        self.assertEqual(all_button.find("span")[0].text(), "11")
+
+    def test_missing_or_unknown_topic_never_partially_writes(self):
+        p = self.root / "aktuelles/willkommen.html"
+        original = p.read_text()
+        for replacement in ["", '<meta name="article:topics" content="persoenlich, typo">']:
+            with self.subTest(replacement=replacement):
+                p.write_text(original.replace('<meta name="article:topics" content="persoenlich">', replacement))
+                before = self.snapshot()
+                with self.assertRaisesRegex(ValueError, "article:topics"):
+                    build(self.root)
+                self.assertEqual(before, self.snapshot())
+
 
 if __name__ == "__main__":
     unittest.main()
