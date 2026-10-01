@@ -15,6 +15,8 @@
   <meta property="og:image" content="https://marcopusceddu.de/assets/images/og-20260928.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="../assets/css/styles.css?v=24">
+  <link rel="stylesheet" href="../assets/css/article-filter.css?v=1">
+  <script src="../assets/js/article-filter.js?v=1" defer></script>
   <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" sizes="16x16 32x32 48x48">
   <link rel="icon" type="image/png" href="/favicon-32x32.png?v=2" sizes="32x32">
   <link rel="icon" type="image/png" href="/favicon-96x96.png?v=2" sizes="96x96">
@@ -45,76 +47,90 @@
     </header>
 
     <section class="news-archive section" aria-labelledby="archive-title">
-      <h2 class="visually-hidden" id="archive-title">Alle Beiträge</h2>
-      <div class="news-grid">
+      <h2 class="visually-hidden" id="archive-title">Beiträge</h2>
+      <div class="article-filter" data-article-filter hidden>
+        <p class="article-filter-label" id="topic-filter-label">Nach Thema</p>
+        <div class="article-filter-options" role="group" aria-labelledby="topic-filter-label">
+          <!-- BEGIN GENERATED:topic-filters -->
+          <button type="button" class="article-filter-button" data-topic="alle" aria-pressed="true" aria-controls="article-list">Alle <span class="article-filter-count" aria-hidden="true">12</span></button>
+          <button type="button" class="article-filter-button" data-topic="politik-finanzen" aria-pressed="false" aria-controls="article-list">Politik &amp; Finanzen <span class="article-filter-count" aria-hidden="true">6</span></button>
+          <button type="button" class="article-filter-button" data-topic="bauen-umwelt" aria-pressed="false" aria-controls="article-list">Bauen &amp; Umwelt <span class="article-filter-count" aria-hidden="true">3</span></button>
+          <button type="button" class="article-filter-button" data-topic="digitalisierung" aria-pressed="false" aria-controls="article-list">Digitalisierung <span class="article-filter-count" aria-hidden="true">2</span></button>
+          <button type="button" class="article-filter-button" data-topic="ehrenamt" aria-pressed="false" aria-controls="article-list">Ehrenamt <span class="article-filter-count" aria-hidden="true">1</span></button>
+          <button type="button" class="article-filter-button" data-topic="persoenlich" aria-pressed="false" aria-controls="article-list">Persönlich <span class="article-filter-count" aria-hidden="true">2</span></button>
+          <!-- END GENERATED:topic-filters -->
+        </div>
+        <p class="article-filter-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      </div>
+      <div class="news-grid" id="article-list">
         <!-- BEGIN GENERATED:archive -->
-        <article class="news-card news-card-featured">
+        <article class="news-card news-card-featured" data-topics="digitalisierung politik-finanzen">
           <p class="news-meta"><time datetime="2026-09-28">28. September 2026</time><span>Vallendar · Meinung · Verwaltung</span></p>
           <h2><a href="organisationshoheit-gute-ideen.html">Gute Ideen verdienen eine Antwort</a></h2>
           <p>Die Organisationshoheit des Bürgermeisters verdient Respekt. Vorschläge für eine bessere Verwaltung verdienen eine sachliche Prüfung.</p>
           <a class="card-link" href="organisationshoheit-gute-ideen.html" aria-label="Beitrag lesen: Gute Ideen verdienen eine Antwort">Beitrag lesen <span aria-hidden="true">↗</span></a>
         </article>
-        <article class="news-card">
+        <article class="news-card" data-topics="ehrenamt">
           <p class="news-meta"><time datetime="2026-08-29">29. August 2026</time><span>Vallendar · Feuerwehr und Ehrenamt</span></p>
           <h2><a href="jahresuebung-feuerwehr-vallendar-2026.html">Jahresübung des Löschzugs <span class="title-lock">Vallendar:</span> Einsatzbereitschaft, die Vertrauen schafft</a></h2>
           <p>Eine realitätsnahe Jahresübung zeigte, wie Ausbildung, Zusammenarbeit und moderne Technik im Ernstfall ineinandergreifen.</p>
           <a class="card-link" href="jahresuebung-feuerwehr-vallendar-2026.html" aria-label="Beitrag lesen: Jahresübung des Löschzugs Vallendar: Einsatzbereitschaft, die Vertrauen schafft">Beitrag lesen <span aria-hidden="true">↗</span></a>
         </article>
-        <article class="news-card">
+        <article class="news-card" data-topics="bauen-umwelt">
           <p class="news-meta"><time datetime="2026-08-27">27. August 2026</time><span>Urbar · Stadtentwicklung</span></p>
           <h2><a href="bauturbo-suedliche-ortsmitte.html">Der Bebauungsplan gilt: Warum wir beim Bauturbo Nein gesagt haben</a></h2>
           <p>Vier Wohnungen bleiben möglich. Die zusätzliche Verdichtung auf sechs Wohnungen über den Bauturbo haben wir nicht mitgetragen.</p>
           <a class="card-link" href="bauturbo-suedliche-ortsmitte.html" aria-label="Beitrag lesen: Der Bebauungsplan gilt: Warum wir beim Bauturbo Nein gesagt haben">Beitrag lesen <span aria-hidden="true">↗</span></a>
         </article>
-        <article class="news-card">
+        <article class="news-card" data-topics="persoenlich">
           <p class="news-meta"><time datetime="2026-08-26">26. August 2026</time><span>Persönlich</span></p>
           <h2><a href="willkommen.html">Warum ich hier schreibe</a></h2>
           <p>Ein eigener Ort für persönliche Positionen, meine Arbeit und konkrete Projekte in Urbar und Vallendar.</p>
           <a class="card-link" href="willkommen.html" aria-label="Beitrag lesen: Warum ich hier schreibe">Beitrag lesen <span aria-hidden="true">↗</span></a>
         </article>
-        <article class="news-card">
+        <article class="news-card" data-topics="politik-finanzen">
           <p class="news-meta"><time datetime="2026-07-02">2. Juli 2026</time><span>Vallendar · Kommunalfinanzen</span></p>
           <h2><a href="kommunalfinanzen-buerger.html">Wer bezahlt am Ende die kommunale Finanzkrise?</a></h2>
           <p>Bund und Land bestellen. Fehlt das Geld, zahlen am Ende die Kommunen und ihre Bürger.</p>
           <a class="card-link" href="kommunalfinanzen-buerger.html" aria-label="Beitrag lesen: Wer bezahlt am Ende die kommunale Finanzkrise?">Beitrag lesen <span aria-hidden="true">↗</span></a>
         </article>
-        <article class="news-card">
+        <article class="news-card" data-topics="bauen-umwelt">
           <p class="news-meta"><time datetime="2026-06-01">1. Juni 2026</time><span>Rückblick · Klimaanpassung</span></p>
           <h2><a href="klimaanpassung-vallendar.html">Klimaanpassung muss vor Ort sichtbar werden</a></h2>
           <p>Ein Workshop allein schützt niemanden. Aus Vorschlägen müssen konkrete Maßnahmen werden.</p>
           <a class="card-link" href="klimaanpassung-vallendar.html" aria-label="Beitrag lesen: Klimaanpassung muss vor Ort sichtbar werden">Beitrag lesen <span aria-hidden="true">↗</span></a>
         </article>
-        <article class="news-card">
+        <article class="news-card" data-topics="bauen-umwelt politik-finanzen">
           <p class="news-meta"><time datetime="2026-05-08">8. Mai 2026</time><span>Urbar · Straßen und Beiträge</span></p>
           <h2><a href="strassenbeitraege-urbar.html">Bornstraße, Gartenstraße und wiederkehrende Beiträge</a></h2>
           <p>Was gebaut wird, wie gerechnet wird und was Eigentümer bei ihrem Bescheid prüfen sollten.</p>
           <a class="card-link" href="strassenbeitraege-urbar.html" aria-label="Beitrag lesen: Bornstraße, Gartenstraße und wiederkehrende Beiträge">Beitrag lesen <span aria-hidden="true">↗</span></a>
         </article>
-        <article class="news-card">
+        <article class="news-card" data-topics="politik-finanzen">
           <p class="news-meta"><time datetime="2026-03-20">20. März 2026</time><span>Rückblick · Sicherheit</span></p>
           <h2><a href="sicherheit-vertrauen.html">Sicherheit und Vertrauen gehören zusammen</a></h2>
           <p>Regeln durchsetzen, Hinweise ernst nehmen und staatliches Handeln klar erklären.</p>
           <a class="card-link" href="sicherheit-vertrauen.html" aria-label="Beitrag lesen: Sicherheit und Vertrauen gehören zusammen">Beitrag lesen <span aria-hidden="true">↗</span></a>
         </article>
-        <article class="news-card">
+        <article class="news-card" data-topics="digitalisierung">
           <p class="news-meta"><time datetime="2026-02-17">17. Februar 2026</time><span>Rückblick · Digitalisierung</span></p>
           <h2><a href="glasfaser-urbar-vallendar.html">Glasfaser für Urbar und Vallendar</a></h2>
           <p>Eine Vereinbarung ist noch kein Anschluss. Das Kabel muss zuverlässig bis ins Haus kommen.</p>
           <a class="card-link" href="glasfaser-urbar-vallendar.html" aria-label="Beitrag lesen: Glasfaser für Urbar und Vallendar">Beitrag lesen <span aria-hidden="true">↗</span></a>
         </article>
-        <article class="news-card">
+        <article class="news-card" data-topics="politik-finanzen">
           <p class="news-meta"><time datetime="2025-12-17">17. Dezember 2025</time><span>Rückblick · Kommunaler Finanzausgleich</span></p>
           <h2><a href="kommunaler-finanzausgleich.html">Warum wir die Klage nicht weiterverfolgt haben</a></h2>
           <p>Der Rückzug war kein Einknicken, sondern nach dem Koblenzer Urteil die verantwortbare Entscheidung.</p>
           <a class="card-link" href="kommunaler-finanzausgleich.html" aria-label="Beitrag lesen: Warum wir die Klage nicht weiterverfolgt haben">Beitrag lesen <span aria-hidden="true">↗</span></a>
         </article>
-        <article class="news-card">
+        <article class="news-card" data-topics="politik-finanzen">
           <p class="news-meta"><time datetime="2025-12-11">11. Dezember 2025</time><span>Rückblick · Vallendar · Haushalt</span></p>
           <h2><a href="haushalt-2026.html">Warum ich dem Haushalt 2026 nicht zugestimmt habe</a></h2>
           <p>Eine schwarze Null macht noch keinen gesunden Haushalt. Deshalb habe ich nicht zugestimmt.</p>
           <a class="card-link" href="haushalt-2026.html" aria-label="Beitrag lesen: Warum ich dem Haushalt 2026 nicht zugestimmt habe">Beitrag lesen <span aria-hidden="true">↗</span></a>
         </article>
-        <article class="news-card">
+        <article class="news-card" data-topics="persoenlich">
           <p class="news-meta"><time datetime="2025-11-05">5. November 2025</time><span>Rückblick · Persönlich</span></p>
           <h2><a href="kommunalpolitik-verantwortung.html">Warum ich kommunalpolitische Verantwortung übernehme</a></h2>
           <p>Zuhören, erklären und an konkreten Problemen dranbleiben. Daran muss sich Kommunalpolitik messen lassen.</p>

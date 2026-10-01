@@ -12,6 +12,13 @@ import sys
 import xml.etree.ElementTree as ET
 
 BASE = "https://marcopusceddu.de/"
+TOPICS = {
+    "politik-finanzen": "Politik & Finanzen",
+    "bauen-umwelt": "Bauen & Umwelt",
+    "digitalisierung": "Digitalisierung",
+    "ehrenamt": "Ehrenamt",
+    "persoenlich": "Persönlich",
+}
 MONTHS = ("", "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli",
           "August", "September", "Oktober", "November", "Dezember")
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
@@ -117,21 +124,37 @@ def read_article(path):
     if not all([title, category, summary, metadata.get("article:author"), metadata.get("og:image")]):
         raise ValueError(f"{path.name}: Titel, Rubrik, Kurztext, Autor oder Vorschaubild fehlen")
     places = {place.strip().casefold() for place in metadata.get("article:places", "").split(",") if place.strip()}
-    return dict(filename=path.name, title=title, heading=heading_html(heading), category=category, places=places,
+    topics = {topic.strip() for topic in metadata.get("article:topics", "").split(",") if topic.strip()}
+    if not topics or topics - TOPICS.keys():
+        raise ValueError(f"{path.name}: article:topics muss mindestens ein gültiges Thema enthalten; erlaubt: {', '.join(TOPICS)}")
+    return dict(filename=path.name, title=title, heading=heading_html(heading), category=category, places=places, topics=topics,
                 summary=summary, published=published, modified=modified, url=url)
 
 
-def card(article, level, css_class, prefix=""):
+def card(article, level, css_class, prefix="", filterable=False):
     a = article
     d = a["published"]
     label = f"{d.day}. {MONTHS[d.month]} {d.year}"
     href = escape(prefix + a["filename"], quote=True)
-    return f'''<article class="{css_class}">
+    topics_attr = ' data-topics="' + ' '.join(sorted(a['topics'])) + '"' if filterable else ''
+    return f'''<article class="{css_class}"{topics_attr}>
   <p class="news-meta"><time datetime="{d.isoformat()}">{label}</time><span>{escape(a['category'])}</span></p>
   <h{level}><a href="{href}">{a['heading']}</a></h{level}>
   <p>{escape(a['summary'])}</p>
   <a class="card-link" href="{href}" aria-label="{escape('Beitrag lesen: ' + a['title'], quote=True)}">Beitrag lesen <span aria-hidden="true">↗</span></a>
 </article>'''
+
+
+def topic_buttons(articles):
+    counts = {key: sum(key in a["topics"] for a in articles) for key in TOPICS}
+    choices = [("alle", "Alle", len(articles))]
+    choices.extend((key, label, counts[key]) for key, label in TOPICS.items() if counts[key])
+    return "\n".join(
+        f'<button type="button" class="article-filter-button" data-topic="{key}" '
+        f'aria-pressed="{"true" if key == "alle" else "false"}" aria-controls="article-list">'
+        f'{escape(label)} <span class="article-filter-count" aria-hidden="true">{count}</span></button>'
+        for key, label, count in choices
+    )
 
 
 def replace_region(source, name, content, indent):
@@ -154,7 +177,8 @@ def outputs(root):
     previews = "\n".join(card(a, 3, "latest-preview-card", "aktuelles/") for a in articles[1:7])
     home = replace_region(home, "previews", previews, "          ")
     archive = archive_path.read_text(encoding="utf-8")
-    cards = "\n".join(card(a, 2, "news-card news-card-featured" if i == 0 else "news-card") for i, a in enumerate(articles))
+    archive = replace_region(archive, "topic-filters", topic_buttons(articles), "          ")
+    cards = "\n".join(card(a, 2, "news-card news-card-featured" if i == 0 else "news-card", filterable=True) for i, a in enumerate(articles))
     archive = replace_region(archive, "archive", cards, "        ")
     urbar_path = root / "urbar/index.html"
     urbar = urbar_path.read_text(encoding="utf-8")
