@@ -24,9 +24,9 @@ class ArticleBuildTest(unittest.TestCase):
     def test_complete_archive_six_previews_and_idempotency(self):
         before = self.snapshot()
         count, _ = build(self.root)
-        self.assertEqual(count, 13)
+        self.assertEqual(count, 14)
         archive = Document((self.root / "aktuelles/index.html").read_text()).root
-        self.assertEqual(len(archive.find("article", "news-card")), 13)
+        self.assertEqual(len(archive.find("article", "news-card")), 14)
         home = Document((self.root / "index.html").read_text()).root
         self.assertEqual(len(home.find("article", "latest-preview-card")), 6)
         self.assertEqual(len(home.find("article", "news-card-featured")), 1)
@@ -41,7 +41,7 @@ class ArticleBuildTest(unittest.TestCase):
         build(self.root)
         page = self.root / "urbar/index.html"
         document = Document(page.read_text()).root
-        self.assertEqual(len(document.find("article", "latest-preview-card")), 4)
+        self.assertEqual(len(document.find("article", "latest-preview-card")), 5)
         self.assertNotIn('href="../aktuelles/haushalt-2026.html"', page.read_text())
         original = self.root / "aktuelles/organisationshoheit-gute-ideen.html"
         new = self.root / "aktuelles/aaa-urbar-test.html"
@@ -65,12 +65,12 @@ class ArticleBuildTest(unittest.TestCase):
         new = self.root / "aktuelles/aaa-pruefbeitrag.html"
         new.write_text(original.read_text().replace(original.name, new.name).replace("Gute Ideen verdienen eine Antwort", "Ein weiterer Prüfbeitrag"))
         count, _ = build(self.root)
-        self.assertEqual(count, 14)
+        self.assertEqual(count, 15)
         for path in ["index.html", "aktuelles/index.html", "sitemap.xml"]:
             self.assertIn(new.name, (self.root / path).read_text())
         new.unlink()
         count, _ = build(self.root)
-        self.assertEqual(count, 13)
+        self.assertEqual(count, 14)
         for path in ["index.html", "aktuelles/index.html", "sitemap.xml"]:
             self.assertNotIn(new.name, (self.root / path).read_text())
 
@@ -80,7 +80,7 @@ class ArticleBuildTest(unittest.TestCase):
         self.assertEqual(home_before, (self.root / "index.html").read_text())
         archive = Document((self.root / "aktuelles/index.html").read_text()).root
         cards = archive.find("article", "news-card")
-        self.assertEqual(cards[0].find("a")[0].attrs["href"], "organisationshoheit-gute-ideen.html")
+        self.assertEqual(cards[0].find("a")[0].attrs["href"], "freiwillige-leistungen-haushaltsdisziplin.html")
         background = cards[-1]
         self.assertEqual(background.find("a")[0].attrs["href"], "erneuerbare-energien-urbar.html")
         self.assertEqual(background.find("time")[0].attrs["datetime"], "2026-10-01")
@@ -90,11 +90,11 @@ class ArticleBuildTest(unittest.TestCase):
         self.assertIn("erneuerbare-energien-urbar.html", urbar.find("article", "latest-preview-card")[-1].find("a")[0].attrs["href"])
         # An equally recent current article still becomes the lead automatically.
         original = self.root / "aktuelles/organisationshoheit-gute-ideen.html"
-        new = self.root / "aktuelles/neue-meldung.html"
-        new.write_text(original.read_text().replace(original.name, new.name).replace("2026-09-28", "2026-10-01"))
+        new = self.root / "aktuelles/aaa-neue-meldung.html"
+        new.write_text(original.read_text().replace(original.name, new.name).replace("2026-09-28", "2026-10-02"))
         build(self.root)
         home = Document((self.root / "index.html").read_text()).root
-        self.assertEqual(home.find("article", "news-card-featured")[0].find("a")[0].attrs["href"], "aktuelles/neue-meldung.html")
+        self.assertEqual(home.find("article", "news-card-featured")[0].find("a")[0].attrs["href"], "aktuelles/aaa-neue-meldung.html")
 
     def test_invalid_listing_never_partially_writes(self):
         p = self.root / "aktuelles/erneuerbare-energien-urbar.html"
@@ -143,6 +143,7 @@ class ArticleBuildTest(unittest.TestCase):
                          {"politik-finanzen", "digitalisierung"})
         self.assertIn('data-topic="ehrenamt"', page.read_text())
         (self.root / "aktuelles/jahresuebung-feuerwehr-vallendar-2026.html").unlink()
+        (self.root / "aktuelles/freiwillige-leistungen-haushaltsdisziplin.html").unlink()
         build(self.root)
         self.assertNotIn('data-topic="ehrenamt"', page.read_text())
         archive = Document(page.read_text()).root

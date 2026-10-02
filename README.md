@@ -84,7 +84,7 @@ Die Website verwendet die lokal gespeicherte Source Sans 3 für Fließtext und �
 ## Änderungen prüfen
 
 - Die vorhandenen Artikeladressen und Quellen beibehalten. Rechtliche Texte gesondert prüfen.
-- Bei CSS-Änderungen den Versionsparameter an allen HTML-Seiten gemeinsam aktualisieren; derzeit 19 Seiten, aktuell `styles.css?v=24`.
+- Bei CSS-Änderungen den Versionsparameter an allen HTML-Seiten gemeinsam aktualisieren; derzeit 20 Seiten, aktuell `styles.css?v=24`.
 - Startseite, Beitragsarchiv, einen langen Artikel und den Bildartikel auf Smartphone, Tablet und Desktop prüfen. Zusätzlich schmale Ansichten, die Umbrüche bei 900 und 1100 Pixeln sowie Textvergrößerung berücksichtigen.
 - Navigation, Tastaturfokus, Sprungmarken, Bilder und interne Links kontrollieren. Der mobile Kopfbereich scrollt mit der Seite, damit mehrzeilige Navigation keine Inhalte verdeckt.
 - Die Fehlerseite lokal unter `/404.html` prüfen. Der einfache lokale Python-Server ersetzt nicht den GitHub-Pages-Test einer tatsächlich fehlenden Unterseite.
@@ -116,7 +116,7 @@ Die Gestaltung liegt ausschließlich in `assets/css/article-filter.css`. Bei Än
 
 Das Favicon verwendet eine für kleine Größen angepasste Fassung des vorhandenen MP-Zeichens: cremeweißes M und helltürkises P auf Dunkelblau. `favicon.svg` ist die skalierbare Hauptfassung mit expliziten Abmessungen. `favicon-32x32.png` und `favicon-96x96.png` sind die Rasterfassungen, `favicon.ico` enthält 16, 32 und 48 Pixel. `apple-touch-icon.png` hat 180 × 180 Pixel und einen deckenden Hintergrund; die Rundung übernimmt das Gerät. `safari-pinned-tab.svg` stellt für angeheftete Safari-Tabs das MP-Zeichen als schwarze Vektormaske auf transparentem Grund bereit; Safari übernimmt die Einfärbung.
 
-Alle 19 HTML-Seiten binden diese Dateien mit Pfaden ab der Domainwurzel ein. Das gilt auch für verschachtelte Artikel und die Fehlerseite. Bei Änderungen alle Fassungen gemeinsam ersetzen, in kleinen Größen vor hellem und dunklem Hintergrund prüfen und die Einbindung in neuen Artikeln übernehmen. Die Favicon-Adressen stabil halten, damit Suchmaschinen sie zuverlässig abrufen können. Aktuell gilt einmalig `?v=2`, damit Browser die anfänglichen, fehlenden oder veralteten Symbole erneut abrufen. Diesen Wert nicht bei gewöhnlichen Artikeländerungen erhöhen.
+Alle 20 HTML-Seiten binden diese Dateien mit Pfaden ab der Domainwurzel ein. Das gilt auch für verschachtelte Artikel und die Fehlerseite. Bei Änderungen alle Fassungen gemeinsam ersetzen, in kleinen Größen vor hellem und dunklem Hintergrund prüfen und die Einbindung in neuen Artikeln übernehmen. Die Favicon-Adressen stabil halten, damit Suchmaschinen sie zuverlässig abrufen können. Aktuell gilt einmalig `?v=2`, damit Browser die anfänglichen, fehlenden oder veralteten Symbole erneut abrufen. Diesen Wert nicht bei gewöhnlichen Artikeländerungen erhöhen.
 
 ## Persönlicher Urbar-Bereich
 
@@ -138,3 +138,7 @@ Die neue CDU-Seite liegt derzeit unter der öffentlichen Entwicklungsadresse `ht
 - GitHub: [github.com/mpusceddu](https://github.com/mpusceddu)
 - E-Mail: [marco.pusceddu@cdu-urbar.de](mailto:marco.pusceddu@cdu-urbar.de)
 - Instagram: [@mapusceddu](https://www.instagram.com/mapusceddu/)
+
+## Beitragsbild zur Haushaltsdisziplin
+
+`assets/images/freiwillige-leistungen-haushaltsdisziplin.jpg` ist eine eigene typografische Beitragsgrafik mit dem vorhandenen MP-Zeichen und Source Sans 3 in Dunkelblau und Türkis. Die Aussage stammt aus dem Artikel. Die Datei ist 1200 × 630 Pixel groß und dient zugleich als Artikelbild und Open-Graph-/Twitter-Vorschau. Sie wird lokal ohne Drittanbieter geladen und enthält keine Darstellung einer tatsächlichen Sitzung.
