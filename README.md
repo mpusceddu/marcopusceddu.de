@@ -120,7 +120,9 @@ Alle 20 HTML-Seiten binden diese Dateien mit Pfaden ab der Domainwurzel ein. Das
 
 ## Persönlicher Urbar-Bereich
 
-`urbar/index.html` bündelt persönliche Beiträge, digitale Projekte und die Arbeit im Ortsgemeinderat. Der Bereich ist von der Startseite und der Hauptnavigation erreichbar. Das Layout ergänzt die vorhandene Gestaltung über `assets/css/urbar.css`; rechtliche Texte bleiben unverändert. Der gemeinsame Footer kann auf schmalen Geräten umbrechen.
+`urbar/index.html` bündelt persönliche Beiträge und die Arbeit im Ortsgemeinderat. Der Bereich ist von der Startseite und der Hauptnavigation erreichbar. Das Layout ergänzt die vorhandene Gestaltung über `assets/css/urbar.css`; rechtliche Texte bleiben unverändert. Der gemeinsame Footer kann auf schmalen Geräten umbrechen.
+
+Seit dem 03.10.2026 sind auf Marcos Wunsch die Karten „Dorfflohmarkt Urbar“ und „Vereinsleben an einem Ort“ vorerst ausgeblendet. Der zugehörige Abschnitt „Digitale Projekte“ und sein Sprunglink sind vollständig aus dem ausgelieferten HTML entfernt. Der bisherige Inhalt bleibt in der Git-Historie erhalten und darf erst nach einem neuen Auftrag wieder eingebaut werden. Die eigenständigen Projektwebsites sind davon unberührt.
 
 Ein veröffentlichter Artikel erscheint automatisch auch dort, wenn sein Kopf `<meta name="article:places" content="urbar">` enthält. Mehrere Orte können durch Kommas getrennt werden. Die Zuordnung erfolgt bewusst durch die Redaktion, nicht über eine Stichwortsuche im Text. Anschließend denselben Pflegeschritt `python3 scripts/build_articles.py` ausführen und alle erzeugten Änderungen gemeinsam committen. Auf der Urbar-Seite erscheinen alle zugeordneten Beiträge: aktuelle Beiträge zuerst, danach Hintergrundbeiträge; innerhalb beider Gruppen neueste zuerst; die Artikel selbst bleiben unter ihrer bisherigen Adresse.
 
