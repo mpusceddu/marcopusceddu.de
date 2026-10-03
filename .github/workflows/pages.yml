@@ -1,0 +1,65 @@
+name: Publish website
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    # Warm up before noon German summer time. Later runs retry publication.
+    - cron: '43 9 7 10 *'
+    - cron: '13 10-16 7 10 *'
+permissions:
+  contents: read
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v6
+      - name: Check release date for scheduled run
+        id: date
+        run: |
+          if [ "${{ github.event_name }}" = schedule ] && [ "$(date -u +%F)" != 2026-10-07 ]; then
+            echo 'run=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'run=true' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Wait until approved publication time
+        if: steps.date.outputs.run == 'true' && github.event_name == 'schedule'
+        run: |
+          python3 - <<'PY'
+          from datetime import datetime, timezone
+          import time
+          due = datetime(2026, 10, 7, 10, 0, tzinfo=timezone.utc)
+          wait = max(0, (due - datetime.now(timezone.utc)).total_seconds())
+          if wait > 1800:
+              raise SystemExit('Unexpected early trigger')
+          time.sleep(wait)
+          PY
+      - name: Test and build static website
+        if: steps.date.outputs.run == 'true'
+        run: |
+          python3 -m unittest discover -s tests
+          python3 scripts/build_site.py --output _site
+      - uses: actions/upload-pages-artifact@v4
+        if: steps.date.outputs.run == 'true'
+        with:
+          path: _site
+    outputs:
+      publish: ${{ steps.date.outputs.run }}
+  deploy:
+    if: needs.build.outputs.publish == 'true'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

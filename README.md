@@ -94,7 +94,7 @@ Die Website verwendet die lokal gespeicherte Source Sans 3 für Fließtext und �
 ## Beiträge auf der Startseite pflegen
 
 - Artikel ausschließlich in ihrer bestehenden Datei unter `aktuelles/*.html` pflegen. Entwürfe außerhalb der veröffentlichten Website aufbewahren: GitHub Pages liefert jede HTML-Datei im Repository aus, auch wenn sie nicht verlinkt ist.
-- Nach einer freigegebenen Änderung `python3 scripts/build_articles.py` ausführen. Das Skript erzeugt die markierten Bereiche in Startseite und Archiv sowie die Artikeladressen der Sitemap. Die erzeugten Dateien gemeinsam mit dem Artikel committen. GitHub Pages veröffentlicht weiterhin die eingecheckten statischen Dateien; es gibt keinen Hintergrundprozess mit Schreibzugriff.
+- Nach einer freigegebenen Änderung `python3 scripts/build_articles.py` ausführen. Das Skript erzeugt die markierten Bereiche in Startseite und Archiv sowie die Artikeladressen der Sitemap. Die erzeugten Dateien gemeinsam mit dem Artikel committen. GitHub Actions baut daraus das statische Veröffentlichungs-Paket; der Workflow benötigt keinen Schreibzugriff auf den Repository-Inhalt.
 - Quelle sind der sichtbare Artikelkopf (Titel, Datum, Rubrik), `og:description` als Kurztext, Canonical-Adresse und Artikelmetadaten. Optional überschreibt `<meta name="article:summary" content="Kurzer Überblick">` den Kurztext für die Übersichten. Das Skript ändert keine Artikeltexte oder rechtlichen Seiten.
 - Den neuesten aktuellen Beitrag zeigt das Skript hervorgehoben. Unter „Weitere Beiträge“ erscheinen die sechs nächsten vorhandenen Beiträge in absteigender Reihenfolge des Veröffentlichungsdatums, ohne Dopplung. Aktualisierungen ändern diese Reihenfolge nicht. Bei gleichem Datum entscheidet der Dateiname.
 - Hintergrundbeiträge erhalten `<meta name="article:listing" content="background">`. Sie erscheinen nach den aktuellen Beiträgen, innerhalb beider Gruppen nach Veröffentlichungsdatum absteigend. Ohne dieses Feld gilt `current`. Das tatsächliche Veröffentlichungsdatum bleibt erhalten; die sichtbare Rubrik kennzeichnet den Hintergrundcharakter. So verdrängt ein neuer Hintergrundtext keine aktuelle Meldung. Diese Reihenfolge gilt auch im Urbar-Bereich.
@@ -144,3 +144,15 @@ Die neue CDU-Seite liegt derzeit unter der öffentlichen Entwicklungsadresse `ht
 ## Beitragsbild zur Haushaltsdisziplin
 
 `assets/images/freiwillige-leistungen-haushaltsdisziplin.jpg` ist eine eigene typografische Beitragsgrafik mit dem vorhandenen MP-Zeichen und Source Sans 3 in Dunkelblau und Türkis. Die Aussage stammt aus dem Artikel. Die Datei ist 1200 × 630 Pixel groß und dient zugleich als Artikelbild und Open-Graph-/Twitter-Vorschau. Sie wird lokal ohne Drittanbieter geladen und enthält keine Darstellung einer tatsächlichen Sitzung.
+
+## Zeitgesteuerte Veröffentlichung ohne lokalen Computer
+
+GitHub Pages nutzt den Workflow `.github/workflows/pages.yml`. Jeder Push auf `main` baut und veröffentlicht die Website. Der Build kopiert nur öffentliche Dateien nach `_site`; Skripte, Tests und `_scheduled` werden nicht ausgeliefert. Die bisherige Website bleibt vor dem Veröffentlichungstermin unverändert.
+
+Der von Marco freigegebene KAS-Artikel und sein Bild liegen unter `_scheduled/kas/files/`. `release.json` legt den Termin auf **7. Oktober 2026, 12:00 Uhr Europe/Berlin (10:00 UTC)** fest. `scripts/build_site.py` übernimmt sie erst ab diesem Zeitpunkt in das öffentliche Paket und erzeugt dann Startseite, Archiv und Sitemap. Die Quelldateien im öffentlichen GitHub-Repository sind bereits einsehbar; auf der Website sind Artikel und Bild vor dem Termin nicht abrufbar. Interne Redaktionsnotizen werden nicht übernommen.
+
+Der GitHub-Zeitplan startet am 7. Oktober vorab und wartet bis zum Termin. Weitere Läufe am selben Tag dienen als Wiederholungsversuche. GitHub garantiert keinen minutengenauen Start; Auslastung und Deployment können verzögern. Der Datumscheck verhindert erneute Terminläufe in späteren Jahren. Normale Push-Deployments bleiben aktiv. Keine neuen externen Dienste, Cookies oder Zugriffsschlüssel erforderlich.
+
+Lokaler Build: `python3 scripts/build_site.py --output /tmp/website-preview` (neues, noch nicht vorhandenes Zielverzeichnis). Vorschau des Veröffentlichungstags: zusätzlich `--preview-at 2026-10-07T12:00:00+02:00`. Die Produktionspipeline verwendet keine manuelle Vorschauzeit. Tests prüfen die Sekunde vor und den Zeitpunkt der Freischaltung, Zeitzonen, Bild/Artikel/Index/Sitemap und unveränderte Rechtsseiten.
+
+Nach Veröffentlichung kann das Freigabepaket bei einer späteren Pflege in die normalen Artikeldateien übernommen und der einmalige Zeitplan entfernt werden. Dabei Paket und öffentliche Dateien gemeinsam umstellen, damit spätere Builds den Artikel behalten. Änderungen an bereits vorhandenen Dateien werden nicht still durch das Paket überschrieben.

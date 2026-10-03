@@ -92,7 +92,8 @@ def heading_html(node):
     return "".join(parts)
 
 
-def read_article(path):
+def read_article(path, today=None):
+    today = today or date.today()
     doc = Document(path.read_text(encoding="utf-8")).root
     header = one(doc.find("header", "article-header"), f"{path.name}: Artikelkopf")
     heading = one(header.find("h1"), f"{path.name}: Überschrift")
@@ -116,10 +117,10 @@ def read_article(path):
         raise ValueError(f"{path.name}: og:title und sichtbare Überschrift weichen ab")
     if metadata.get("article:published_time") != published.isoformat():
         raise ValueError(f"{path.name}: sichtbares Datum und article:published_time weichen ab")
-    if published > date.today():
+    if published > today:
         raise ValueError(f"{path.name}: zukünftiges Veröffentlichungsdatum; Entwürfe außerhalb der Website aufbewahren")
     modified = metadata.get("article:modified_time")
-    if modified and not published <= date.fromisoformat(modified) <= date.today():
+    if modified and not published <= date.fromisoformat(modified) <= today:
         raise ValueError(f"{path.name}: ungültiges Änderungsdatum")
     summary = metadata.get("article:summary") or metadata.get("og:description", "")
     if not all([title, category, summary, metadata.get("article:author"), metadata.get("og:image")]):
@@ -170,8 +171,8 @@ def replace_region(source, name, content, indent):
                   lambda _: start + "\n" + rendered + "\n" + indent + end, source, flags=re.S)
 
 
-def outputs(root):
-    articles = [read_article(p) for p in sorted((root / "aktuelles").glob("*.html")) if p.name != "index.html"]
+def outputs(root, today=None):
+    articles = [read_article(p, today=today) for p in sorted((root / "aktuelles").glob("*.html")) if p.name != "index.html"]
     if not articles:
         raise ValueError("Keine veröffentlichten Artikel gefunden")
     # Editorial placement is independent of the real publication date.
@@ -214,9 +215,9 @@ def outputs(root):
     return {home_path: home, archive_path: archive, urbar_path: urbar, sitemap_path: "\n".join(xml) + "\n"}, len(articles)
 
 
-def build(root, check=False):
+def build(root, check=False, today=None):
     # Validate and render every output before writing any file.
-    generated, count = outputs(root)
+    generated, count = outputs(root, today=today)
     changed = [p for p, content in generated.items() if p.read_text(encoding="utf-8") != content]
     if check and changed:
         raise ValueError("Veraltete Artikelübersichten: " + ", ".join(str(p.relative_to(root)) for p in changed))
