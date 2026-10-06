@@ -30,6 +30,21 @@ class ScheduledReleaseTests(unittest.TestCase):
                 self.assertIn('kas-finanzierung.html', (output/name).read_text())
             for name in ['impressum.html', 'datenschutz.html', 'CNAME']:
                 self.assertEqual((ROOT/name).read_bytes(), (output/name).read_bytes())
+    def test_europa_absent_before_release_preserves_kas(self):
+        output = self.build_at('2026-10-26T11:59:59+01:00')
+        self.assertTrue((output/'aktuelles/kas-finanzierung.html').is_file())
+        self.assertFalse((output/'aktuelles/europa-zusammenarbeit.html').exists())
+        self.assertFalse((output/'assets/images/europa-zusammenarbeit.jpg').exists())
+        for name in ['index.html', 'aktuelles/index.html', 'sitemap.xml']:
+            self.assertNotIn('europa-zusammenarbeit.html', (output/name).read_text())
+    def test_europa_published_at_noon_cet_and_later(self):
+        for timestamp in ['2026-10-26T11:00:00+00:00', '2026-12-01T12:00:00+01:00']:
+            output = self.build_at(timestamp)
+            for slug in ['kas-finanzierung', 'europa-zusammenarbeit']:
+                self.assertTrue((output/f'aktuelles/{slug}.html').is_file())
+                self.assertTrue((output/f'assets/images/{slug}.jpg').is_file())
+                for name in ['index.html', 'aktuelles/index.html', 'sitemap.xml']:
+                    self.assertIn(slug+'.html', (output/name).read_text())
     def test_offset_and_timezone_required(self):
         output = self.build_at('2026-10-07T10:00:00+00:00')
         self.assertTrue((output/'aktuelles/kas-finanzierung.html').is_file())
