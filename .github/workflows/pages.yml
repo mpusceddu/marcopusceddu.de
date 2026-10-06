@@ -4,9 +4,12 @@ on:
     branches: [main]
   workflow_dispatch:
   schedule:
-    # Warm up before noon German summer time. Later runs retry publication.
+    # Warm up before noon Europe/Berlin; October 26 is after the DST change.
+    # Later runs retry publication. Year guard below prevents annual repeats.
     - cron: '43 9 7 10 *'
     - cron: '13 10-16 7 10 *'
+    - cron: '43 10 26 10 *'
+    - cron: '13 11-17 26 10 *'
 permissions:
   contents: read
 concurrency:
@@ -21,7 +24,7 @@ jobs:
       - name: Check release date for scheduled run
         id: date
         run: |
-          if [ "${{ github.event_name }}" = schedule ] && [ "$(date -u +%F)" != 2026-10-07 ]; then
+          if [ "${{ github.event_name }}" = schedule ] && [ "$(date -u +%F)" != 2026-10-07 ] && [ "$(date -u +%F)" != 2026-10-26 ]; then
             echo 'run=false' >> "$GITHUB_OUTPUT"
           else
             echo 'run=true' >> "$GITHUB_OUTPUT"
@@ -32,7 +35,12 @@ jobs:
           python3 - <<'PY'
           from datetime import datetime, timezone
           import time
-          due = datetime(2026, 10, 7, 10, 0, tzinfo=timezone.utc)
+          now = datetime.now(timezone.utc)
+          releases = {
+              '2026-10-07': datetime(2026, 10, 7, 10, 0, tzinfo=timezone.utc),
+              '2026-10-26': datetime(2026, 10, 26, 11, 0, tzinfo=timezone.utc),
+          }
+          due = releases[now.date().isoformat()]
           wait = max(0, (due - datetime.now(timezone.utc)).total_seconds())
           if wait > 1800:
               raise SystemExit('Unexpected early trigger')
