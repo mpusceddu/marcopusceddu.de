@@ -1,4 +1,7 @@
 import sys
+import shutil
+from datetime import date
+from zoneinfo import ZoneInfo
 import tempfile
 import unittest
 from pathlib import Path
@@ -6,12 +9,22 @@ from datetime import datetime
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from build_site import assemble
+from build_articles import read_article
 class ScheduledReleaseTests(unittest.TestCase):
     def build_at(self, timestamp):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
         output = Path(temporary.name) / 'site'
-        assemble(ROOT, output, datetime.fromisoformat(timestamp))
+        now = datetime.fromisoformat(timestamp)
+        source = Path(temporary.name) / 'source'
+        shutil.copytree(ROOT, source, ignore=shutil.ignore_patterns('.git', '__pycache__'))
+        # Historical release tests must use only articles already published then.
+        # The production builder still rejects future-dated public articles.
+        as_of = now.astimezone(ZoneInfo('Europe/Berlin')).date()
+        for path in (source / 'aktuelles').glob('*.html'):
+            if path.name != 'index.html' and read_article(path, today=date.max)['published'] > as_of:
+                path.unlink()
+        assemble(source, output, now)
         return output
     def test_absent_one_second_before_release(self):
         output = self.build_at('2026-10-07T11:59:59+02:00')

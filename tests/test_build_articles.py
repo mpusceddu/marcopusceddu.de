@@ -8,7 +8,7 @@ import unittest
 
 SITE = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(SITE / "scripts"))
-from build_articles import build, Document
+from build_articles import build, Document, read_article
 
 
 class ArticleBuildTest(unittest.TestCase):
@@ -17,6 +17,10 @@ class ArticleBuildTest(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name) / "site"
         shutil.copytree(SITE, self.root, ignore=shutil.ignore_patterns("__pycache__", ".git"))
+        self.articles = [read_article(p) for p in (self.root / "aktuelles").glob("*.html") if p.name != "index.html"]
+        self.article_count = len(self.articles)
+        current = [a for a in self.articles if a["listing"] == "current"]
+        self.latest = sorted(current, key=lambda a: (-a["published"].toordinal(), a["filename"]))[0]
 
     def snapshot(self):
         return {p.relative_to(self.root): p.read_bytes() for p in self.root.rglob("*") if p.is_file()}
@@ -24,9 +28,9 @@ class ArticleBuildTest(unittest.TestCase):
     def test_complete_archive_six_previews_and_idempotency(self):
         before = self.snapshot()
         count, _ = build(self.root)
-        self.assertEqual(count, 14)
+        self.assertEqual(count, self.article_count)
         archive = Document((self.root / "aktuelles/index.html").read_text()).root
-        self.assertEqual(len(archive.find("article", "news-card")), 14)
+        self.assertEqual(len(archive.find("article", "news-card")), self.article_count)
         home = Document((self.root / "index.html").read_text()).root
         self.assertEqual(len(home.find("article", "latest-preview-card")), 6)
         self.assertEqual(len(home.find("article", "news-card-featured")), 1)
@@ -65,12 +69,12 @@ class ArticleBuildTest(unittest.TestCase):
         new = self.root / "aktuelles/aaa-pruefbeitrag.html"
         new.write_text(original.read_text().replace(original.name, new.name).replace("Gute Ideen verdienen eine Antwort", "Ein weiterer Prüfbeitrag"))
         count, _ = build(self.root)
-        self.assertEqual(count, 15)
+        self.assertEqual(count, self.article_count + 1)
         for path in ["index.html", "aktuelles/index.html", "sitemap.xml"]:
             self.assertIn(new.name, (self.root / path).read_text())
         new.unlink()
         count, _ = build(self.root)
-        self.assertEqual(count, 14)
+        self.assertEqual(count, self.article_count)
         for path in ["index.html", "aktuelles/index.html", "sitemap.xml"]:
             self.assertNotIn(new.name, (self.root / path).read_text())
 
@@ -80,7 +84,7 @@ class ArticleBuildTest(unittest.TestCase):
         self.assertEqual(home_before, (self.root / "index.html").read_text())
         archive = Document((self.root / "aktuelles/index.html").read_text()).root
         cards = archive.find("article", "news-card")
-        self.assertEqual(cards[0].find("a")[0].attrs["href"], "freiwillige-leistungen-haushaltsdisziplin.html")
+        self.assertEqual(cards[0].find("a")[0].attrs["href"], self.latest["filename"])
         background = cards[-1]
         self.assertEqual(background.find("a")[0].attrs["href"], "erneuerbare-energien-urbar.html")
         self.assertEqual(background.find("time")[0].attrs["datetime"], "2026-10-01")
@@ -91,7 +95,7 @@ class ArticleBuildTest(unittest.TestCase):
         # An equally recent current article still becomes the lead automatically.
         original = self.root / "aktuelles/organisationshoheit-gute-ideen.html"
         new = self.root / "aktuelles/aaa-neue-meldung.html"
-        new.write_text(original.read_text().replace(original.name, new.name).replace("2026-09-28", "2026-10-02"))
+        new.write_text(original.read_text().replace(original.name, new.name).replace("2026-09-28", self.latest["published"].isoformat()))
         build(self.root)
         home = Document((self.root / "index.html").read_text()).root
         self.assertEqual(home.find("article", "news-card-featured")[0].find("a")[0].attrs["href"], "aktuelles/aaa-neue-meldung.html")
@@ -148,7 +152,7 @@ class ArticleBuildTest(unittest.TestCase):
         self.assertNotIn('data-topic="ehrenamt"', page.read_text())
         archive = Document(page.read_text()).root
         all_button = next(b for b in archive.find("button") if b.attrs.get("data-topic") == "alle")
-        self.assertEqual(all_button.find("span")[0].text(), "12")
+        self.assertEqual(all_button.find("span")[0].text(), str(self.article_count - 2))
 
     def test_missing_or_unknown_topic_never_partially_writes(self):
         p = self.root / "aktuelles/willkommen.html"
