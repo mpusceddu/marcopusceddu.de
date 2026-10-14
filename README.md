@@ -160,3 +160,7 @@ Der GitHub-Zeitplan startet am 7. Oktober vorab und wartet bis zum Termin. Weite
 Lokaler Build: `python3 scripts/build_site.py --output /tmp/website-preview` (neues, noch nicht vorhandenes Zielverzeichnis). Vorschau des Veröffentlichungstags: zusätzlich `--preview-at 2026-10-07T12:00:00+02:00`. Die Produktionspipeline verwendet keine manuelle Vorschauzeit. Tests prüfen die Sekunde vor und den Zeitpunkt der Freischaltung, Zeitzonen, Bild/Artikel/Index/Sitemap und unveränderte Rechtsseiten.
 
 Nach Veröffentlichung kann das Freigabepaket bei einer späteren Pflege in die normalen Artikeldateien übernommen und der einmalige Zeitplan entfernt werden. Dabei Paket und öffentliche Dateien gemeinsam umstellen, damit spätere Builds den Artikel behalten. Änderungen an bereits vorhandenen Dateien werden nicht still durch das Paket überschrieben.
+
+## Artikelbilder: Gestaltungsstandard
+
+Seit 14.10.2026 ist der KAS-Artikel die Referenz: Titelbild im Querformat (ca. 1,9:1), direkt nach Überschrift und Einleitung, vor dem Artikeltext. Die `article-figure` nutzt die volle Artikelbreite, ohne schmale Maximalbreite oder seitliche Zentrierung. Bilder werden proportional und ohne Beschnitt dargestellt. Text links, Illustration rechts, Dunkelblau und Türkis. Alternativtext, reale Bildmaße und bei KI-Motiven eine eindeutige Bildunterschrift ergänzen. Instagram erhält eigene Hochformatdateien.
