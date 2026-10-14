@@ -81,10 +81,14 @@ Das kanonische runde Porträt für persönliche Kacheln und Profil-Icons liegt u
 
 Die Website verwendet die lokal gespeicherte Source Sans 3 für Fließtext und Überschriften. Moderate Schriftgewichte und offene Zeilenabstände halten die Darstellung ruhig. Das Startseitenporträt `assets/images/marco-pusceddu-portrait-ki-v2.jpg` zeigt Marco im dunkelblauen Poloshirt. Das KI-bearbeitete Porträt wurde von Marco am 01.10.2026 als Bildfassung bestätigt; Hintergrund und Pose sind generativ bearbeitet. Die Bilddatei hat 1122 × 1402 Pixel und wird im Alternativtext als KI-bearbeitet bezeichnet. Auf schmalen Ansichten bleibt das Bild im Hochformat, damit Gesicht und verschränkte Arme sichtbar sind. Das runde Profilbild und vorhandene Social-Media-Vorschaubilder bleiben eigenständige Motive.
 
+## Navigation im Kopfbereich
+
+„Aktuelles“ wird über die Klasse `nav-news` als gefüllter Button in dunklem Türkis hervorgehoben. Weiße Schrift, mindestens 44 Pixel Höhe sowie ein sichtbarer Tastaturfokus halten den Link gut lesbar und bedienbar. Auf der aktiven Rubrik bleibt die Unterstreichung zusätzlich zu `aria-current` sichtbar. Neue Artikelseiten und geplante Veröffentlichungen übernehmen dieselbe Header-Klasse; die Footer-Links bleiben einfache Textlinks.
+
 ## Änderungen prüfen
 
 - Die vorhandenen Artikeladressen und Quellen beibehalten. Rechtliche Texte gesondert prüfen.
-- Bei CSS-Änderungen den Versionsparameter an allen HTML-Seiten gemeinsam aktualisieren; derzeit 20 Seiten, aktuell `styles.css?v=24`.
+- Bei CSS-Änderungen den Versionsparameter an allen HTML-Seiten gemeinsam aktualisieren; aktuell `styles.css?v=25`, einschließlich der HTML-Quellen unter `_scheduled/`.
 - Startseite, Beitragsarchiv, einen langen Artikel und den Bildartikel auf Smartphone, Tablet und Desktop prüfen. Zusätzlich schmale Ansichten, die Umbrüche bei 900 und 1100 Pixeln sowie Textvergrößerung berücksichtigen.
 - Navigation, Tastaturfokus, Sprungmarken, Bilder und interne Links kontrollieren. Der mobile Kopfbereich scrollt mit der Seite, damit mehrzeilige Navigation keine Inhalte verdeckt.
 - Die Fehlerseite lokal unter `/404.html` prüfen. Der einfache lokale Python-Server ersetzt nicht den GitHub-Pages-Test einer tatsächlich fehlenden Unterseite.
