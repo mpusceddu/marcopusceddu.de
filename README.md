@@ -164,3 +164,9 @@ Nach Veröffentlichung kann das Freigabepaket bei einer späteren Pflege in die 
 ## Artikelbilder: Gestaltungsstandard
 
 Seit 14.10.2026 ist der KAS-Artikel die Referenz: Titelbild im Querformat (ca. 1,9:1), direkt nach Überschrift und Einleitung, vor dem Artikeltext. Die `article-figure` nutzt die volle Artikelbreite, ohne schmale Maximalbreite oder seitliche Zentrierung. Bilder werden proportional und ohne Beschnitt dargestellt. Text links, Illustration rechts, Dunkelblau und Türkis. Alternativtext, reale Bildmaße und bei KI-Motiven eine eindeutige Bildunterschrift ergänzen. Instagram erhält eigene Hochformatdateien.
+
+## Freigegebene Anlassbeiträge Oktober 2026
+
+Die Pakete `_scheduled/vorsorge` und `_scheduled/ganztag` sind von Marco am 16.10.2026 freigegeben. Vorsorge erscheint am 17.10.2026 um 10:00 Uhr Europe/Berlin, Ganztag am 20.10.2026 um 18:00 Uhr. Beide verwenden die vorhandene zeitabhängige Paketübernahme. Die zusätzlichen einmaligen GitHub-Zeitpläne starten 17 Minuten vorher und versuchen die Veröffentlichung danach erneut; Jahresprüfung und bestehende KAS-/Europa-Termine bleiben erhalten. GitHub-Auslastung kann die tatsächliche Veröffentlichung verzögern.
+
+Der Vorsorgeabend steht allen Interessierten offen. Vor dem Termin aktuelle Veranstalterangaben prüfen. Den datierten Veranstaltungshinweis nach dem 21.10.2026 als vergangenes Angebot kennzeichnen; keine durchgeführte Veranstaltung ohne Beleg behaupten. Diese Website-Zeitpläne veröffentlichen keine Instagram-Inhalte.

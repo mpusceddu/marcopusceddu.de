@@ -63,5 +63,19 @@ class ScheduledReleaseTests(unittest.TestCase):
         self.assertTrue((output/'aktuelles/kas-finanzierung.html').is_file())
         with self.assertRaises(ValueError):
             self.build_at('2026-10-07T12:00:00')
+    def test_approved_content_release_boundaries(self):
+        for slug, before, due in [
+            ('selbstbestimmung-vorsorge-vallendar', '2026-10-17T09:59:59+02:00', '2026-10-17T08:00:00+00:00'),
+            ('guter-ganztag-qualifizierte-menschen', '2026-10-20T17:59:59+02:00', '2026-10-20T16:00:00+00:00'),
+        ]:
+            for timestamp, visible in [(before, False), (due, True)]:
+                with self.subTest(slug=slug, timestamp=timestamp):
+                    output = self.build_at(timestamp)
+                    self.assertEqual((output / f'aktuelles/{slug}.html').exists(), visible)
+                    self.assertEqual((output / f'assets/images/{slug}.png').exists(), visible)
+                    for name in ['index.html', 'aktuelles/index.html', 'sitemap.xml']:
+                        self.assertEqual(slug + '.html' in (output / name).read_text(), visible)
+                    self.assertTrue((output / 'aktuelles/kas-finanzierung.html').exists())
+                    self.assertFalse((output / 'aktuelles/europa-zusammenarbeit.html').exists())
 if __name__ == '__main__':
     unittest.main()

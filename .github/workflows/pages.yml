@@ -8,6 +8,10 @@ on:
     # Later runs retry publication. Year guard below prevents annual repeats.
     - cron: '43 9 7 10 *'
     - cron: '13 10-16 7 10 *'
+    - cron: '43 7 17 10 *'
+    - cron: '13 8-14 17 10 *'
+    - cron: '43 15 20 10 *'
+    - cron: '13 16-22 20 10 *'
     - cron: '43 10 26 10 *'
     - cron: '13 11-17 26 10 *'
 permissions:
@@ -24,7 +28,7 @@ jobs:
       - name: Check release date for scheduled run
         id: date
         run: |
-          if [ "${{ github.event_name }}" = schedule ] && [ "$(date -u +%F)" != 2026-10-07 ] && [ "$(date -u +%F)" != 2026-10-26 ]; then
+          if [ "${{ github.event_name }}" = schedule ] && [ "$(date -u +%F)" != 2026-10-07 ] && [ "$(date -u +%F)" != 2026-10-17 ] && [ "$(date -u +%F)" != 2026-10-20 ] && [ "$(date -u +%F)" != 2026-10-26 ]; then
             echo 'run=false' >> "$GITHUB_OUTPUT"
           else
             echo 'run=true' >> "$GITHUB_OUTPUT"
@@ -38,6 +42,8 @@ jobs:
           now = datetime.now(timezone.utc)
           releases = {
               '2026-10-07': datetime(2026, 10, 7, 10, 0, tzinfo=timezone.utc),
+              '2026-10-17': datetime(2026, 10, 17, 8, 0, tzinfo=timezone.utc),
+              '2026-10-20': datetime(2026, 10, 20, 16, 0, tzinfo=timezone.utc),
               '2026-10-26': datetime(2026, 10, 26, 11, 0, tzinfo=timezone.utc),
           }
           due = releases[now.date().isoformat()]
