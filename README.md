@@ -170,3 +170,7 @@ Seit 14.10.2026 ist der KAS-Artikel die Referenz: Titelbild im Querformat (ca. 1
 Die Pakete `_scheduled/vorsorge` und `_scheduled/ganztag` sind von Marco am 16.10.2026 freigegeben. Vorsorge erscheint am 17.10.2026 um 10:00 Uhr Europe/Berlin, Ganztag am 20.10.2026 um 18:00 Uhr. Beide verwenden die vorhandene zeitabhängige Paketübernahme. Die zusätzlichen einmaligen GitHub-Zeitpläne starten 17 Minuten vorher und versuchen die Veröffentlichung danach erneut; Jahresprüfung und bestehende KAS-/Europa-Termine bleiben erhalten. GitHub-Auslastung kann die tatsächliche Veröffentlichung verzögern.
 
 Der Vorsorgeabend steht allen Interessierten offen. Vor dem Termin aktuelle Veranstalterangaben prüfen. Den datierten Veranstaltungshinweis nach dem 21.10.2026 als vergangenes Angebot kennzeichnen; keine durchgeführte Veranstaltung ohne Beleg behaupten. Diese Website-Zeitpläne veröffentlichen keine Instagram-Inhalte.
+
+### Veröffentlichungskontrolle 17.10.2026
+
+Der Vorsorgehinweis ist seit 10:00 Uhr Europe/Berlin freigegeben. Da bis 12:22 Uhr kein geplanter Workflow gestartet war, wurde die Veröffentlichung durch diesen Commit erneut ausgelöst. Der Ganztagbeitrag bleibt bis zum 20.10.2026 um 18:00 Uhr gesperrt.
