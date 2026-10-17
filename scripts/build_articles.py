@@ -180,7 +180,7 @@ def outputs(root, today=None):
     home_path, archive_path = root / "index.html", root / "aktuelles/index.html"
     home = home_path.read_text(encoding="utf-8")
     home = replace_region(home, "featured", card(articles[0], 3, "news-card news-card-featured", "aktuelles/"), "      ")
-    previews = "\n".join(card(a, 3, "latest-preview-card", "aktuelles/") for a in articles[1:7])
+    previews = "\n".join(card(a, 3, "latest-preview-card", "aktuelles/") for a in articles[1:3])
     home = replace_region(home, "previews", previews, "          ")
     archive = archive_path.read_text(encoding="utf-8")
     archive = replace_region(archive, "topic-filters", topic_buttons(articles), "          ")

@@ -253,3 +253,10 @@ footer div { display: flex; flex-wrap: wrap; gap: 12px 24px; }
   html { scroll-behavior: auto; }
   .button { transition: none; }
 }
+
+/* Expanded navigation and the permanent knowledge section. */
+@media (min-width: 901px) { .site-header nav { gap: clamp(10px, 1.5vw, 24px); font-size: .82rem; } .site-header { padding-inline: clamp(20px, 4vw, 64px); } }
+section[aria-labelledby="wissen-title"] { display: block; }
+section[aria-labelledby="wissen-title"] .news-card { margin-top: 28px; max-width: 780px; }
+.article-body li { margin-bottom: .75rem; }
+.article-body li[id] { scroll-margin-top: 120px; }

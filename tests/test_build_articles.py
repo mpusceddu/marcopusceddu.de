@@ -25,14 +25,14 @@ class ArticleBuildTest(unittest.TestCase):
     def snapshot(self):
         return {p.relative_to(self.root): p.read_bytes() for p in self.root.rglob("*") if p.is_file()}
 
-    def test_complete_archive_six_previews_and_idempotency(self):
+    def test_complete_archive_two_previews_and_idempotency(self):
         before = self.snapshot()
         count, _ = build(self.root)
         self.assertEqual(count, self.article_count)
         archive = Document((self.root / "aktuelles/index.html").read_text()).root
         self.assertEqual(len(archive.find("article", "news-card")), self.article_count)
         home = Document((self.root / "index.html").read_text()).root
-        self.assertEqual(len(home.find("article", "latest-preview-card")), 6)
+        self.assertEqual(len(home.find("article", "latest-preview-card")), 2)
         self.assertEqual(len(home.find("article", "news-card-featured")), 1)
         _, changed = build(self.root, check=True)
         self.assertFalse(changed)

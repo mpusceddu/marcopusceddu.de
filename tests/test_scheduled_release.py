@@ -39,7 +39,7 @@ class ScheduledReleaseTests(unittest.TestCase):
             output = self.build_at(timestamp)
             self.assertTrue((output/'aktuelles/kas-finanzierung.html').is_file())
             self.assertTrue((output/'assets/images/kas-finanzierung.jpg').is_file())
-            for name in ['index.html', 'aktuelles/index.html', 'sitemap.xml']:
+            for name in ['aktuelles/index.html', 'sitemap.xml']:
                 self.assertIn('kas-finanzierung.html', (output/name).read_text())
             for name in ['impressum.html', 'datenschutz.html', 'CNAME']:
                 self.assertEqual((ROOT/name).read_bytes(), (output/name).read_bytes())
@@ -56,7 +56,7 @@ class ScheduledReleaseTests(unittest.TestCase):
             for slug in ['kas-finanzierung', 'europa-zusammenarbeit']:
                 self.assertTrue((output/f'aktuelles/{slug}.html').is_file())
                 self.assertTrue((output/f'assets/images/{slug}.jpg').is_file())
-                for name in ['index.html', 'aktuelles/index.html', 'sitemap.xml']:
+                for name in ['aktuelles/index.html', 'sitemap.xml']:
                     self.assertIn(slug+'.html', (output/name).read_text())
     def test_offset_and_timezone_required(self):
         output = self.build_at('2026-10-07T10:00:00+00:00')

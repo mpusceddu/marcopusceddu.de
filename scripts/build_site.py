@@ -10,7 +10,7 @@ from build_articles import build
 
 ROOT = Path(__file__).resolve().parents[1]
 # Only web content belongs in the deployment, never scripts or release sources.
-DIRECTORIES = ('assets', 'aktuelles', 'urbar')
+DIRECTORIES = ('assets', 'aktuelles', 'urbar', 'standpunkte', 'energie')
 ROOT_SUFFIXES = {'.html', '.xml', '.txt', '.svg', '.png', '.ico'}
 
 def assemble(root, destination, now=None):
