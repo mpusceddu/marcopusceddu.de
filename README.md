@@ -165,6 +165,14 @@ Nach Veröffentlichung kann das Freigabepaket bei einer späteren Pflege in die 
 
 Seit 14.10.2026 ist der KAS-Artikel die Referenz: Titelbild im Querformat (ca. 1,9:1), direkt nach Überschrift und Einleitung, vor dem Artikeltext. Die `article-figure` nutzt die volle Artikelbreite, ohne schmale Maximalbreite oder seitliche Zentrierung. Bilder werden proportional und ohne Beschnitt dargestellt. Text links, Illustration rechts, Dunkelblau und Türkis. Alternativtext, reale Bildmaße und bei KI-Motiven eine eindeutige Bildunterschrift ergänzen. Instagram erhält eigene Hochformatdateien.
 
+## Einheitliche Artikelgestaltung
+
+Alle Artikel unter `aktuelles/`, `standpunkte/` und `energie/` sowie die Quellen unter `_scheduled/` laden nach `styles.css` die gemeinsame Datei `assets/css/articles.css?v=1`. Sie legt die Artikeltypografie und Abstände verbindlich fest; die älteren Grundregeln in `styles.css` werden damit überschrieben. Die Übersichtsseiten verwenden weiterhin ihre eigene Kartengestaltung, insbesondere `knowledge.css` für „Standpunkte & Wissen“ und die Energieübersicht.
+
+Neue Beiträge übernehmen `article-page`, `article-back`, `article-header`, `article-deck` und `article-body`. Bei einem Kontaktkasten stehen Text und `article-aside` in `article-layout`; bis einschließlich 1100 Pixel folgt der Kasten unter dem Text. Titelbilder behalten ihre volle Breite und ihr Seitenverhältnis. Direkte Textbereiche ohne Kontaktkasten erhalten dieselben Abstände wie Beiträge mit `article-layout`. Keine individuellen Schriftgrößen oder Abstände im Artikel-HTML ergänzen.
+
+Der Test `tests/test_article_layout.py` prüft auch geplante Beiträge auf die gemeinsame Einbindung. Bei Änderungen an `articles.css` ihren Versionsparameter in sämtlichen Artikeln einschließlich der Freigabepakete erhöhen. Die Veröffentlichungstermine bleiben davon unberührt.
+
 ## Freigegebene Anlassbeiträge Oktober 2026
 
 Die Pakete `_scheduled/vorsorge` und `_scheduled/ganztag` sind von Marco am 16.10.2026 freigegeben. Vorsorge erscheint am 17.10.2026 um 10:00 Uhr Europe/Berlin, Ganztag am 20.10.2026 um 18:00 Uhr. Beide verwenden die vorhandene zeitabhängige Paketübernahme. Die zusätzlichen einmaligen GitHub-Zeitpläne starten 17 Minuten vorher und versuchen die Veröffentlichung danach erneut; Jahresprüfung und bestehende KAS-/Europa-Termine bleiben erhalten. GitHub-Auslastung kann die tatsächliche Veröffentlichung verzögern.
