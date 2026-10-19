@@ -1,0 +1,66 @@
+/* The knowledge overview has its own rhythm, independent of article pages. */
+.knowledge-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(56px, 7vw, 100px) clamp(22px, 5vw, 72px) clamp(72px, 8vw, 112px);
+}
+
+.knowledge-intro { margin-bottom: clamp(48px, 6vw, 80px); }
+.knowledge-intro .eyebrow { margin-bottom: 20px; }
+.knowledge-intro h1 {
+  font-size: clamp(2.125rem, 4.6vw, 4.25rem);
+  line-height: 1.12;
+  letter-spacing: -.025em;
+  hyphens: manual;
+  text-wrap: balance;
+}
+.knowledge-deck {
+  max-width: 780px;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: clamp(1.125rem, 1.7vw, 1.375rem);
+  line-height: 1.6;
+}
+
+.knowledge-topic {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.4fr);
+  gap: clamp(32px, 4vw, 56px);
+  align-items: start;
+  padding-top: clamp(28px, 3vw, 40px);
+  border-top: 1px solid var(--line);
+}
+.knowledge-topic + .knowledge-topic { margin-top: clamp(48px, 6vw, 80px); }
+.knowledge-topic-heading { min-width: 0; }
+.knowledge-topic-heading .eyebrow { margin-bottom: 16px; }
+.knowledge-topic-heading h2 {
+  font-size: clamp(1.75rem, 2.65vw, 2.5rem);
+  line-height: 1.18;
+  letter-spacing: -.015em;
+  hyphens: auto;
+}
+.knowledge-topic-heading > p:not(.eyebrow) { margin: 20px 0 0; color: var(--muted); }
+.knowledge-topic-heading .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 24px;
+}
+.knowledge-card {
+  padding: clamp(24px, 3vw, 40px);
+  background: var(--cream);
+  border: 0;
+  border-top: 3px solid var(--teal);
+}
+.knowledge-card .news-meta { margin: 0 0 22px; gap: 6px 16px; }
+.knowledge-card h3 { font-size: clamp(1.5rem, 2.15vw, 2rem); line-height: 1.25; }
+.knowledge-card h3 a:hover { color: var(--teal-dark); }
+.knowledge-card > p:not(.news-meta) { margin: 20px 0 0; }
+.knowledge-card .card-link { min-height: 44px; margin-top: 20px; padding-top: 8px; align-items: center; color: var(--teal-dark); }
+.knowledge-card .card-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+@media (max-width: 960px) {
+  .knowledge-topic { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .knowledge-topic-heading { max-width: 680px; }
+}
