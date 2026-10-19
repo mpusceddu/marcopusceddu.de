@@ -1,0 +1,87 @@
+/* Shared reading layout for every article, including scheduled releases.
+   Load after styles.css. Overview cards retain their own typography. */
+.article-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(56px, 7vw, 100px) clamp(22px, 5vw, 72px) clamp(72px, 8vw, 112px);
+}
+.article-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-bottom: 32px;
+  color: var(--teal-dark);
+  font-size: .875rem;
+  font-weight: 650;
+}
+.article-back:hover { text-decoration: underline; text-underline-offset: 4px; }
+.article-header { max-width: none; }
+.article-header .news-meta { margin-bottom: 20px; }
+.article-header h1 {
+  font-size: clamp(2.125rem, 4.6vw, 4.25rem);
+  line-height: 1.12;
+  letter-spacing: -.025em;
+  overflow-wrap: break-word;
+  hyphens: manual;
+  text-wrap: balance;
+}
+.article-deck {
+  max-width: 780px;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: clamp(1.125rem, 1.7vw, 1.375rem);
+  line-height: 1.6;
+}
+.article-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: clamp(32px, 5vw, 72px);
+  margin-top: clamp(40px, 5vw, 64px);
+  align-items: start;
+}
+article > .article-body { margin-top: clamp(40px, 5vw, 64px); }
+.article-figure + .article-layout, .article-figure + .article-body { margin-top: 0; }
+.article-body { min-width: 0; max-width: 760px; }
+.article-body p { margin: 0 0 22px; font-size: 1.125rem; line-height: 1.75; }
+.article-body > p:first-of-type {
+  margin-top: 0;
+  color: var(--ink);
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  line-height: 1.55;
+}
+.article-body h2 {
+  margin: 48px 0 18px;
+  font-size: clamp(1.6rem, 2.4vw, 2.15rem);
+  line-height: 1.25;
+  hyphens: auto;
+}
+.article-body h3 { margin: 36px 0 16px; font-size: clamp(1.3rem, 2vw, 1.65rem); line-height: 1.3; }
+.article-body ul, .article-body ol { margin: 0 0 24px; padding-left: 1.3em; color: #43545f; font-size: 1.125rem; line-height: 1.75; }
+.article-body li { margin: 0; }
+.article-body li + li { margin-top: 10px; }
+.article-body a {
+  color: var(--teal-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+.article-body a:hover { color: var(--navy); }
+.article-body [id] { scroll-margin-top: 120px; }
+.article-figure { margin: clamp(32px, 4vw, 48px) 0 40px; }
+.article-figure img { width: 100%; height: auto; }
+.article-figure figcaption { margin-top: 12px; color: var(--muted); font-size: .875rem; line-height: 1.5; }
+.article-body .article-source { margin: 40px 0 24px; padding: 20px 0; }
+.article-body .article-source + .article-source { margin-top: 0; }
+.article-body .article-disclaimer { margin: 48px 0 0; padding-top: 24px; font-size: .875rem; line-height: 1.6; }
+.article-aside { min-width: 0; padding: 24px; }
+.article-aside strong { font-size: 1.35rem; line-height: 1.3; }
+.article-aside p { font-size: 1rem; line-height: 1.6; }
+.article-aside a { display: inline-flex; align-items: center; min-height: 44px; margin-top: 12px; font-size: .875rem; }
+
+@media (max-width: 1100px) {
+  .article-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .article-aside { max-width: 520px; }
+}
+@media (max-width: 900px) {
+  .article-body [id] { scroll-margin-top: 24px; }
+}
