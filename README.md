@@ -182,3 +182,9 @@ Der Vorsorgeabend steht allen Interessierten offen. Vor dem Termin aktuelle Vera
 ### Veröffentlichungskontrolle 17.10.2026
 
 Der Vorsorgehinweis ist seit 10:00 Uhr Europe/Berlin freigegeben. Da bis 12:22 Uhr kein geplanter Workflow gestartet war, wurde die Veröffentlichung durch diesen Commit erneut ausgelöst. Der Ganztagbeitrag bleibt bis zum 20.10.2026 um 18:00 Uhr gesperrt.
+
+## Link-in-Bio-Seite
+
+`/links/` bietet die aktuellen Beiträge, Themen- und Kontaktlinks sowie Verweise auf die Hauptwebsite, vinofy und GitHub. `scripts/build_articles.py` aktualisiert sie zusammen mit den übrigen Übersichten. Der Produktions-Build berücksichtigt dabei nur bereits freigegebene Artikel, auch aus den terminierten Paketen.
+
+In `links/featured.json` bestimmt `path` den hervorgehobenen Artikel relativ zur Websitewurzel. `expires` ist optional (`null` oder `YYYY-MM-DD`); der Tag selbst ist eingeschlossen. Nach Ablauf erscheint beim nächsten Website-Build der neueste veröffentlichte Beitrag. Die drei letzten Beiträge werden aus `aktuelles/`, `standpunkte/` und `energie/` nach tatsächlichem Veröffentlichungsdatum erzeugt. Keine zusätzliche Automation und kein JavaScript im Browser erforderlich.

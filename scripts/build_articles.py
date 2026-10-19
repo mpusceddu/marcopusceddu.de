@@ -10,6 +10,7 @@ from pathlib import Path
 import re
 import sys
 import xml.etree.ElementTree as ET
+from build_links import outputs as link_outputs
 
 BASE = "https://marcopusceddu.de/"
 TOPICS = {
@@ -212,7 +213,9 @@ def outputs(root, today=None):
             xml.append("    <lastmod>" + modified + "</lastmod>")
         xml.append("  </url>")
     xml.append("</urlset>")
-    return {home_path: home, archive_path: archive, urbar_path: urbar, sitemap_path: "\n".join(xml) + "\n"}, len(articles)
+    generated = {home_path: home, archive_path: archive, urbar_path: urbar, sitemap_path: "\n".join(xml) + "\n"}
+    generated.update(link_outputs(root, today=today))
+    return generated, len(articles)
 
 
 def build(root, check=False, today=None):
