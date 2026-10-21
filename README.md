@@ -196,3 +196,7 @@ Marco hat am 21.10.2026 den Artikel „Was soziale Marktwirtschaft für mich bed
 Die GitHub-Zeitpläne starten 17 Minuten vorher und versuchen danach erneut. GitHub-Auslastung und Deployment können die Freischaltung verzögern. Der Artikel erscheint ab Freigabezeit im Archiv, in der Sitemap und unter „Standpunkte & Wissen“. Das neue Metadatenfeld `article:collection=standpunkte` steuert dessen erzeugten Übersichtsbereich; bestehende Themenkarten bleiben erhalten. Als Hintergrundbeitrag verdrängt er keine aktuelle Ortsmeldung.
 
 Instagram ist nicht beauftragt: vor einer Veröffentlichung dort Marco erneut fragen. Bestehende andere Beitragstermine und Vorratsentwürfe bleiben unverändert.
+
+## Beruflicher Werdegang: GDPR LEGAL COOKIE
+
+Der persönliche Hintergrundbeitrag `standpunkte/gdpr-legal-cookie.html` ist im Bereich „Über mich“, unter „Standpunkte & Wissen“ und auf `/links/` verknüpft. Entwicklung und Betrieb der App lagen bei der beeclever GmbH. vinofy hielt als Holding 30 % an beeclever; Marco Pusceddu war Geschäftsführer beider Gesellschaften. Rund 17.000 aktive Installationen beziehen sich auf den App-Verkauf 2023 und sind als eigene Unternehmensangabe gekennzeichnet. Die Beteiligung endete 2025. Diese Rollen auch in Kurzfassungen und Vorschautexten getrennt halten. Der berufliche Kontakt führt zu vinofy.

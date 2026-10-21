@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://marcopusceddu.de/</loc>
+    <lastmod>2026-10-21</lastmod>
   </url>
   <url>
     <loc>https://marcopusceddu.de/urbar/</loc>
@@ -12,7 +13,7 @@
   </url>
   <url>
     <loc>https://marcopusceddu.de/standpunkte/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-21</lastmod>
   </url>
   <url>
     <loc>https://marcopusceddu.de/energie/</loc>
@@ -28,7 +29,11 @@
   </url>
   <url>
     <loc>https://marcopusceddu.de/links/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-21</lastmod>
+  </url>
+  <url>
+    <loc>https://marcopusceddu.de/standpunkte/gdpr-legal-cookie.html</loc>
+    <lastmod>2026-10-21</lastmod>
   </url>
   <url>
     <loc>https://marcopusceddu.de/aktuelles/whu-vallendar-verlaesslichkeit.html</loc>
