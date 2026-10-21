@@ -58,6 +58,23 @@ class ScheduledReleaseTests(unittest.TestCase):
                 self.assertTrue((output/f'assets/images/{slug}.jpg').is_file())
                 for name in ['aktuelles/index.html', 'sitemap.xml']:
                     self.assertIn(slug+'.html', (output/name).read_text())
+    def test_social_market_release_including_knowledge_listing(self):
+        for timestamp, visible in [
+            ('2026-10-23T17:59:59+02:00', False),
+            ('2026-10-23T16:00:00+00:00', True),
+            ('2026-12-01T12:00:00+01:00', True),
+        ]:
+            with self.subTest(timestamp=timestamp):
+                output = self.build_at(timestamp)
+                slug = 'soziale-marktwirtschaft'
+                self.assertEqual((output / f'aktuelles/{slug}.html').exists(), visible)
+                self.assertEqual((output / f'assets/images/{slug}-querformat.png').exists(), visible)
+                for name in ['aktuelles/index.html', 'standpunkte/index.html', 'sitemap.xml', 'links/index.html']:
+                    self.assertEqual(slug + '.html' in (output / name).read_text(), visible)
+                if visible:
+                    self.assertIn('rheinischer Kapitalismus', (output / f'aktuelles/{slug}.html').read_text())
+                for name in ['impressum.html', 'datenschutz.html', 'CNAME']:
+                    self.assertEqual((ROOT / name).read_bytes(), (output / name).read_bytes())
     def test_offset_and_timezone_required(self):
         output = self.build_at('2026-10-07T10:00:00+00:00')
         self.assertTrue((output/'aktuelles/kas-finanzierung.html').is_file())

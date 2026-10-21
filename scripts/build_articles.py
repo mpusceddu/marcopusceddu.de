@@ -133,7 +133,7 @@ def read_article(path, today=None):
     listing = metadata.get("article:listing", "current")
     if listing not in {"current", "background"}:
         raise ValueError(f"{path.name}: article:listing muss current oder background sein")
-    return dict(listing=listing, filename=path.name, title=title, heading=heading_html(heading), category=category, places=places, topics=topics,
+    return dict(collection=metadata.get("article:collection", ""), listing=listing, filename=path.name, title=title, heading=heading_html(heading), category=category, places=places, topics=topics,
                 summary=summary, published=published, modified=modified, url=url)
 
 
@@ -214,6 +214,16 @@ def outputs(root, today=None):
         xml.append("  </url>")
     xml.append("</urlset>")
     generated = {home_path: home, archive_path: archive, urbar_path: urbar, sitemap_path: "\n".join(xml) + "\n"}
+    knowledge_path = root / "standpunkte/index.html"
+    if knowledge_path.exists():
+        knowledge = knowledge_path.read_text(encoding="utf-8")
+        if "<!-- BEGIN GENERATED:standpunkte -->" in knowledge:
+            selected = [a for a in articles if a["collection"] == "standpunkte"]
+            cards = "\n".join(card(a, 3, "news-card knowledge-card", "/aktuelles/") for a in selected)
+            section = ("<section class=\"knowledge-topic\" aria-labelledby=\"wirtschaft-title\">"
+                       "<div class=\"knowledge-topic-heading\"><p class=\"eyebrow\">Wirtschaft &amp; Gesellschaft</p>"
+                       "<h2 id=\"wirtschaft-title\">Freiheit und Verantwortung.</h2></div>" + cards + "</section>") if selected else ""
+            generated[knowledge_path] = replace_region(knowledge, "standpunkte", section, "    ")
     generated.update(link_outputs(root, today=today))
     return generated, len(articles)
 

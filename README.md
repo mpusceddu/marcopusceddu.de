@@ -188,3 +188,11 @@ Der Vorsorgehinweis ist seit 10:00 Uhr Europe/Berlin freigegeben. Da bis 12:22 U
 `/links/` bietet die aktuellen Beiträge, Themen- und Kontaktlinks sowie Verweise auf die Hauptwebsite, vinofy und GitHub. `scripts/build_articles.py` aktualisiert sie zusammen mit den übrigen Übersichten. Der Produktions-Build berücksichtigt dabei nur bereits freigegebene Artikel, auch aus den terminierten Paketen.
 
 In `links/featured.json` bestimmt `path` den hervorgehobenen Artikel relativ zur Websitewurzel. `expires` ist optional (`null` oder `YYYY-MM-DD`); der Tag selbst ist eingeschlossen. Nach Ablauf erscheint beim nächsten Website-Build der neueste veröffentlichte Beitrag. Die drei letzten Beiträge werden aus `aktuelles/`, `standpunkte/` und `energie/` nach tatsächlichem Veröffentlichungsdatum erzeugt. Keine zusätzliche Automation und kein JavaScript im Browser erforderlich.
+
+## Soziale Marktwirtschaft: Freigabe und Termin
+
+Marco hat am 21.10.2026 den Artikel „Was soziale Marktwirtschaft für mich bedeutet“ einschließlich des Abschnitts zum rheinischen Kapitalismus freigegeben und die technische Veröffentlichung beauftragt. `_scheduled/soziale-marktwirtschaft/release.json` setzt den Termin auf **23.10.2026, 18:00 Uhr Europe/Berlin (16:00 UTC)**. Das Paket enthält den Artikel und die separat erzeugte, als Illustration gekennzeichnete Querformatgrafik. Vor dem Termin werden beide nicht an die Website ausgeliefert; der öffentliche Repository-Quellstand ist bereits einsehbar.
+
+Die GitHub-Zeitpläne starten 17 Minuten vorher und versuchen danach erneut. GitHub-Auslastung und Deployment können die Freischaltung verzögern. Der Artikel erscheint ab Freigabezeit im Archiv, in der Sitemap und unter „Standpunkte & Wissen“. Das neue Metadatenfeld `article:collection=standpunkte` steuert dessen erzeugten Übersichtsbereich; bestehende Themenkarten bleiben erhalten. Als Hintergrundbeitrag verdrängt er keine aktuelle Ortsmeldung.
+
+Instagram ist nicht beauftragt: vor einer Veröffentlichung dort Marco erneut fragen. Bestehende andere Beitragstermine und Vorratsentwürfe bleiben unverändert.
