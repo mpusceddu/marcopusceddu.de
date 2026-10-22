@@ -63,3 +63,5 @@
   .home-page .latest-preview-grid { grid-template-columns: minmax(0, 1fr); }
   .home-page .latest-more-heading { flex-direction: column; align-items: flex-start; }
 }
+
+.home-page .name-pronunciation { display: inline-block; font-size: .8em; font-weight: 400; color: var(--muted); white-space: nowrap; }
