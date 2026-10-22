@@ -93,7 +93,7 @@ def heading_html(node):
     return "".join(parts)
 
 
-def read_article(path, today=None):
+def read_article(path, today=None, directory="aktuelles"):
     today = today or date.today()
     doc = Document(path.read_text(encoding="utf-8")).root
     header = one(doc.find("header", "article-header"), f"{path.name}: Artikelkopf")
@@ -110,7 +110,7 @@ def read_article(path, today=None):
                 raise ValueError(f"{path.name}: doppelte Metadaten {key}")
             metadata[key] = node.attrs.get("content", "")
     canonical = one([n for n in doc.find("link") if n.attrs.get("rel") == "canonical"], f"{path.name}: Canonical").attrs.get("href")
-    url = BASE + "aktuelles/" + path.name
+    url = BASE + directory + "/" + path.name
     if canonical != url or metadata.get("og:url") != url:
         raise ValueError(f"{path.name}: Canonical und og:url müssen {url} entsprechen")
     title = heading.text().strip()
@@ -133,7 +133,7 @@ def read_article(path, today=None):
     listing = metadata.get("article:listing", "current")
     if listing not in {"current", "background"}:
         raise ValueError(f"{path.name}: article:listing muss current oder background sein")
-    return dict(collection=metadata.get("article:collection", ""), listing=listing, filename=path.name, title=title, heading=heading_html(heading), category=category, places=places, topics=topics,
+    return dict(directory=directory, collection=metadata.get("article:collection", ""), listing=listing, filename=path.name, title=title, heading=heading_html(heading), category=category, places=places, topics=topics,
                 summary=summary, published=published, modified=modified, url=url)
 
 
@@ -141,6 +141,8 @@ def card(article, level, css_class, prefix="", filterable=False):
     a = article
     d = a["published"]
     label = f"{d.day}. {MONTHS[d.month]} {d.year}"
+    if a.get("directory", "aktuelles") != "aktuelles":
+        prefix = prefix.replace("aktuelles/", a["directory"] + "/") if prefix else "../" + a["directory"] + "/"
     href = escape(prefix + a["filename"], quote=True)
     topics_attr = ' data-topics="' + ' '.join(sorted(a['topics'])) + '"' if filterable else ''
     return f'''<article class="{css_class}"{topics_attr}>
@@ -174,6 +176,9 @@ def replace_region(source, name, content, indent):
 
 def outputs(root, today=None):
     articles = [read_article(p, today=today) for p in sorted((root / "aktuelles").glob("*.html")) if p.name != "index.html"]
+    for path in sorted((root / "energie").glob("*.html")):
+        if 'name="article:collection" content="energie"' in path.read_text(encoding="utf-8"):
+            articles.append(read_article(path, today=today, directory="energie"))
     if not articles:
         raise ValueError("Keine veröffentlichten Artikel gefunden")
     # Editorial placement is independent of the real publication date.
@@ -199,7 +204,7 @@ def outputs(root, today=None):
     entries = [(u.findtext(ns + "loc"), u.findtext(ns + "lastmod")) for u in old.findall(ns + "url")]
     previous = dict(entries)
     # Keep non-article URLs and historic modification dates; never use build time.
-    urls = [(url, modified) for url, modified in entries if not (url.startswith(BASE + "aktuelles/") and url.endswith(".html"))]
+    urls = [(url, modified) for url, modified in entries if url not in {a["url"] for a in articles} and not (url.startswith(BASE + "aktuelles/") and url.endswith(".html"))]
     for a in articles:
         candidates = [a["published"].isoformat(), a["modified"], previous.get(a["url"])]
         modified = max(date.fromisoformat(v) for v in candidates if v).isoformat()
@@ -224,6 +229,14 @@ def outputs(root, today=None):
                        "<div class=\"knowledge-topic-heading\"><p class=\"eyebrow\">Wirtschaft &amp; Gesellschaft</p>"
                        "<h2 id=\"wirtschaft-title\">Freiheit und Verantwortung.</h2></div>" + cards + "</section>") if selected else ""
             generated[knowledge_path] = replace_region(knowledge, "standpunkte", section, "    ")
+    energy_path = root / "energie/index.html"
+    if energy_path.exists():
+        energy = energy_path.read_text(encoding="utf-8")
+        if "<!-- BEGIN GENERATED:energie -->" in energy:
+            selected = sorted((a for a in articles if a["collection"] == "energie"), key=lambda a: a["published"])
+            cards = "\n".join(card(a, 3, "news-card knowledge-card", "/energie/") for a in selected)
+            section = ('<section class="knowledge-topic" aria-labelledby="folgen-title"><div class="knowledge-topic-heading"><h2 id="folgen-title">Weitere Folgen</h2></div>' + cards + '</section>') if selected else ''
+            generated[energy_path] = replace_region(energy, "energie", section, "    ")
     generated.update(link_outputs(root, today=today))
     return generated, len(articles)
 

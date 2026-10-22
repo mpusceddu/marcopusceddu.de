@@ -200,3 +200,11 @@ Instagram ist nicht beauftragt: vor einer Veröffentlichung dort Marco erneut fr
 ## Pausierter Artikel zur Cookie App
 
 Auf Marcos Wunsch vom 22.10.2026 ist der Artikel zur GDPR LEGAL COOKIE App vorerst von der Website genommen. Der vollständige Text bleibt unter `_drafts/gdpr-legal-cookie.html` für die Überarbeitung erhalten. `_drafts` gehört nicht zum öffentlichen Websitepaket. Verweise und App-Zusammenfassung auf der Startseite sowie die Karte unter Standpunkte und der Sitemap-Eintrag sind entfernt. Die Linkübersicht wird aus den verbleibenden veröffentlichten Beiträgen erzeugt. Erst nach überarbeiteter Fassung und ausdrücklicher Freigabe wieder veröffentlichen.
+
+## Freigegebene Energiereihe ab Oktober 2026
+
+Marco hat am 22.10.2026 die vollständigen Folgen 2 bis 8 und den Plan im Dokument Energiereihe-Artikel-und-Plan-2026-10-22.docx mit „So machen“ freigegeben. Die Pakete `_scheduled/energie-02` bis `energie-08` enthalten die jeweiligen HTML-Artikel und symbolischen Beitragsgrafiken. Veröffentlichung jeweils 18 Uhr Europe/Berlin: 30.10., 13.11., 27.11., 11.12.2026 sowie 08.01., 22.01., 05.02.2027. Über Weihnachten pausiert die Reihe.
+
+Die Artikel werden erst ab ihrem Termin an `/energie/` ausgeliefert. `article:collection=energie` bindet erschienene Folgen in die Energieübersicht, das Beitragsarchiv, die Linkübersicht und die Sitemap ein. Als Hintergrundbeiträge verdrängen sie keine aktuellen örtlichen Meldungen. Die bestehende Auftaktadresse bleibt erhalten.
+
+Der GitHub-Zeitplan startet freitags 17 Minuten vor 18 Uhr und versucht später erneut. Die Jahres- und Datumsprüfung beschränkt die Freischaltung auf die genehmigten Termine. GitHub garantiert keinen minutengenauen Beginn. Social-Media-Texte sind Entwürfe; Instagram erfordert weiterhin eine gesonderte Entscheidung je Beitrag. Quellen vor dem jeweiligen Termin kontrollieren. Wesentliche inhaltliche Änderungen erneut mit Marco abstimmen.

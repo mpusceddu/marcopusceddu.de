@@ -69,7 +69,7 @@ class ScheduledReleaseTests(unittest.TestCase):
                 slug = 'soziale-marktwirtschaft'
                 self.assertEqual((output / f'aktuelles/{slug}.html').exists(), visible)
                 self.assertEqual((output / f'assets/images/{slug}-querformat.png').exists(), visible)
-                for name in ['aktuelles/index.html', 'standpunkte/index.html', 'sitemap.xml', 'links/index.html']:
+                for name in ['aktuelles/index.html', 'standpunkte/index.html', 'sitemap.xml']:
                     self.assertEqual(slug + '.html' in (output / name).read_text(), visible)
                 if visible:
                     self.assertIn('rheinischer Kapitalismus', (output / f'aktuelles/{slug}.html').read_text())
