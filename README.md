@@ -208,3 +208,22 @@ Marco hat am 22.10.2026 die vollständigen Folgen 2 bis 8 und den Plan im Dokume
 Die Artikel werden erst ab ihrem Termin an `/energie/` ausgeliefert. `article:collection=energie` bindet erschienene Folgen in die Energieübersicht, das Beitragsarchiv, die Linkübersicht und die Sitemap ein. Als Hintergrundbeiträge verdrängen sie keine aktuellen örtlichen Meldungen. Die bestehende Auftaktadresse bleibt erhalten.
 
 Der GitHub-Zeitplan startet freitags 17 Minuten vor 18 Uhr und versucht später erneut. Die Jahres- und Datumsprüfung beschränkt die Freischaltung auf die genehmigten Termine. GitHub garantiert keinen minutengenauen Beginn. Social-Media-Texte sind Entwürfe; Instagram erfordert weiterhin eine gesonderte Entscheidung je Beitrag. Quellen vor dem jeweiligen Termin kontrollieren. Wesentliche inhaltliche Änderungen erneut mit Marco abstimmen.
+
+
+## Was uns zusammenhält
+
+Am 22. Oktober 2026 zur technischen Planung und Veröffentlichung freigegebene Reihe mit elf Folgen einschließlich des zusätzlich gewünschten Draghi Beitrags. Teaser und Übersicht unter `/standpunkte/was-uns-zusammenhaelt/` sind sofort öffentlich. Artikel und Einzelbilder liegen bis zur Freigabe ausschließlich in `_scheduled/zusammenhalt-01` bis `zusammenhalt-11`. Jeweils 18 Uhr Europe/Berlin; Weihnachts und Osterpause.
+
+- 2026-11-06T18:00:00+01:00: Europa darf vielfältig sein. Aber nicht handlungsunfähig.
+- 2026-11-20T18:00:00+01:00: Eine starke Stimme in der Welt braucht ein geeintes Europa.
+- 2026-12-04T18:00:00+01:00: Warum Europas Wohlstand kein Selbstläufer ist.
+- 2026-12-18T18:00:00+01:00: Demokratie lebt vom Mitmachen.
+- 2027-01-15T18:00:00+01:00: Die Mehrheit entscheidet. Der Rechtsstaat schützt.
+- 2027-01-29T18:00:00+01:00: Streiten können. Respekt behalten.
+- 2027-02-12T18:00:00+01:00: Freiheit braucht Verantwortung.
+- 2027-02-26T18:00:00+01:00: Migration braucht Chancen. Und klare Regeln.
+- 2027-03-12T18:00:00+01:00: Heimat und Europa gehören zusammen.
+- 2027-04-09T18:00:00+02:00: Behauptet ist schnell. Belegt ist besser.
+- 2027-04-23T18:00:00+02:00: Die demokratische Mitte braucht Haltung.
+
+Die Übersicht erzeugt Links nur zu freigeschalteten Folgen. Das neue Feld `article:collection=zusammenhalt` bindet veröffentlichte Artikel in das Archiv und die Sitemap ein. Instagram bleibt separat abzustimmen. Der Cookie App Artikel bleibt zurückgezogen. Der Build schützt jede Folge bis zum exakten Termin; GitHub Actions kann die tatsächliche Veröffentlichung verzögern.

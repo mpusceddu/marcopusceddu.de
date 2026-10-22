@@ -19,6 +19,9 @@ on:
     # Energy series: prewarm at 17:43 CET, then retries after 18:00 CET.
     - cron: '43 16 * * 5'
     - cron: '13 17-23 * * 5'
+    # April series dates use CEST: 18:00 local is 16:00 UTC.
+    - cron: '43 15 * 4 5'
+    - cron: '13 16-23 * 4 5'
 permissions:
   contents: read
 concurrency:
@@ -33,7 +36,7 @@ jobs:
       - name: Check release date for scheduled run
         id: date
         run: |
-          if [ "${{ github.event_name }}" = schedule ] && [ "$(date -u +%F)" != 2026-10-07 ] && [ "$(date -u +%F)" != 2026-10-17 ] && [ "$(date -u +%F)" != 2026-10-20 ] && [ "$(date -u +%F)" != 2026-10-23 ] && [ "$(date -u +%F)" != 2026-10-26 ] && [ "$(date -u +%F)" != 2026-10-30 ] && [ "$(date -u +%F)" != 2026-11-13 ] && [ "$(date -u +%F)" != 2026-11-27 ] && [ "$(date -u +%F)" != 2026-12-11 ] && [ "$(date -u +%F)" != 2027-01-08 ] && [ "$(date -u +%F)" != 2027-01-22 ] && [ "$(date -u +%F)" != 2027-02-05 ]; then
+          if [ "${{ github.event_name }}" = schedule ] && [ "$(date -u +%F)" != 2026-10-07 ] && [ "$(date -u +%F)" != 2026-10-17 ] && [ "$(date -u +%F)" != 2026-10-20 ] && [ "$(date -u +%F)" != 2026-10-23 ] && [ "$(date -u +%F)" != 2026-10-26 ] && [ "$(date -u +%F)" != 2026-10-30 ] && [ "$(date -u +%F)" != 2026-11-13 ] && [ "$(date -u +%F)" != 2026-11-27 ] && [ "$(date -u +%F)" != 2026-12-11 ] && [ "$(date -u +%F)" != 2027-01-08 ] && [ "$(date -u +%F)" != 2027-01-22 ] && [ "$(date -u +%F)" != 2027-02-05 ] && [ "$(date -u +%F)" != 2026-11-06 ] && [ "$(date -u +%F)" != 2026-11-20 ] && [ "$(date -u +%F)" != 2026-12-04 ] && [ "$(date -u +%F)" != 2026-12-18 ] && [ "$(date -u +%F)" != 2027-01-15 ] && [ "$(date -u +%F)" != 2027-01-29 ] && [ "$(date -u +%F)" != 2027-02-12 ] && [ "$(date -u +%F)" != 2027-02-26 ] && [ "$(date -u +%F)" != 2027-03-12 ] && [ "$(date -u +%F)" != 2027-04-09 ] && [ "$(date -u +%F)" != 2027-04-23 ]; then
             echo 'run=false' >> "$GITHUB_OUTPUT"
           else
             echo 'run=true' >> "$GITHUB_OUTPUT"
@@ -58,6 +61,17 @@ jobs:
               '2027-01-08': datetime(2027, 1, 8, 17, 0, tzinfo=timezone.utc),
               '2027-01-22': datetime(2027, 1, 22, 17, 0, tzinfo=timezone.utc),
               '2027-02-05': datetime(2027, 2, 5, 17, 0, tzinfo=timezone.utc),
+              '2026-11-06': datetime(2026, 11, 6, 17, 0, tzinfo=timezone.utc),
+              '2026-11-20': datetime(2026, 11, 20, 17, 0, tzinfo=timezone.utc),
+              '2026-12-04': datetime(2026, 12, 4, 17, 0, tzinfo=timezone.utc),
+              '2026-12-18': datetime(2026, 12, 18, 17, 0, tzinfo=timezone.utc),
+              '2027-01-15': datetime(2027, 1, 15, 17, 0, tzinfo=timezone.utc),
+              '2027-01-29': datetime(2027, 1, 29, 17, 0, tzinfo=timezone.utc),
+              '2027-02-12': datetime(2027, 2, 12, 17, 0, tzinfo=timezone.utc),
+              '2027-02-26': datetime(2027, 2, 26, 17, 0, tzinfo=timezone.utc),
+              '2027-03-12': datetime(2027, 3, 12, 17, 0, tzinfo=timezone.utc),
+              '2027-04-09': datetime(2027, 4, 9, 16, 0, tzinfo=timezone.utc),
+              '2027-04-23': datetime(2027, 4, 23, 16, 0, tzinfo=timezone.utc),
           }
           due = releases[now.date().isoformat()]
           wait = max(0, (due - datetime.now(timezone.utc)).total_seconds())

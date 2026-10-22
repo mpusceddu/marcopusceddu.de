@@ -2,6 +2,7 @@
 """Generate article lists and sitemap from published HTML; Python standard library only."""
 
 import argparse
+import json
 from dataclasses import dataclass, field
 from datetime import date
 from html import escape
@@ -179,6 +180,10 @@ def outputs(root, today=None):
     for path in sorted((root / "energie").glob("*.html")):
         if 'name="article:collection" content="energie"' in path.read_text(encoding="utf-8"):
             articles.append(read_article(path, today=today, directory="energie"))
+    series_directory = "standpunkte/was-uns-zusammenhaelt"
+    for path in sorted((root / series_directory).glob("*.html")):
+        if 'name="article:collection" content="zusammenhalt"' in path.read_text(encoding="utf-8"):
+            articles.append(read_article(path, today=today, directory=series_directory))
     if not articles:
         raise ValueError("Keine veröffentlichten Artikel gefunden")
     # Editorial placement is independent of the real publication date.
@@ -237,6 +242,28 @@ def outputs(root, today=None):
             cards = "\n".join(card(a, 3, "news-card knowledge-card", "/energie/") for a in selected)
             section = ('<section class="knowledge-topic" aria-labelledby="folgen-title"><div class="knowledge-topic-heading"><h2 id="folgen-title">Weitere Folgen</h2></div>' + cards + '</section>') if selected else ''
             generated[energy_path] = replace_region(energy, "energie", section, "    ")
+    series_path = root / series_directory / "index.html"
+    if series_path.exists():
+        planned = json.loads((series_path.parent / "reihe.json").read_text(encoding="utf-8"))
+        released = {a["category"].rsplit(" ", 1)[-1]: a for a in articles if a["collection"] == "zusammenhalt"}
+        items = []
+        for episode in planned:
+            a = released.get(str(episode["number"]))
+            stamp = date.fromisoformat(episode["date"])
+            label = f"{stamp.day}. {MONTHS[stamp.month]} {stamp.year}"
+            title = escape(episode["title"])
+            if a:
+                title = '<a href="' + escape(a["url"], quote=True) + '">' + title + '</a>'
+            status = "Veröffentlicht" if a else "Geplant"
+            items.append(f'<li class="series-episode"><p class="news-meta">Folge {episode["number"]} · {status} · <time datetime="{stamp.isoformat()}">{label}</time> · 18 Uhr</p><h3>{title}</h3><p>{escape(episode["deck"])}</p></li>')
+        series = replace_region(series_path.read_text(encoding="utf-8"), "zusammenhalt", '<ol>' + ''.join(items) + '</ol>', '    ')
+        if not released:
+            status = '<p>Die Reihe beginnt am <strong>6. November 2026 um 18 Uhr</strong>. Weitere Beiträge folgen in der Regel alle zwei Wochen. Über Weihnachten, Neujahr und Ostern gibt es eine Pause.</p>'
+        elif len(released) == len(planned):
+            status = '<p>Alle elf Folgen der Reihe sind veröffentlicht. Lesen Sie die Beiträge in der Reihenfolge oder wählen Sie das Thema, das Sie interessiert.</p>'
+        else:
+            status = f'<p>Bereits {len(released)} von elf Folgen sind veröffentlicht. Weitere Beiträge folgen an den unten angekündigten Terminen, jeweils um 18 Uhr.</p>'
+        generated[series_path] = replace_region(series, "series-status", status, '    ')
     generated.update(link_outputs(root, today=today))
     return generated, len(articles)
 

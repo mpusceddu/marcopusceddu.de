@@ -25,7 +25,7 @@ class Metadata(HTMLParser):
 def articles(root, today):
     result = []
     for folder in ("aktuelles", "standpunkte", "energie"):
-        for path in sorted((root / folder).glob("*.html")):
+        for path in sorted((root / folder).rglob("*.html")):
             values = Metadata(path.read_text(encoding="utf-8")).values
             if not values.get("article:published_time"):
                 continue

@@ -2,7 +2,7 @@
 from html.parser import HTMLParser
 from pathlib import Path
 import unittest
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, urljoin
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -30,11 +30,15 @@ class ArticleLayoutTest(unittest.TestCase):
                     continue
                 markup = ArticleMarkup(path.read_text())
                 with self.subTest(page=str(path.relative_to(ROOT))):
-                    base = '../assets/css/styles.css'
-                    article = '../assets/css/articles.css'
-                    self.assertEqual(markup.stylesheets.count(article), 1)
-                    self.assertLess(markup.stylesheets.index(base), markup.stylesheets.index(article))
-                    self.assertNotIn('../assets/css/knowledge.css', markup.stylesheets)
+                    relative = path.relative_to(ROOT).as_posix()
+                    if '/files/' in relative:
+                        relative = relative.split('/files/', 1)[1]
+                    sheets = [urlsplit(urljoin('https://marcopusceddu.de/' + relative, s)).path for s in markup.stylesheets]
+                    base = '/assets/css/styles.css'
+                    article = '/assets/css/articles.css'
+                    self.assertEqual(sheets.count(article), 1)
+                    self.assertLess(sheets.index(base), sheets.index(article))
+                    self.assertNotIn('/assets/css/knowledge.css', sheets)
                     self.assertTrue({'article-page', 'article-header', 'article-deck', 'article-body'} <= markup.classes)
                 checked += 1
         self.assertGreater(checked, 0)
