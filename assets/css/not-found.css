@@ -1,0 +1,21 @@
+.not-found-page { background:var(--cream); }
+.error-header,.error-main,.error-footer { max-width:1216px; margin:0 auto; padding-inline:clamp(22px,5vw,40px); }
+.error-header { padding-block:24px; }
+.error-header a { display:inline-flex; min-height:44px; align-items:center; }
+.error-header img { width:clamp(210px,28vw,260px); height:auto; }
+.error-main { display:grid; grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr); gap:clamp(32px,6vw,80px); align-items:center; padding-block:clamp(40px,7vw,96px); }
+.error-sign { text-align:center; color:var(--teal-dark); }
+.error-sign>span:first-child { display:block; font-size:clamp(100px,16vw,190px); line-height:1; font-weight:700; letter-spacing:-.06em; }
+.error-road { display:block; width:70px; height:66px; margin:20px auto; border-top:12px solid var(--teal-dark); background:linear-gradient(var(--ink),var(--ink)) center/10px 100% no-repeat; }
+.error-sign small { display:block; color:var(--muted); font-size:14px; line-height:1.5; }
+.error-copy .eyebrow { margin-bottom:20px; font-size:11px; }
+.error-copy h1 { font-size:clamp(34px,4.6vw,64px); line-height:1.12; text-wrap:balance; margin-bottom:28px; }
+.error-copy p { font-size:18px; line-height:1.65; margin:0 0 22px; }
+.error-copy .error-lead { font-size:clamp(20px,2vw,24px); color:var(--teal-dark); font-weight:600; }
+.error-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
+.error-actions .button { display:inline-flex; justify-content:center; align-items:center; gap:12px; min-height:48px; font-size:14px; text-align:center; }
+.error-copy .error-note { font-size:14px; color:var(--muted); margin-top:24px; }
+.error-footer { display:flex; flex-wrap:wrap; gap:24px; padding-block:20px; border-top:1px solid var(--line); font-size:14px; }
+.error-footer a { display:inline-flex; align-items:center; min-height:44px; }
+.error-footer a:hover { text-decoration:underline; }
+@media(max-width:700px){.error-main{grid-template-columns:minmax(0,1fr);gap:32px;padding-top:24px}.error-sign{display:flex;align-items:center;gap:24px;text-align:left}.error-sign>span:first-child{font-size:80px}.error-road{display:none}.error-sign small{font-size:13px}.error-copy h1{font-size:34px}.error-actions{align-items:stretch;flex-direction:column}.error-header{padding-block:16px}}
