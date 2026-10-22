@@ -45,7 +45,7 @@ class ArticleBuildTest(unittest.TestCase):
         build(self.root)
         page = self.root / "urbar/index.html"
         document = Document(page.read_text()).root
-        self.assertEqual(len(document.find("article", "latest-preview-card")), 5)
+        self.assertEqual(len(document.find("article", "latest-preview-card")), sum("urbar" in a["places"] for a in self.articles))
         self.assertNotIn('href="../aktuelles/haushalt-2026.html"', page.read_text())
         original = self.root / "aktuelles/organisationshoheit-gute-ideen.html"
         new = self.root / "aktuelles/aaa-urbar-test.html"
@@ -67,7 +67,7 @@ class ArticleBuildTest(unittest.TestCase):
     def test_new_article_updates_all_lists_without_manual_entries(self):
         original = self.root / "aktuelles/organisationshoheit-gute-ideen.html"
         new = self.root / "aktuelles/aaa-pruefbeitrag.html"
-        new.write_text(original.read_text().replace(original.name, new.name).replace("Gute Ideen verdienen eine Antwort", "Ein weiterer Prüfbeitrag"))
+        new.write_text(original.read_text().replace(original.name, new.name).replace("Gute Ideen verdienen eine Antwort", "Ein weiterer Prüfbeitrag").replace("2026-09-28", self.latest["published"].isoformat()))
         count, _ = build(self.root)
         self.assertEqual(count, self.article_count + 1)
         for path in ["index.html", "aktuelles/index.html", "sitemap.xml"]:
@@ -146,13 +146,14 @@ class ArticleBuildTest(unittest.TestCase):
         self.assertEqual(set(by_file["organisationshoheit-gute-ideen.html"].attrs["data-topics"].split()),
                          {"politik-finanzen", "digitalisierung"})
         self.assertIn('data-topic="ehrenamt"', page.read_text())
-        (self.root / "aktuelles/jahresuebung-feuerwehr-vallendar-2026.html").unlink()
-        (self.root / "aktuelles/freiwillige-leistungen-haushaltsdisziplin.html").unlink()
+        removed = [a for a in self.articles if "ehrenamt" in a["topics"]]
+        for a in removed:
+            (self.root / "aktuelles" / a["filename"]).unlink()
         build(self.root)
         self.assertNotIn('data-topic="ehrenamt"', page.read_text())
         archive = Document(page.read_text()).root
         all_button = next(b for b in archive.find("button") if b.attrs.get("data-topic") == "alle")
-        self.assertEqual(all_button.find("span")[0].text(), str(self.article_count - 2))
+        self.assertEqual(all_button.find("span")[0].text(), str(self.article_count - len(removed)))
 
     def test_missing_or_unknown_topic_never_partially_writes(self):
         p = self.root / "aktuelles/willkommen.html"
