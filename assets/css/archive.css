@@ -1,0 +1,46 @@
+/* Article archive: aligned with the shared article reading layout. */
+.archive-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(56px, 7vw, 100px) clamp(22px, 5vw, 72px) clamp(72px, 8vw, 112px);
+}
+.archive-page .editorial-hero {
+  max-width: none;
+  padding: 0;
+  margin: 0 0 clamp(40px, 5vw, 64px);
+}
+.archive-page .eyebrow { margin-bottom: 20px; }
+.archive-page h1 {
+  font-size: clamp(2.125rem, 4.6vw, 4.25rem);
+  line-height: 1.12;
+  letter-spacing: -.025em;
+  hyphens: manual;
+  text-wrap: balance;
+}
+.archive-page .intro {
+  max-width: 780px;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: clamp(1.125rem, 1.7vw, 1.375rem);
+  line-height: 1.6;
+}
+.archive-page .news-archive { max-width: none; margin: 0; padding: 0; }
+.archive-page .article-filter { margin-bottom: 24px; }
+.archive-page .archive-context { margin: 0 0 32px; color: var(--muted); font-size: 1rem; line-height: 1.6; }
+.archive-context a { color: var(--teal-dark); text-decoration: underline; text-underline-offset: 3px; }
+.archive-page .news-grid { gap: 24px; }
+.archive-page .news-card { padding: clamp(24px, 3vw, 40px); }
+.archive-page .news-meta { margin: 0 0 20px; gap: 6px 16px; }
+.archive-page .news-card h2 {
+  font-size: clamp(1.6rem, 2.4vw, 2.15rem);
+  line-height: 1.25;
+  overflow-wrap: break-word;
+  hyphens: manual;
+  text-wrap: balance;
+}
+.archive-page .news-card > p:not(.news-meta) { margin: 20px 0 0; font-size: 1.125rem; line-height: 1.6; }
+.archive-page .card-link { align-items: center; min-height: 44px; margin-top: auto; padding-top: 24px; font-size: .875rem; }
+.archive-page .card-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 900px) {
+  .archive-page .news-grid { grid-template-columns: minmax(0, 1fr); }
+}
