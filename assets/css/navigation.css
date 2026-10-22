@@ -1,0 +1,15 @@
+/* Compact mobile navigation; desktop navigation and no-JS fallback stay intact. */
+.menu-toggle { display: none; }
+@media (max-width: 900px) {
+  .site-header.has-menu { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 0 12px; padding: 10px 22px; }
+  .site-header.has-menu .wordmark { align-self: center; }
+  .site-header.has-menu .wordmark img { width: min(100%,230px); height: 44px; }
+  .menu-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); color: var(--ink); font: 600 .875rem/1.2 var(--font-sans); cursor: pointer; }
+  .menu-toggle:focus-visible { outline: 3px solid var(--teal-dark); outline-offset: 3px; }
+  .menu-toggle[aria-expanded="true"] { border-color: var(--teal-dark); color: var(--teal-dark); }
+  .menu-icon { width: 18px; font-size: 20px; line-height: 1; }
+  .site-header.has-menu nav { display: none; grid-column: 1 / -1; }
+  .site-header.has-menu.menu-open nav { display: flex; flex-direction: column; align-items: stretch; gap: 4px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .site-header.has-menu nav a { min-height: 44px; padding: 10px 12px; justify-content: flex-start; font-size: 1rem; border-radius: 6px; }
+  .site-header.has-menu nav .nav-contact { border-color: var(--line); }
+}
