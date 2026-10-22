@@ -1,0 +1,65 @@
+/* Homepage rhythm matches article and archive typography. */
+.home-page { --home-gutter: max(clamp(22px, 5vw, 72px), calc((100vw - 1136px) / 2)); font-size: 1.125rem; line-height: 1.65; }
+.home-page .section { padding: clamp(56px, 7vw, 96px) var(--home-gutter); }
+.home-page .section-number { display: none; }
+.home-page .eyebrow { margin-bottom: 20px; }
+.home-page h1 { font-size: clamp(2.125rem, 4.6vw, 4.25rem); line-height: 1.12; letter-spacing: -.025em; hyphens: manual; text-wrap: balance; }
+.home-page .about-heading h2, .home-page .section-heading h2, .home-page .latest-heading h2, .home-page .contact-heading h2, .home-page #wissen-title {
+  font-size: clamp(1.75rem, 3.4vw, 3rem); line-height: 1.2; letter-spacing: -.02em; hyphens: manual; text-wrap: balance;
+}
+.home-page .hero { min-height: 0; }
+.home-page .hero-copy { padding: clamp(56px, 7vw, 96px) clamp(22px, 5vw, 72px); }
+.home-page .intro { margin: 28px 0 32px; font-size: clamp(1.125rem, 1.7vw, 1.375rem); line-height: 1.6; }
+.home-page .hero-portrait { min-height: clamp(650px, 55vw, 800px); }
+.home-page .button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; font-size: .875rem; }
+.home-page .about, .home-page .contact { display: block; }
+.home-page .about-inner, .home-page .contact-inner { grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr); gap: clamp(32px, 4vw, 56px); }
+.home-page .about-story { align-self: start; padding: 0; }
+.home-page .about-story p { margin: 0 0 22px; }
+.home-page .about-story p:last-child { margin-bottom: 0; }
+.home-page .about-story .lead { font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.55; }
+.home-page .about-values { gap: 24px; }
+.home-page .about-values article, .home-page .engagement-grid article, .home-page .news-card { padding: clamp(24px, 3vw, 40px); }
+.home-page .about-value-label { margin: 0 0 20px; }
+.home-page .about-values h3, .home-page .engagement-grid h3 { font-size: clamp(1.5rem, 2.15vw, 2rem); line-height: 1.25; hyphens: manual; text-wrap: balance; }
+.home-page .about-values article > p:last-child { margin: 20px 0 0; font-size: 1.125rem; line-height: 1.6; }
+.home-page .engagement, .home-page .latest { grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr); gap: clamp(32px, 4vw, 56px); }
+.home-page .engagement .section-heading, .home-page .latest-heading { grid-column: 1; }
+.home-page .engagement-grid, .home-page .latest > .news-card { grid-column: 2; margin-top: 0; }
+.home-page .engagement-grid { padding-top: 0; }
+.home-page .engagement-grid h3 { margin: 20px 0; }
+.home-page .engagement-link { margin-top: 20px; }
+.home-page .personal { gap: clamp(32px, 4vw, 56px); }
+.home-page blockquote p { font-size: clamp(1.75rem, 3.1vw, 2.75rem); line-height: 1.3; margin-bottom: 24px; text-wrap: balance; }
+.home-page .latest-heading > p:not(.eyebrow) { margin: 24px 0 0; }
+.home-page .text-link { min-height: 44px; font-size: .875rem; margin-top: 20px; }
+.home-page .latest-more { grid-column: 1 / -1; margin-top: 0; padding-top: 32px; }
+.home-page .latest-more-heading { margin-bottom: 24px; gap: 16px; }
+.home-page .latest-more-heading .text-link { margin-top: 0; }
+.home-page .latest-preview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.home-page .news-meta { margin-bottom: 20px; gap: 6px 16px; }
+.home-page .news-card h3, .home-page .latest-preview-card h3 { font-size: clamp(1.6rem, 2.4vw, 2.15rem); line-height: 1.25; hyphens: manual; text-wrap: balance; }
+.home-page .news-card > p:not(.news-meta):not(.eyebrow), .home-page .latest-preview-card > p:not(.news-meta) { margin: 20px 0 0; font-size: 1.125rem; line-height: 1.6; }
+.home-page .card-link { min-height: 44px; padding-top: 24px; align-items: center; font-size: .875rem; }
+.home-page section[aria-labelledby="wissen-title"] { border-top: 1px solid var(--line); }
+.home-page section[aria-labelledby="wissen-title"] > p:not(.eyebrow) { max-width: 780px; margin: 24px 0 0; }
+.home-page section[aria-labelledby="wissen-title"] .news-card { margin-top: 32px; background: var(--cream); border: 0; border-top: 3px solid var(--teal); }
+.home-page .contact-body > p { margin: 0; font-size: clamp(1.125rem, 1.7vw, 1.375rem); line-height: 1.6; }
+.home-page .contact-options { margin-top: 32px; }
+.home-page .contact-value { font-size: 1rem; }
+.home-page .contact-options + p { margin-top: 24px; font-size: 1rem; }
+.home-page .contact-options + p .text-link { margin-top: 8px; }
+@media (max-width: 1100px) {
+  .home-page .about-inner, .home-page .contact-inner, .home-page .engagement, .home-page .latest { grid-template-columns: minmax(0, 1fr); }
+  .home-page .about-inner, .home-page .contact-inner, .home-page .engagement .section-heading, .home-page .engagement-grid, .home-page .latest-heading, .home-page .latest > .news-card, .home-page .latest-more { grid-column: 1; }
+  .home-page .about-values { grid-column: 1; }
+}
+@media (max-width: 900px) {
+  .home-page .hero-portrait { min-height: 0; }
+  .home-page .about-values { grid-template-columns: minmax(0, 1fr); }
+  .home-page .about-values article { display: block; }
+}
+@media (max-width: 600px) {
+  .home-page .latest-preview-grid { grid-template-columns: minmax(0, 1fr); }
+  .home-page .latest-more-heading { flex-direction: column; align-items: flex-start; }
+}
