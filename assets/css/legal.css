@@ -1,0 +1,9 @@
+/* Match the reading rhythm used by articles and overview pages. */
+.legal-page { padding: clamp(56px,7vw,96px) clamp(22px,5vw,40px); font-size: 1.125rem; line-height: 1.65; }
+.legal-page .eyebrow { margin-bottom: 20px; }
+.legal-page h1 { font-size: clamp(2.125rem,4.6vw,4.25rem); line-height: 1.12; letter-spacing: -.025em; text-wrap: balance; margin-bottom: 24px; }
+.legal-page section { margin-top: 40px; }
+.legal-page h2 { font-size: clamp(1.75rem,3.4vw,2.5rem); line-height: 1.25; margin-bottom: 20px; text-wrap: balance; }
+.legal-page p, .legal-page address { margin-top: 0; margin-bottom: 22px; }
+.legal-page .legal-updated { font-size: .875rem; }
+.legal-page .button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 28px; font-size: .875rem; }
