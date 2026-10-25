@@ -37,3 +37,13 @@ Haushaltskosten: Monitoringbericht Energie 2025, Tabelle 38, gedruckte Seite 169
 Systemkosten werden knapp und ohne weitere fiktive ct/kWh-Aufschläge eingeordnet: Netzausbau und Redispatch über Netzkosten, EEG-Finanzierung seit 2023 im Bundeshaushalt. Quellen stehen an den Abschnitten.
 
 37 Python- und neun JavaScript-Tests bestanden. Neue Tests prüfen Integration und Datenlücken, Merit-Order-Grenzfälle, Angebotsreihenfolge, Angebotsmangel und negative Gebote. Modell im Browser mit niedriger/hoher Nachfrage getestet; 320-px-Ansicht und Kostenblock bei 390 px visuell geprüft.
+
+## Merit Order mit zeitgleichen Marktdaten
+
+Das Modell startet mit der gemeldeten Last und der öffentlichen Erzeugung aus Wind, Sonne und Laufwasser. Der beobachtete Day-Ahead-Preis für DE-LU steht separat daneben und wird nicht zur Berechnung des Modellpreises verwendet. Erzeugung und Preis müssen exakt denselben Intervallbeginn besitzen; berücksichtigt werden nur abgeschlossene Viertelstunden innerhalb der letzten sieben Tage. Fehlende oder ungültige Werte verhindern den Abgleich, negative und nullwertige Preise bleiben gültig. Daten älter als zwei Stunden werden als verzögert gekennzeichnet.
+
+Die Mengen im Modell sind auf 0,1 GW gerundet. Die Gebote 0/6/12/20 ct/kWh und weitere Kapazitäten bleiben Beispielannahmen. Last ist keine vollständige Börsennachfrage; Außenhandel, Speicherbetrieb und weitere Gebote werden im Modell nicht rekonstruiert. Es wird weder ein Grenzkraftwerk bestimmt noch der reale Preis nachgebildet.
+
+Manuelle Szenarien bleiben beim Nachladen erhalten. Ein Knopf übernimmt die neuesten gemeinsam verfügbaren Messwerte erneut. Die separate Anzeige beobachteter Werte wird unabhängig vom Szenario aktualisiert.
+
+Prüfung: 37 Python-Tests und 14 JavaScript-Tests bestanden, darunter exakte Intervallzuordnung, fehlende Reihen, unvollständige/future Intervalle, negative und nullwertige Preise, Datenalter und Einheiten. Modellübernahme und Rücksetzung im Browser geprüft.
