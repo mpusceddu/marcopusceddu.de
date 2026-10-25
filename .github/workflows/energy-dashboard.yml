@@ -1,0 +1,52 @@
+name: Refresh energy dashboard
+on:
+  workflow_dispatch:
+  schedule:
+    # Shared snapshot: three API calls twice per hour, independent of visitors.
+    - cron: '17,47 * * * *'
+permissions:
+  contents: read
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - name: Restore latest valid shared energy snapshot
+        uses: actions/cache/restore@v4
+        with:
+          path: assets/data/strom-im-blick.json
+          key: energy-snapshot-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: energy-snapshot-v1-
+      - name: Check calculations and existing publication boundaries
+        run: |
+          python3 -m unittest discover -s tests
+          node --test tests/test_energy_model.cjs
+      - name: Refresh data with last-known-good fallback
+        run: python3 scripts/update_energy_data.py
+      - name: Save valid snapshot for future runs
+        uses: actions/cache/save@v4
+        with:
+          path: assets/data/strom-im-blick.json
+          key: energy-snapshot-v1-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Build website respecting approved publication timestamps
+        run: python3 scripts/build_site.py --output _site
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
