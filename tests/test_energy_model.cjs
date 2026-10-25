@@ -60,3 +60,52 @@ test('merit order sorts bids, supports negative prices, and rejects invalid assu
   assert.equal(offers[0].price,6);
   assert.throws(()=>meritOrder([{capacity:-1,price:0}],5));
 });
+
+const {marketContext}=require('../assets/js/energy-model.js');
+const contextFixture=()=>({
+  power:{unix_seconds:[1000,1900,2800],production_types:[
+    {name:'Load',data:[5000,6000,7000]},
+    {name:'Wind onshore',data:[1000,2000,3000]},
+    {name:'Wind offshore',data:[500,500,500]},
+    {name:'Solar',data:[200,200,200]},
+    {name:'Hydro Run-of-River',data:[50,50,50]}]},
+  prices:{unix_seconds:[1000,1900],price:[60,80],unit:'EUR / MWh'}
+});
+test('market context uses the latest exactly matching completed delivery interval',()=>{
+  const {power,prices}=contextFixture();const result=marketContext(power,prices,4000);
+  assert.equal(result.timestamp,1900);
+  assert.equal(result.marketPriceCt,8);
+  assert.equal(result.loadGW,6);
+  assert.equal(result.cheapGW,2.75);
+  assert.equal(marketContext(power,{...prices,unix_seconds:[1000,1901]},4000).timestamp,1000);
+});
+test('context skips future, unfinished and incomplete production periods',()=>{
+  const {power,prices}=contextFixture();
+  assert.equal(marketContext(power,prices,2700).timestamp,1000);
+  power.production_types[0].data[1]=null;
+  assert.equal(marketContext(power,prices,4000).timestamp,1000);
+  power.production_types[0].data[0]=NaN;
+  assert.equal(marketContext(power,prices,4000),null);
+});
+test('observed negative and zero prices and zero renewable production remain valid',()=>{
+  const {power,prices}=contextFixture();
+  for(const series of power.production_types)series.data[1]=0;
+  prices.price[1]=-10;
+  const result=marketContext(power,prices,4000);
+  assert.equal(result.marketPriceCt,-1);
+  assert.equal(result.cheapGW,0);
+  assert.equal(result.loadGW,0);
+  prices.price[1]=0;
+  assert.equal(marketContext(power,prices,4000).marketPriceCt,0);
+});
+test('incompatible units or missing required source series have no market context',()=>{
+  const {power,prices}=contextFixture();
+  assert.equal(marketContext(power,{...prices,unit:'ct/kWh'},4000),null);
+  power.production_types.pop();
+  assert.equal(marketContext(power,prices,4000),null);
+});
+test('old context is marked delayed and expires after seven days',()=>{
+  const {power,prices}=contextFixture();
+  assert.equal(marketContext(power,prices,10000).delayed,true);
+  assert.equal(marketContext(power,prices,700000),null);
+});

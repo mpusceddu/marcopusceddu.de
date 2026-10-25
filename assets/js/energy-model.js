@@ -34,7 +34,26 @@
     });
     return {offers:cleared, unmet:remaining, marginal:remaining > 0 ? null : marginal, price:remaining > 0 ? null : marginal?.price ?? 0};
   }
-  const model = Object.freeze({dayKey, shiftDay, inPeriod, currentPriceIndex, generationMix, meritOrder});
+  function marketContext(power, prices, nowSeconds) {
+    // Comparing different delivery intervals would falsely link production
+    // with a price that was set for another time. Match exact interval starts.
+    if (!power?.production_types || !prices?.price || prices.unit?.replaceAll(' ', '').toLowerCase() !== 'eur/mwh') return null;
+    const series = Object.fromEntries(power.production_types.map(s => [s.name, s.data]));
+    const required = ['Load','Wind onshore','Wind offshore','Solar','Hydro Run-of-River'];
+    if (required.some(name => !series[name])) return null;
+    const priceMap = new Map(prices.unix_seconds.map((t,i) => [t, prices.price[i]]));
+    for (let i=power.unix_seconds.length-1;i>=0;i--) {
+      const timestamp = power.unix_seconds[i];
+      if (timestamp+900 > nowSeconds || timestamp < nowSeconds-7*86400) continue;
+      const values = required.map(name => series[name][i]), price = priceMap.get(timestamp);
+      if (values.some(v => typeof v !== 'number' || !Number.isFinite(v) || v<0) || typeof price !== 'number' || !Number.isFinite(price)) continue;
+      const [load, windOn, windOff, solar, hydro] = values;
+      return {timestamp, loadGW:load/1000, windGW:(windOn+windOff)/1000, solarGW:solar/1000, hydroGW:hydro/1000,
+        cheapGW:(windOn+windOff+solar+hydro)/1000, marketPriceCt:price/10, delayed:nowSeconds-timestamp>7200};
+    }
+    return null;
+  }
+  const model = Object.freeze({dayKey, shiftDay, inPeriod, currentPriceIndex, generationMix, meritOrder, marketContext});
   if (typeof module !== 'undefined' && module.exports) module.exports = model;
   else window.energyModel = model;
 })();

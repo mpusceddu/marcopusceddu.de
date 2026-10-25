@@ -109,9 +109,14 @@
       if(!response.ok)throw Error(response.status);
       const next=await response.json();
       if(!next.power?.production_types||!next.flows?.countries||!next.price?.price||!next.tomorrow?.price)throw Error('Unvollständige Daten');
-      data=next;render();$('period').disabled=false;
+      const firstLoad=!data;
+      data=next;render();window.energyExplain.updateContext(data);$('period').disabled=false;
+      // Initial asynchronous chart layout must not displace a requested section.
+      if(firstLoad&&['#merit-title','#mix-title','#price-title','#household-title'].includes(location.hash)){
+        requestAnimationFrame(()=>document.getElementById(location.hash.slice(1))?.scrollIntoView({block:'start',behavior:'instant'}));
+      }
     }catch{
-      if(data)render();
+      if(data)render();else window.energyExplain.updateContext(null);
       $('data-status').textContent='Der Datenstand konnte nicht aktualisiert werden. '+(data?'Die zuletzt geladenen Werte bleiben sichtbar. ':'Bitte später erneut versuchen oder die Originalcharts öffnen.');
       $('data-status').className='energy-status warning';
     }finally{loading=false;}
