@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Warum ist Strom teuer, obwohl Wind und Sonne liefern? | Marco Pusceddu</title>
+  <meta name="description" content="Die Merit Order verständlich erklärt: Warum auch bei viel Wind- und Solarstrom teurere Angebote den Marktpreis bestimmen können.">
+  <meta name="theme-color" content="#071f33">
+  <link rel="canonical" href="https://marcopusceddu.de/energie/merit-order/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Warum ist Strom teuer, obwohl Wind und Sonne liefern?">
+  <meta property="og:description" content="Die Merit Order verständlich erklärt: Warum auch bei viel Wind- und Solarstrom teurere Angebote den Marktpreis bestimmen können.">
+  <meta property="og:url" content="https://marcopusceddu.de/energie/merit-order/">
+  <meta property="og:image" content="https://marcopusceddu.de/assets/images/erneuerbare-energien-urbar-querformat.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=26">
+  <link rel="stylesheet" href="/assets/css/knowledge.css?v=2">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" sizes="16x16 32x32 48x48">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png?v=2" sizes="32x32">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png?v=2" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" sizes="180x180">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg?v=2" color="#007579">
+  <meta property="og:image:width" content="1729">
+  <meta property="og:image:height" content="910">
+  <meta property="og:image:alt" content="KI-Symbolbild eines kommunalen Gebäudes mit Solarmodulen und einem Plan im Vordergrund. Überschrift: Erneuerbare Energien. Was ist für Urbar sinnvoll? Kein reales Projekt in Urbar.">
+  <meta name="twitter:image:alt" content="KI-Symbolbild eines kommunalen Gebäudes mit Solarmodulen und einem Plan im Vordergrund. Überschrift: Erneuerbare Energien. Was ist für Urbar sinnvoll? Kein reales Projekt in Urbar.">
+  <meta name="twitter:image" content="https://marcopusceddu.de/assets/images/erneuerbare-energien-urbar-querformat.jpg">
+  <link rel="stylesheet" href="/assets/css/navigation.css?v=1">
+  <script src="/assets/js/navigation.js?v=1" defer></script>
+<link rel="stylesheet" href="/assets/css/energy-dashboard.css?v=20261025-split1">
+<script src="/assets/js/energy-model.js?v=20261025-split1" defer></script>
+<script src="/assets/js/energy-explain.js?v=20261025-split1" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+  <header class="site-header">
+    <a class="wordmark" href="/index.html" aria-label="Marco Pusceddu, zur Startseite"><img src="/assets/images/logo-monogramm.svg?v=22" alt="Marco Pusceddu"></a>
+    <nav aria-label="Seitennavigation"><a href="/index.html#ueber-mich">Über mich</a><a href="/index.html#engagement">Engagement</a><a href="/urbar/">Urbar</a>
+      <a class="nav-news" href="/aktuelles/">Aktuelles vor Ort</a><a href="/standpunkte/" aria-current="page">Standpunkte &amp; Wissen</a><a class="nav-contact" href="/index.html#kontakt">Kontakt</a></nav>
+  </header>
+
+
+<main class="energy-dashboard energy-reading" id="inhalt"><a class="knowledge-back" href="/energie/">← Zur Energiereihe</a><p class="eyebrow">Strompreise verstehen</p><h1>Warum ist Strom teuer, obwohl Wind und Sonne liefern?</h1><p class="energy-lead">Günstige Erzeugung allein bestimmt noch nicht den Börsenpreis. Entscheidend ist auch, welche weiteren Angebote gebraucht werden, um die Nachfrage zu decken.</p><p class="energy-note"><strong>Wer setzt gerade den Preis?</strong> Unsere aktuellen Daten zeigen Erzeugung und Börsenpreis. Welches konkrete Kraftwerk oder Gebot den Preis für ein Lieferintervall gesetzt hat, lässt sich daraus nicht zuverlässig bestimmen.</p><section class="energy-panel" aria-labelledby="merit-title"><h2 id="merit-title">Das letzte benötigte Angebot setzt den Preis.</h2><p>Im vereinfachten Auktionsmodell werden Angebote nach ihrem Preis gereiht. Das letzte zur Deckung der Nachfrage benötigte Angebot legt den einheitlichen Marktpreis fest. Auch günstigere bezuschlagte Angebote erhalten diesen Preis.</p><p>Deshalb kann eine teurere Anlage den Preis mitbestimmen, obwohl viel günstiger Wind- und Solarstrom erzeugt wird. Entscheidend ist nicht, wer die größte Strommenge liefert. Entscheidend ist, welches Angebot zusätzlich noch gebraucht wird. Gas kann dabei eine Rolle spielen, ist aber nicht immer preissetzend.</p><div class="merit-model"><div class="model-label">Frei gewähltes Beispiel · keine aktuellen Gebote oder Kraftwerkskosten</div><div class="merit-controls"><label for="merit-demand">Nachfrage im Modell <output id="demand-output" for="merit-demand">65 GW</output><input id="merit-demand" type="range" min="0" max="100" step="5" value="65"></label><label for="merit-renewables">Günstiges Angebot im Beispiel <output id="renewables-output" for="merit-renewables">35 GW</output><input id="merit-renewables" type="range" min="0" max="100" step="5" value="35"></label></div><p class="energy-description">Beispielangebote von günstig nach teuer. Das hervorgehobene Angebot bestimmt den Modellpreis.</p><div id="merit-offers" class="merit-offers"></div><div class="merit-outcome"><div><span>Einheitlicher Preis im Modell</span><strong id="merit-price">–</strong></div><p id="merit-result" role="status"></p></div></div>
+<p class="energy-note"><strong>Probiere es aus:</strong> Mehr günstiges Angebot kann teurere Angebote aus dem Zuschlag drängen und den Marktpreis senken. Steigt die Nachfrage, kann ein teureres Angebot nötig werden. Ein hoher Erneuerbaren-Anteil allein garantiert deshalb keinen niedrigen Preis.</p><p class="energy-description">Im realen Markt spielen auch Importe, Exporte, Speicher, flexible Nachfrage und komplexe Gebote eine Rolle. Brennstoff- und CO₂-Kosten beeinflussen die Angebote. Gas kann den Preis bestimmen, tut dies aber nicht immer. Der Abstand zwischen Gebot und Marktpreis ist kein reiner Gewinn: Daraus müssen unter anderem Investitionen und weitere Kosten gedeckt werden. Der Erzeugungsmix zeigt nicht, welches konkrete Angebot im aktuellen Intervall den Preis gesetzt hat.</p><p class="energy-description">Grundlage: <a href="https://www.smard.de/page/home/wiki-article/518/562">SMARD: Großhandelspreise und Merit Order</a>. Die Beispielangebote B bis D sind bewusst keiner festen Technologie zugeordnet; deren Reihenfolge hängt von den tatsächlichen Kosten und Geboten ab.</p></section><section class="energy-panel"><h2>Auch unsere Nachbarn beeinflussen den Preis.</h2><p>Die Strommärkte sind gekoppelt. Angebote aus dem Ausland können teurere inländische Erzeugung ersetzen. Umgekehrt kann Strom aus Deutschland exportiert werden, wenn er anderswo gefragt ist. Leitungen und Handelskapazitäten begrenzen den Austausch. Physische Stromflüsse und Handelsgeschäfte sind dabei unterschiedliche Größen.</p><p class="energy-description">Quelle: <a href="https://www.smard.de/page/home/wiki-article/446/548/grenzueberschreitender-stromhandel">SMARD: Grenzüberschreitender Stromhandel</a>.</p><div class="energy-related"><a href="/energie/strom-im-blick/">Aktuelle Erzeugung, Preise und Import/Export ansehen ↗</a><a href="/energie/was-steckt-im-strompreis.html">Was auf der Stromrechnung wirklich steht ↗</a></div></section></main>  <footer><span>© 2026 Marco Pusceddu</span><div><a href="/index.html">Startseite</a><a href="/aktuelles/">Aktuelles vor Ort</a><a href="/impressum.html">Impressum</a><a href="/datenschutz.html">Datenschutz</a></div></footer>
+</body>
+</html>

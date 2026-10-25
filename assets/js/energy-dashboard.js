@@ -70,7 +70,7 @@
     const extra=p.production_types.filter(s=>!excluded.has(s.name)&&!known.has(s.name));
     const grouped=groups.map((g,idx)=>({name:g.label,data:p.unix_seconds.map((_,i)=>{const found=[...g.names.map(n=>map[n]).filter(Boolean),...(idx===groups.length-1?extra:[])];return found.length===0?0:found.every(s=>finite(s.data[i])&&s.data[i]>=0)?found.reduce((a,s)=>a+s.data[i],0)/1000:null;})}));
     chart('power-chart',rows(p,grouped),groups,'GW',true);
-    window.energyExplain.renderMix(rows(p,grouped),groups);
+    window.energyMix.renderMix(rows(p,grouped),groups);
     const share=map['Renewable share of generation'];
     chart('share-chart',rows(p,share?[share]:[]),[{label:'Erneuerbare an der Erzeugung',color:'#087b7c'}],'%');
     const priceDataset=selected()==='tomorrow'?data.tomorrow:data.price;
@@ -90,7 +90,26 @@
     $('flow-label').textContent=finite(net)?(net>=0?'Importüberschuss':'Exportüberschuss'):'Stromfluss-Saldo';
     $('flow-time').textContent=frow?'Intervallbeginn '+stamp(frow.t):'Heute noch keine vollständigen Daten';
     $('power-time').textContent=grow?'Letzte vollständige Werte: '+stamp(grow.t):'Heute keine vollständigen Werte';
-    $('flow-detail').textContent=frow?flowSeries.map((s,i)=>`${countries[s.name]||s.name}: ${fmt(Math.abs(frow.values[i]),2)} GW ${frow.values[i]>=0?'Import':'Export'}`).join(' · '):'Keine vollständigen Länderwerte verfügbar.';
+    const importGW=frow?frow.values.reduce((sum,v)=>sum+Math.max(0,v),0):null;
+    const exportGW=frow?-frow.values.reduce((sum,v)=>sum+Math.min(0,v),0):null;
+    $('import-number').textContent=finite(importGW)?fmt(importGW,2)+' GW':'Keine Daten';
+    $('export-number').textContent=finite(exportGW)?fmt(exportGW,2)+' GW':'Keine Daten';
+    $('flow-net-number').textContent=finite(net)?fmt(Math.abs(net),2)+' GW':'Keine Daten';
+    $('flow-net-label').textContent=finite(net)?(net>0?'Importüberschuss':net<0?'Exportüberschuss':'Ausgeglichener Saldo'):'Saldo';
+    $('flow-observation-time').textContent=frow?'Letzte vollständige Länderwerte · Intervallbeginn '+stamp(frow.t):'Heute noch keine vollständigen Länderwerte';
+    const totals=window.energyModel.flowTotals(flowRows,Date.now()/1000);
+    $('flow-period-total').textContent=totals?'Im gewählten Zeitraum erfasst: '+fmt(totals.importGWh)+' GWh Import · '+fmt(totals.exportGWh)+' GWh Export. '+stamp(totals.start)+' bis '+stamp(totals.end)+'. Nur vollständige Viertelstunden; keine Hochrechnung auf Datenlücken.':'Im gewählten Zeitraum fehlen vollständige Viertelstunden für eine Strommengenbilanz.';
+    const countryList=$('flow-country-list');countryList.replaceChildren();
+    if(frow){
+      flowSeries.map((series,i)=>({name:countries[series.name]||series.name,value:frow.values[i]})).sort((a,b)=>Math.abs(b.value)-Math.abs(a.value)).forEach(country=>{
+        const li=document.createElement('li'),name=document.createElement('span'),direction=document.createElement('span'),amount=document.createElement('strong');
+        name.textContent=country.name;
+        direction.className='flow-direction '+(country.value>0?'import':country.value<0?'export':'balanced');
+        direction.textContent=country.value>0?'→ nach Deutschland':country.value<0?'← aus Deutschland':'Kein Nettofluss';
+        amount.textContent=fmt(Math.abs(country.value),2)+' GW';
+        li.append(name,direction,amount);countryList.append(li);
+      });
+    }else{const li=document.createElement('li');li.textContent='Noch keine vollständigen Länderwerte für heute.';countryList.append(li);}
     const newest=Math.min(grow?.t||0,frow?.t||0),stale=Date.now()/1000-newest>7200;
     const failed=Object.keys(data.fetch_errors||{}), labels={power:'Erzeugung',flows:'Stromflüsse',price:'Börsenpreise'};
     const fetchStale=Date.now()-Date.parse(data.fetched_at)>2*3600*1000;
@@ -110,13 +129,13 @@
       const next=await response.json();
       if(!next.power?.production_types||!next.flows?.countries||!next.price?.price||!next.tomorrow?.price)throw Error('Unvollständige Daten');
       const firstLoad=!data;
-      data=next;render();window.energyExplain.updateContext(data);$('period').disabled=false;
+      data=next;render();$('period').disabled=false;
       // Initial asynchronous chart layout must not displace a requested section.
-      if(firstLoad&&['#merit-title','#mix-title','#price-title','#household-title'].includes(location.hash)){
+      if(firstLoad&&['#flow-title','#merit-title','#mix-title','#price-title','#household-title'].includes(location.hash)){
         requestAnimationFrame(()=>document.getElementById(location.hash.slice(1))?.scrollIntoView({block:'start',behavior:'instant'}));
       }
     }catch{
-      if(data)render();else window.energyExplain.updateContext(null);
+      if(data)render();
       $('data-status').textContent='Der Datenstand konnte nicht aktualisiert werden. '+(data?'Die zuletzt geladenen Werte bleiben sichtbar. ':'Bitte später erneut versuchen oder die Originalcharts öffnen.');
       $('data-status').className='energy-status warning';
     }finally{loading=false;}

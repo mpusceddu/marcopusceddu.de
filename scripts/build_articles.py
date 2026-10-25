@@ -240,7 +240,7 @@ def outputs(root, today=None):
         if "<!-- BEGIN GENERATED:energie -->" in energy:
             selected = sorted((a for a in articles if a["collection"] == "energie"), key=lambda a: a["published"])
             cards = "\n".join(card(a, 3, "news-card knowledge-card", "/energie/") for a in selected)
-            section = ('<section class="knowledge-topic" aria-labelledby="folgen-title"><div class="knowledge-topic-heading"><h2 id="folgen-title">Weitere Folgen</h2></div>' + cards + '</section>') if selected else ''
+            section = ('<section class="knowledge-topic" aria-labelledby="folgen-title"><div class="knowledge-topic-heading"><h2 id="folgen-title">Aus der Energiereihe</h2></div>' + cards + '</section>') if selected else ''
             generated[energy_path] = replace_region(energy, "energie", section, "    ")
     series_path = root / series_directory / "index.html"
     if series_path.exists():

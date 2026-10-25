@@ -34,26 +34,14 @@
     });
     return {offers:cleared, unmet:remaining, marginal:remaining > 0 ? null : marginal, price:remaining > 0 ? null : marginal?.price ?? 0};
   }
-  function marketContext(power, prices, nowSeconds) {
-    // Comparing different delivery intervals would falsely link production
-    // with a price that was set for another time. Match exact interval starts.
-    if (!power?.production_types || !prices?.price || prices.unit?.replaceAll(' ', '').toLowerCase() !== 'eur/mwh') return null;
-    const series = Object.fromEntries(power.production_types.map(s => [s.name, s.data]));
-    const required = ['Load','Wind onshore','Wind offshore','Solar','Hydro Run-of-River'];
-    if (required.some(name => !series[name])) return null;
-    const priceMap = new Map(prices.unix_seconds.map((t,i) => [t, prices.price[i]]));
-    for (let i=power.unix_seconds.length-1;i>=0;i--) {
-      const timestamp = power.unix_seconds[i];
-      if (timestamp+900 > nowSeconds || timestamp < nowSeconds-7*86400) continue;
-      const values = required.map(name => series[name][i]), price = priceMap.get(timestamp);
-      if (values.some(v => typeof v !== 'number' || !Number.isFinite(v) || v<0) || typeof price !== 'number' || !Number.isFinite(price)) continue;
-      const [load, windOn, windOff, solar, hydro] = values;
-      return {timestamp, loadGW:load/1000, windGW:(windOn+windOff)/1000, solarGW:solar/1000, hydroGW:hydro/1000,
-        cheapGW:(windOn+windOff+solar+hydro)/1000, marketPriceCt:price/10, delayed:nowSeconds-timestamp>7200};
-    }
-    return null;
+  function flowTotals(records, nowSeconds) {
+    const valid=records.filter(row=>row.t+900<=nowSeconds&&row.values.length===2&&row.values.every(v=>typeof v==='number'&&Number.isFinite(v)&&v>=0));
+    if(!valid.length)return null;
+    const importGWh=valid.reduce((sum,row)=>sum+row.values[0]*.25,0);
+    const exportGWh=valid.reduce((sum,row)=>sum+row.values[1]*.25,0);
+    return {importGWh,exportGWh,netGWh:importGWh-exportGWh,intervals:valid.length,start:valid[0].t,end:valid.at(-1).t+900};
   }
-  const model = Object.freeze({dayKey, shiftDay, inPeriod, currentPriceIndex, generationMix, meritOrder, marketContext});
+  const model = Object.freeze({dayKey, shiftDay, inPeriod, currentPriceIndex, generationMix, meritOrder, flowTotals});
   if (typeof module !== 'undefined' && module.exports) module.exports = model;
   else window.energyModel = model;
 })();

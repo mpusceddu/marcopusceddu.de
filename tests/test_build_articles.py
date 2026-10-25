@@ -18,6 +18,7 @@ class ArticleBuildTest(unittest.TestCase):
         self.root = Path(self.temp.name) / "site"
         shutil.copytree(SITE, self.root, ignore=shutil.ignore_patterns("__pycache__", ".git"))
         self.articles = [read_article(p) for p in (self.root / "aktuelles").glob("*.html") if p.name != "index.html"]
+        self.articles += [read_article(p, directory="energie") for p in (self.root / "energie").glob("*.html") if 'name="article:collection" content="energie"' in p.read_text()]
         self.article_count = len(self.articles)
         current = [a for a in self.articles if a["listing"] == "current"]
         self.latest = sorted(current, key=lambda a: (-a["published"].toordinal(), a["filename"]))[0]
