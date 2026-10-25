@@ -24,6 +24,9 @@ class ScheduledReleaseTests(unittest.TestCase):
         for path in (source / 'aktuelles').glob('*.html'):
             if path.name != 'index.html' and read_article(path, today=date.max)['published'] > as_of:
                 path.unlink()
+        for path in (source / 'energie').glob('*.html'):
+            if 'name="article:collection" content="energie"' in path.read_text() and read_article(path, today=date.max, directory='energie')['published'] > as_of:
+                path.unlink()
         assemble(source, output, now)
         return output
     def test_absent_one_second_before_release(self):

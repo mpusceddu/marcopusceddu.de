@@ -34,6 +34,9 @@ class LinkPageTest(unittest.TestCase):
                 for article in (source / 'aktuelles').glob('*.html'):
                     if article.name != 'index.html' and read_article(article)['published'] > date(2026, 10, 20):
                         article.unlink()
+                for article in (source / 'energie').glob('*.html'):
+                    if 'name="article:collection" content="energie"' in article.read_text() and read_article(article, today=date.max, directory='energie')['published'] > date(2026, 10, 20):
+                        article.unlink()
                 assemble(source, destination, datetime.fromisoformat(timestamp))
                 html = (destination / 'links/index.html').read_text()
                 recent = html.split('<!-- BEGIN GENERATED:links-recent -->')[1].split('<!-- END GENERATED:links-recent -->')[0]

@@ -1,12 +1,12 @@
 """Protect scheduled articles, nested navigation, and the public series teaser."""
-from datetime import datetime,timedelta
+from datetime import datetime,timedelta,date
 from pathlib import Path
-import json,sys,tempfile,unittest
+import json,sys,tempfile,unittest,shutil
 from urllib.parse import urlsplit,urljoin,unquote
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 from build_site import assemble
-from build_articles import Document,build
+from build_articles import Document,build,read_article
 
 class ZusammenhaltTests(unittest.TestCase):
  def test_individual_release_boundaries_and_overview(self):
@@ -31,7 +31,10 @@ class ZusammenhaltTests(unittest.TestCase):
  def test_teaser_and_all_final_internal_destinations(self):
   for stamp in [datetime.fromisoformat('2026-10-22T17:00:00+02:00'),datetime.fromisoformat('2027-04-23T18:00:00+02:00')]:
    with self.subTest(stamp=stamp),tempfile.TemporaryDirectory() as tmp:
-    out=Path(tmp)/'site';assemble(ROOT,out,stamp)
+    source=Path(tmp)/'source';shutil.copytree(ROOT,source,ignore=shutil.ignore_patterns('.git','__pycache__'))
+    for path in (source/'energie').glob('*.html'):
+     if 'name="article:collection" content="energie"' in path.read_text() and read_article(path,today=date.max,directory='energie')['published']>stamp.date():path.unlink()
+    out=Path(tmp)/'site';assemble(source,out,stamp)
     landing=(out/'standpunkte/was-uns-zusammenhaelt/index.html').read_text()
     self.assertIn('Mario Draghis',landing)
     self.assertIn('was-uns-zusammenhaelt-teaser.jpg',(out/'standpunkte/index.html').read_text())
