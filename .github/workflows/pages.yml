@@ -79,11 +79,30 @@ jobs:
               raise SystemExit('Unexpected early trigger')
           time.sleep(wait)
           PY
-      - name: Test and build static website
+      - name: Test website and energy calculations
         if: steps.date.outputs.run == 'true'
         run: |
           python3 -m unittest discover -s tests
-          python3 scripts/build_site.py --output _site
+          node --test tests/test_energy_model.cjs
+      - name: Restore latest valid energy snapshot
+        if: steps.date.outputs.run == 'true'
+        uses: actions/cache/restore@v4
+        with:
+          path: assets/data/strom-im-blick.json
+          key: energy-snapshot-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: energy-snapshot-v1-
+      - name: Update shared energy data
+        if: steps.date.outputs.run == 'true'
+        run: python3 scripts/update_energy_data.py
+      - name: Cache valid energy snapshot
+        if: steps.date.outputs.run == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: assets/data/strom-im-blick.json
+          key: energy-snapshot-v1-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Build static website
+        if: steps.date.outputs.run == 'true'
+        run: python3 scripts/build_site.py --output _site
       - uses: actions/upload-pages-artifact@v4
         if: steps.date.outputs.run == 'true'
         with:
