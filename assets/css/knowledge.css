@@ -110,3 +110,5 @@
   border-radius: 10px;
   margin: 0 0 24px;
 }
+
+.series-episode-preview { display: block; width: 100%; max-width: 640px; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 10px; margin: 0 0 24px; }
