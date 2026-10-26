@@ -99,3 +99,14 @@
   .knowledge-topic { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .knowledge-topic-heading { max-width: 680px; }
 }
+
+/* Consistent previews across the Standpunkte & Wissen topic cards. */
+.knowledge-card .knowledge-preview-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0 0 24px;
+}
