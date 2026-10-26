@@ -135,10 +135,11 @@ def read_article(path, today=None, directory="aktuelles"):
     if listing not in {"current", "background"}:
         raise ValueError(f"{path.name}: article:listing muss current oder background sein")
     return dict(directory=directory, collection=metadata.get("article:collection", ""), listing=listing, filename=path.name, title=title, heading=heading_html(heading), category=category, places=places, topics=topics,
-                summary=summary, published=published, modified=modified, url=url)
+                summary=summary, published=published, modified=modified, url=url,
+                image=metadata["og:image"], image_alt=metadata.get("og:image:alt", ""))
 
 
-def card(article, level, css_class, prefix="", filterable=False):
+def card(article, level, css_class, prefix="", filterable=False, show_image=False):
     a = article
     d = a["published"]
     label = f"{d.day}. {MONTHS[d.month]} {d.year}"
@@ -146,8 +147,14 @@ def card(article, level, css_class, prefix="", filterable=False):
         prefix = prefix.replace("aktuelles/", a["directory"] + "/") if prefix else "../" + a["directory"] + "/"
     href = escape(prefix + a["filename"], quote=True)
     topics_attr = ' data-topics="' + ' '.join(sorted(a['topics'])) + '"' if filterable else ''
+    image = ""
+    if show_image and a.get("image"):
+        src = a["image"].removeprefix(BASE.rstrip("/"))
+        image = ('  <img class="knowledge-preview-image" src="' + escape(src, quote=True)
+                 + '" width="1600" height="900" loading="lazy" decoding="async" alt="'
+                 + escape(a.get("image_alt", ""), quote=True) + '">\n')
     return f'''<article class="{css_class}"{topics_attr}>
-  <p class="news-meta"><time datetime="{d.isoformat()}">{label}</time><span>{escape(a['category'])}</span></p>
+{image}  <p class="news-meta"><time datetime="{d.isoformat()}">{label}</time><span>{escape(a['category'])}</span></p>
   <h{level}><a href="{href}">{a['heading']}</a></h{level}>
   <p>{escape(a['summary'])}</p>
   <a class="card-link" href="{href}" aria-label="{escape('Beitrag lesen: ' + a['title'], quote=True)}">Beitrag lesen <span aria-hidden="true">↗</span></a>
@@ -229,7 +236,7 @@ def outputs(root, today=None):
         knowledge = knowledge_path.read_text(encoding="utf-8")
         if "<!-- BEGIN GENERATED:standpunkte -->" in knowledge:
             selected = [a for a in articles if a["collection"] == "standpunkte"]
-            cards = "\n".join(card(a, 3, "news-card knowledge-card", "/aktuelles/") for a in selected)
+            cards = "\n".join(card(a, 3, "news-card knowledge-card", "/aktuelles/", show_image=True) for a in selected)
             section = ("<section class=\"knowledge-topic\" aria-labelledby=\"wirtschaft-title\">"
                        "<div class=\"knowledge-topic-heading\"><p class=\"eyebrow\">Wirtschaft &amp; Gesellschaft</p>"
                        "<h2 id=\"wirtschaft-title\">Freiheit und Verantwortung.</h2></div>" + cards + "</section>") if selected else ""
