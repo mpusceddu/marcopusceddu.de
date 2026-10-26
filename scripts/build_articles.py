@@ -136,7 +136,8 @@ def read_article(path, today=None, directory="aktuelles"):
         raise ValueError(f"{path.name}: article:listing muss current oder background sein")
     return dict(directory=directory, collection=metadata.get("article:collection", ""), listing=listing, filename=path.name, title=title, heading=heading_html(heading), category=category, places=places, topics=topics,
                 summary=summary, published=published, modified=modified, url=url,
-                image=metadata["og:image"], image_alt=metadata.get("og:image:alt", ""))
+                image=metadata.get("article:preview_image", metadata["og:image"]),
+                image_alt=metadata.get("article:preview_image:alt", metadata.get("og:image:alt", "")))
 
 
 def card(article, level, css_class, prefix="", filterable=False, show_image=False):
@@ -246,7 +247,7 @@ def outputs(root, today=None):
         energy = energy_path.read_text(encoding="utf-8")
         if "<!-- BEGIN GENERATED:energie -->" in energy:
             selected = sorted((a for a in articles if a["collection"] == "energie"), key=lambda a: a["published"])
-            cards = "\n".join(card(a, 3, "news-card knowledge-card", "/energie/") for a in selected)
+            cards = "\n".join(card(a, 3, "news-card knowledge-card", "/energie/", show_image=True) for a in selected)
             section = ('<section class="knowledge-topic" aria-labelledby="folgen-title"><div class="knowledge-topic-heading"><h2 id="folgen-title">Aus der Energiereihe</h2></div>' + cards + '</section>') if selected else ''
             generated[energy_path] = replace_region(energy, "energie", section, "    ")
     series_path = root / series_directory / "index.html"
@@ -261,8 +262,13 @@ def outputs(root, today=None):
             title = escape(episode["title"])
             if a:
                 title = '<a href="' + escape(a["url"], quote=True) + '">' + title + '</a>'
+            preview = ""
+            if a and a.get("image"):
+                preview = ('<img class="series-episode-preview" src="' + escape(a["image"].removeprefix(BASE.rstrip("/")), quote=True)
+                           + '" width="1600" height="900" loading="lazy" decoding="async" alt="'
+                           + escape(a.get("image_alt", ""), quote=True) + '">')
             status = "Veröffentlicht" if a else "Geplant"
-            items.append(f'<li class="series-episode"><p class="news-meta">Folge {episode["number"]} · {status} · <time datetime="{stamp.isoformat()}">{label}</time> · 18 Uhr</p><h3>{title}</h3><p>{escape(episode["deck"])}</p></li>')
+            items.append(f'<li class="series-episode">{preview}<p class="news-meta">Folge {episode["number"]} · {status} · <time datetime="{stamp.isoformat()}">{label}</time> · 18 Uhr</p><h3>{title}</h3><p>{escape(episode["deck"])}</p></li>')
         series = replace_region(series_path.read_text(encoding="utf-8"), "zusammenhalt", '<ol>' + ''.join(items) + '</ol>', '    ')
         if not released:
             status = '<p>Die Reihe beginnt am <strong>6. November 2026 um 18 Uhr</strong>. Weitere Beiträge folgen in der Regel alle zwei Wochen. Über Weihnachten, Neujahr und Ostern gibt es eine Pause.</p>'
