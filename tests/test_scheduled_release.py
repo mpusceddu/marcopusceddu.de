@@ -78,6 +78,20 @@ class ScheduledReleaseTests(unittest.TestCase):
                     self.assertIn('rheinischer Kapitalismus', (output / f'aktuelles/{slug}.html').read_text())
                 for name in ['impressum.html', 'datenschutz.html', 'CNAME']:
                     self.assertEqual((ROOT / name).read_bytes(), (output / name).read_bytes())
+    def test_energy_index_release_precedes_instagram_and_updates_links(self):
+        for stamp, visible in [
+            ('2026-10-29T10:59:59+01:00', False),
+            ('2026-10-29T10:00:00+00:00', True),
+        ]:
+            with self.subTest(stamp=stamp):
+                output = self.build_at(stamp)
+                slug = 'energieindex-irak-vergleich'
+                self.assertEqual((output / f'energie/{slug}.html').exists(), visible)
+                self.assertEqual((output / f'assets/images/{slug}-panorama.jpg').exists(), visible)
+                for name in ['energie/index.html', 'links/index.html', 'sitemap.xml']:
+                    self.assertEqual(slug in (output / name).read_text(), visible)
+                self.assertFalse((output / 'energie/stromzahlen-verstehen.html').exists())
+
     def test_offset_and_timezone_required(self):
         output = self.build_at('2026-10-07T10:00:00+00:00')
         self.assertTrue((output/'aktuelles/kas-finanzierung.html').is_file())
