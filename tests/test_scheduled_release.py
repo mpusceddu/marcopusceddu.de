@@ -92,6 +92,29 @@ class ScheduledReleaseTests(unittest.TestCase):
                     self.assertEqual(slug in (output / name).read_text(), visible)
                 self.assertFalse((output / 'energie/stromzahlen-verstehen.html').exists())
 
+    def test_wealth_article_release_boundary_and_knowledge_listing(self):
+        slug = 'wirtschaftswachstum-und-wohlstand'
+        for timestamp, visible in [
+            ('2026-10-28T12:00:00+01:00', False),
+            ('2027-02-19T17:59:59+01:00', False),
+            ('2027-02-19T17:00:00+00:00', True),
+        ]:
+            with self.subTest(timestamp=timestamp):
+                output = self.build_at(timestamp)
+                article = output / f'aktuelles/{slug}.html'
+                self.assertEqual(article.exists(), visible)
+                for suffix in ['querformat', 'kachel']:
+                    self.assertEqual((output / f'assets/images/{slug}-{suffix}.jpg').exists(), visible)
+                for name in ['aktuelles/index.html', 'standpunkte/index.html', 'links/index.html', 'sitemap.xml']:
+                    self.assertEqual(slug + '.html' in (output / name).read_text(), visible)
+                if visible:
+                    html = article.read_text()
+                    self.assertIn('HEILBRONN: EIN HOHER DURCHSCHNITT', html)
+                    self.assertIn('Dieser Median liegt für den Vergleich jedoch nicht vor.', html)
+                    self.assertIn('Dieses Beispiel betrifft das durchschnittliche Einkommen', html)
+                    self.assertNotIn('REDAKTIONELLER VERMERK', html)
+                    self.assertFalse((output / 'standpunkte/was-uns-zusammenhaelt/migration-chancen-und-regeln.html').exists())
+
     def test_offset_and_timezone_required(self):
         output = self.build_at('2026-10-07T10:00:00+00:00')
         self.assertTrue((output/'aktuelles/kas-finanzierung.html').is_file())
