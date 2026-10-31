@@ -203,7 +203,7 @@ Auf Marcos Wunsch vom 22.10.2026 ist der Artikel zur GDPR LEGAL COOKIE App vorer
 
 ## Freigegebene Energiereihe ab Oktober 2026
 
-Marco hat am 22.10.2026 die vollständigen Folgen 2 bis 8 und den Plan im Dokument Energiereihe-Artikel-und-Plan-2026-10-22.docx mit „So machen“ freigegeben. Die Pakete `_scheduled/energie-02` bis `energie-08` enthalten die jeweiligen HTML-Artikel und symbolischen Beitragsgrafiken. Veröffentlichung jeweils 18 Uhr Europe/Berlin: 30.10., 13.11., 27.11., 11.12.2026 sowie 08.01., 22.01., 05.02.2027. Über Weihnachten pausiert die Reihe.
+Marco hat am 22.10.2026 die vollständigen Folgen 2 bis 8 und den Plan im Dokument Energiereihe-Artikel-und-Plan-2026-10-22.docx mit „So machen“ freigegeben. Die Pakete `_scheduled/energie-02` bis `energie-08` enthalten die jeweiligen HTML-Artikel und symbolischen Beitragsgrafiken. Veröffentlichung jeweils 18 Uhr Europe/Berlin: 30.10., 13.11., 27.11., 11.12.2026 sowie 22.01., 05.02. und 05.03.2027 (Folge 6 wurde am 31.10. vom 08.01. auf den 05.03. verschoben). Über Weihnachten pausiert die Reihe.
 
 Die Artikel werden erst ab ihrem Termin an `/energie/` ausgeliefert. `article:collection=energie` bindet erschienene Folgen in die Energieübersicht, das Beitragsarchiv, die Linkübersicht und die Sitemap ein. Als Hintergrundbeiträge verdrängen sie keine aktuellen örtlichen Meldungen. Die bestehende Auftaktadresse bleibt erhalten.
 
@@ -227,3 +227,12 @@ Am 22. Oktober 2026 zur technischen Planung und Veröffentlichung freigegebene R
 - 2027-04-23T18:00:00+02:00: Die demokratische Mitte braucht Haltung.
 
 Die Übersicht erzeugt Links nur zu freigeschalteten Folgen. Das neue Feld `article:collection=zusammenhalt` bindet veröffentlichte Artikel in das Archiv und die Sitemap ein. Instagram bleibt separat abzustimmen. Der Cookie App Artikel bleibt zurückgezogen. Der Build schützt jede Folge bis zum exakten Termin; GitHub Actions kann die tatsächliche Veröffentlichung verzögern.
+
+
+## Terminabgleich vom 31. Oktober 2026
+
+- Konkret freigegeben: „Warum den Kommunen das Geld fehlt“, vollständiges bestätigtes Gesamtpaket einschließlich Teaser und Symbolbild, 04.11.2026 um 18:00 Europe/Berlin. Paket `_scheduled/kommunale-finanzen`; Veröffentlichung unter `/aktuelles/warum-den-kommunen-das-geld-fehlt.html`, Hintergrundbeitrag in Standpunkte & Wissen. TXT-Wortlaut und Bildmotiv unverändert.
+- Konkret verschoben: energie-06 „Viel Strom wenig Preis Warum“ auf 05.03.2027 um 18:00 Europe/Berlin. Nur Datumsangaben und zugehörige Auslöser geändert; übrige Folgen unverändert.
+- Nur redaktionell reserviert: 29.12.2026 um 18:00 Europe/Berlin für „Leistung braucht Freiheit. Braucht sie auch Egoismus?“ sowie 08.01.2027 um 18:00 Europe/Berlin für Atomkraft. Keine konkrete Text-/Bildfreigabe, keine Release-Manifeste, keine Platzhalter, keine Freischaltung. Erst nach konkreter Freigabe technisch terminieren.
+
+Der zusätzliche `release-clock` liest tatsächliche Release-Manifeste und stößt den Publisher frühestens zur Freigabe an. Beide Publisher prüfen nach dem Deployment die öffentlichen Artikel, Bilddateien und vorgesehenen Verweise. Die Cloud-Livebestätigung liest die jeweils aktuellen Freigaben; keine neue Automation für diesen Terminabgleich. Die zentrale Redaktion führt ihre eigenen Koordinationsregister.
