@@ -19,6 +19,9 @@ on:
     # Energy index commentary: 11:00 CET, one hour before the Instagram post.
     - cron: '43 9 29 10 *'
     - cron: '13 10-16 29 10 *'
+    # Approved municipal-finance article: 4 November, 18:00 CET.
+    - cron: '43 16 4 11 *'
+    - cron: '13 17-23 4 11 *'
     # Energy series: prewarm at 17:43 CET, then retries after 18:00 CET.
     - cron: '43 16 * * 5'
     - cron: '13 17-23 * * 5'
@@ -39,7 +42,7 @@ jobs:
       - name: Check release date for scheduled run
         id: date
         run: |
-          if [ "${{ github.event_name }}" = schedule ] && [ "$(date -u +%F)" != 2026-10-07 ] && [ "$(date -u +%F)" != 2026-10-17 ] && [ "$(date -u +%F)" != 2026-10-20 ] && [ "$(date -u +%F)" != 2026-10-23 ] && [ "$(date -u +%F)" != 2026-10-26 ] && [ "$(date -u +%F)" != 2026-10-29 ] && [ "$(date -u +%F)" != 2026-10-30 ] && [ "$(date -u +%F)" != 2026-11-13 ] && [ "$(date -u +%F)" != 2026-11-27 ] && [ "$(date -u +%F)" != 2026-12-11 ] && [ "$(date -u +%F)" != 2027-01-08 ] && [ "$(date -u +%F)" != 2027-01-22 ] && [ "$(date -u +%F)" != 2027-02-05 ] && [ "$(date -u +%F)" != 2026-11-06 ] && [ "$(date -u +%F)" != 2026-11-20 ] && [ "$(date -u +%F)" != 2026-12-04 ] && [ "$(date -u +%F)" != 2026-12-18 ] && [ "$(date -u +%F)" != 2027-01-15 ] && [ "$(date -u +%F)" != 2027-01-29 ] && [ "$(date -u +%F)" != 2027-02-12 ] && [ "$(date -u +%F)" != 2027-02-26 ] && [ "$(date -u +%F)" != 2027-03-12 ] && [ "$(date -u +%F)" != 2027-04-09 ] && [ "$(date -u +%F)" != 2027-04-23 ] && [ "$(date -u +%F)" != 2027-02-19 ]; then
+          if [ "${{ github.event_name }}" = schedule ] && [ "$(date -u +%F)" != 2026-11-04 ] && [ "$(date -u +%F)" != 2026-10-07 ] && [ "$(date -u +%F)" != 2026-10-17 ] && [ "$(date -u +%F)" != 2026-10-20 ] && [ "$(date -u +%F)" != 2026-10-23 ] && [ "$(date -u +%F)" != 2026-10-26 ] && [ "$(date -u +%F)" != 2026-10-29 ] && [ "$(date -u +%F)" != 2026-10-30 ] && [ "$(date -u +%F)" != 2026-11-13 ] && [ "$(date -u +%F)" != 2026-11-27 ] && [ "$(date -u +%F)" != 2026-12-11 ] && [ "$(date -u +%F)" != 2027-03-05 ] && [ "$(date -u +%F)" != 2027-01-22 ] && [ "$(date -u +%F)" != 2027-02-05 ] && [ "$(date -u +%F)" != 2026-11-06 ] && [ "$(date -u +%F)" != 2026-11-20 ] && [ "$(date -u +%F)" != 2026-12-04 ] && [ "$(date -u +%F)" != 2026-12-18 ] && [ "$(date -u +%F)" != 2027-01-15 ] && [ "$(date -u +%F)" != 2027-01-29 ] && [ "$(date -u +%F)" != 2027-02-12 ] && [ "$(date -u +%F)" != 2027-02-26 ] && [ "$(date -u +%F)" != 2027-03-12 ] && [ "$(date -u +%F)" != 2027-04-09 ] && [ "$(date -u +%F)" != 2027-04-23 ] && [ "$(date -u +%F)" != 2027-02-19 ]; then
             echo 'run=false' >> "$GITHUB_OUTPUT"
           else
             echo 'run=true' >> "$GITHUB_OUTPUT"
@@ -52,6 +55,7 @@ jobs:
           import time
           now = datetime.now(timezone.utc)
           releases = {
+              '2026-11-04': datetime(2026, 11, 4, 17, 0, tzinfo=timezone.utc),
               '2026-10-07': datetime(2026, 10, 7, 10, 0, tzinfo=timezone.utc),
               '2026-10-17': datetime(2026, 10, 17, 8, 0, tzinfo=timezone.utc),
               '2026-10-20': datetime(2026, 10, 20, 16, 0, tzinfo=timezone.utc),
@@ -62,7 +66,7 @@ jobs:
               '2026-11-13': datetime(2026, 11, 13, 17, 0, tzinfo=timezone.utc),
               '2026-11-27': datetime(2026, 11, 27, 17, 0, tzinfo=timezone.utc),
               '2026-12-11': datetime(2026, 12, 11, 17, 0, tzinfo=timezone.utc),
-              '2027-01-08': datetime(2027, 1, 8, 17, 0, tzinfo=timezone.utc),
+              '2027-03-05': datetime(2027, 3, 5, 17, 0, tzinfo=timezone.utc),
               '2027-01-22': datetime(2027, 1, 22, 17, 0, tzinfo=timezone.utc),
               '2027-02-05': datetime(2027, 2, 5, 17, 0, tzinfo=timezone.utc),
               '2026-11-06': datetime(2026, 11, 6, 17, 0, tzinfo=timezone.utc),
