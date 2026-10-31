@@ -34,6 +34,13 @@ jobs:
           key: energy-snapshot-v1-${{ github.run_id }}-${{ github.run_attempt }}
       - name: Build website respecting approved publication timestamps
         run: python3 scripts/build_site.py --output _site
+      - name: Record expected public releases
+        run: python3 scripts/verify_release_live.py --site _site --manifest release-verification.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-verification
+          path: release-verification.json
+          retention-days: 14
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
@@ -50,3 +57,9 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-verification
+      - name: Verify actual live articles, images and listing links
+        run: python3 scripts/verify_release_live.py --manifest release-verification.json
